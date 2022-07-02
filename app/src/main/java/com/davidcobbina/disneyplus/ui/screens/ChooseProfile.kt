@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -21,12 +22,14 @@ import com.davidcobbina.disneyplus.ui.components.CircularImage
 import com.davidcobbina.disneyplus.ui.theme.blackGrey100
 
 //TODO:: Add bouncing animations to Profile Images
-
 @Composable
 fun ChooseProfileScreen(modifier: Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.padding(horizontal = 16.dp, vertical = 20.dp)
+        modifier = modifier.padding(
+            horizontal = dimensionResource(id = R.dimen.paddingMedium),
+            vertical = dimensionResource(id = R.dimen.paddingLarge)
+        )
     ) {
         Text(
             text = stringResource(R.string.who_is_watching),
@@ -57,8 +60,8 @@ fun ChooseProfileScreen(modifier: Modifier) {
             IconButton(
                 onClick = { /*TODO*/ },
                 modifier = Modifier.background(
-                    color = blackGrey100,
-                    shape = RoundedCornerShape(24.dp)
+                    color = MaterialTheme.colorScheme.secondary,
+                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.borderRadiusLarge))
                 )
             ) {
                 Icon(

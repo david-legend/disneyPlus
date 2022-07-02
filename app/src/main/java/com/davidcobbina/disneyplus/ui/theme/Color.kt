@@ -8,13 +8,13 @@ val black = Color(0xFF000000)
 
 // OnPrimary Color
 // Color used for text and icons displayed on top of the primary color.
-val blackGrey50 = Color(0xFF27272A)
+val blackGrey50 = Color(0xFF8D8D93)
 val blackGrey100 = Color(0xFF1C1C1E)
 
 // Secondary Color
 // Color accent etc mostly for: Floating action buttons, checkboxes and radio buttons,
 // Links and headlines, Highlighting selected text
-val grey100 = Color(0xFF6A6A6E)
+val grey100 = Color(0xFF1C1C1E) //Color(0xFF6A6A6E)
 // OnSecondary Color
 // Color used for text and icons displayed on top of the secondary color.
 val grey50 = Color(0xFF84848A) // General Color for  icons

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="paddingNone">4dp</dimen>
+    <dimen name="paddingExtraSmall">4dp</dimen>
+    <dimen name="paddingSmall">8dp</dimen>
+    <dimen name="paddingExtraMedium">12dp</dimen>
+    <dimen name="paddingMedium">16dp</dimen>
+    <dimen name="paddingLarge">20dp</dimen>
+    <dimen name="paddingExtraLarge">36dp</dimen>
+
+    <dimen name="marginExtraSmall">4dp</dimen>
+    <dimen name="marginSmall">8dp</dimen>
+    <dimen name="marginExtraMedium">12dp</dimen>
+    <dimen name="marginMedium">16dp</dimen>
+    <dimen name="marginLarge">20dp</dimen>
+    <dimen name="marginExtraLarge">36dp</dimen>
+
+    <dimen name="borderRadiusExtraSmall">8dp</dimen>
+    <dimen name="borderRadiusSmall">10dp</dimen>
+    <dimen name="borderRadiusMedium">16dp</dimen>
+    <dimen name="borderRadiusLarge">20dp</dimen>
+    <dimen name="borderRadiusExtraLarge">30dp</dimen>
+
+    <dimen name="iconSizeSmall">20dp</dimen>
+    <dimen name="iconSizeMedium">28dp</dimen>
+    <dimen name="iconSizeLarge">36dp</dimen>
+    <dimen name="iconSizeExtraLarge">48dp</dimen>
+
+</resources>

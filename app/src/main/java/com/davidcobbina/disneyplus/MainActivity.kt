@@ -31,8 +31,8 @@ fun DisneyPlusApp() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            ChooseProfileScreen(modifier = Modifier)
-//            HomeScreen()
+//            ChooseProfileScreen(modifier = Modifier)
+            HomeScreen()
         }
     }
 }

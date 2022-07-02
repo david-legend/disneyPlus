@@ -28,9 +28,24 @@ val Typography = Typography(
         fontWeight = FontWeight.Bold
     ),
     headlineSmall = TextStyle(fontFamily = SFPro, color = Color.White, fontSize = 24.sp),
-    titleLarge = TextStyle(fontFamily = SFPro, fontSize = 22.sp, color = blackGrey50),
-    titleMedium = TextStyle(fontFamily = SFPro, fontSize = 16.sp, color = blackGrey50),
-    titleSmall = TextStyle(fontFamily = SFPro, fontSize = 14.sp, color = blackGrey50),
+    titleLarge = TextStyle(
+        fontFamily = SFPro,
+        fontSize = 22.sp,
+        color = blackGrey50,
+        fontWeight = FontWeight.W400
+    ),
+    titleMedium = TextStyle(
+        fontFamily = SFPro,
+        fontSize = 16.sp,
+        color = blackGrey50,
+
+    ),
+    titleSmall = TextStyle(
+        fontFamily = SFPro,
+        fontSize = 14.sp,
+        color = blackGrey50,
+        fontWeight = FontWeight.Bold
+    ),
     bodyLarge = TextStyle(
         fontFamily = SFPro,
         fontWeight = FontWeight.Normal,

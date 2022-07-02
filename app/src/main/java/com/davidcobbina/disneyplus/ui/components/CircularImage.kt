@@ -24,6 +24,7 @@ import com.davidcobbina.disneyplus.R
 fun CircularImage(
     painter: Painter,
     contentDescription: String,
+    modifier: Modifier = Modifier,
     imageTitle: String = "",
     contentScale: ContentScale = ContentScale.Crop,
     imageSize: Dp = 100.dp,
@@ -31,7 +32,8 @@ fun CircularImage(
     titleStyle: TextStyle = MaterialTheme.typography.bodyMedium
 ) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
     ) {
         Image(
             painter = painter,
