@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">DisneyPlus</string>
+    //Choose Profile Screen
+    <string name="who_is_watching">Who\'s watching ?</string>
+    <string name="megan">Megan</string>
+    <string name="anthony">Anthony</string>
+    <string name="marc">Marc</string>
+    <string name="profile_content_description">Profile Image Of User</string>
+    <string name="edit">Edit</string>
+    <string name="add_button_content_description">Button For Adding More Profile</string>
 </resources>

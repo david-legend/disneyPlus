@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
@@ -25,7 +27,8 @@ fun CircularImage(
     imageTitle: String = "",
     contentScale: ContentScale = ContentScale.Crop,
     imageSize: Dp = 100.dp,
-    hasTitle: Boolean = true
+    hasTitle: Boolean = true,
+    titleStyle: TextStyle = MaterialTheme.typography.bodyMedium
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -40,7 +43,7 @@ fun CircularImage(
         )
         if (hasTitle) {
             Box(modifier = Modifier.height(16.dp))
-            Text(text = imageTitle)
+            Text(text = imageTitle, style = titleStyle)
         }
 
     }
