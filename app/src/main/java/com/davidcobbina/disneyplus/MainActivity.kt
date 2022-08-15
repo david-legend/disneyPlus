@@ -15,6 +15,12 @@ import com.davidcobbina.disneyplus.ui.screens.HomeScreen
 import com.davidcobbina.disneyplus.ui.screens.NavigationDrawer
 import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 
+//TODO: Mascot Selector
+//TODO: Downloads
+//TODO: Movie Detail ->
+//TODO: Search On HomePage
+//TODO: Link Pages Together
+//TODO: Add any missing animations
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

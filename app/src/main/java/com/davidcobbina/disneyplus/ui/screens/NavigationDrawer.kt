@@ -11,11 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.FranchiseStudioData
@@ -25,20 +25,26 @@ import com.davidcobbina.disneyplus.data.navItemsList
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.NavItem
 
+//TODO: Add selected to navigation Drawer and dot
+//TODO: Add Cover to bottom of nav drawer
+
+val topSpacing: Dp = 180.dp
+val mediumSpacing: Dp = 60.dp
+val footerSpacing: Dp = 120.dp
+
 @Composable
 fun NavigationDrawer() {
     Box() {
         Column(
             modifier = Modifier
-                .padding(bottom = dimensionResource(id = R.dimen.paddingExtraLarge))
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Box(modifier = Modifier.height(180.dp))
+            Box(modifier = Modifier.height(topSpacing))
             NavigationList(navItemsList)
-            Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginExtraLarge)))
+            Box(modifier = Modifier.height(mediumSpacing))
             FranchiseStudioList(franchiseStudioList)
-            Box(modifier = Modifier.height(50.dp))
+            Box(modifier = Modifier.height(mediumSpacing))
             Text(
                 text = stringResource(id = R.string.categories),
                 style = MaterialTheme.typography.titleLarge,
@@ -48,7 +54,7 @@ fun NavigationDrawer() {
                 text = stringResource(id = R.string.coming_soon),
                 style = MaterialTheme.typography.titleLarge,
             )
-            Box(modifier = Modifier.height(50.dp))
+            Box(modifier = Modifier.height(footerSpacing))
         }
         CloseNavigationButton()
 
@@ -67,7 +73,8 @@ fun NavigationList(navItems: List<NavItemData>) {
                 painter = painterResource(id = navItem.icon),
                 title = stringResource(id = navItem.title),
                 textStyle = MaterialTheme.typography.titleLarge,
-                contentDescription = stringResource(id = navItem.title)
+                contentDescription = stringResource(id = navItem.title),
+                isSelected = navItem.isSelected,
             )
             Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
         }
@@ -88,7 +95,7 @@ fun FranchiseStudioList(franchiseStudioData: List<FranchiseStudioData>) {
                 colorFilter = colorFilter,
                 contentDescription = stringResource(id = item.title),
             )
-            Box(modifier = Modifier.height(50.dp))
+            Box(modifier = Modifier.height(mediumSpacing))
         }
     }
 }
