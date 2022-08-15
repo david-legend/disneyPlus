@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.davidcobbina.disneyplus.ui.screens.ChooseProfileScreen
 import com.davidcobbina.disneyplus.ui.screens.HomeScreen
+import com.davidcobbina.disneyplus.ui.screens.NavigationDrawer
 import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +33,8 @@ fun DisneyPlusApp() {
             color = MaterialTheme.colorScheme.background
         ) {
 //            ChooseProfileScreen(modifier = Modifier)
-            HomeScreen()
+//            HomeScreen()
+            NavigationDrawer()
         }
     }
 }

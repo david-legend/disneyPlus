@@ -21,4 +21,16 @@
     <string name="movies">Movies</string>
     <string name="marvel">Marvel</string>
     <string name="star_wars">Star Wars</string>
+
+    //Navigator Drawer
+    <string name="shows">Shows</string>
+    <string name="watchlist">Watchlist</string>
+    <string name="downloads">Downloads</string>
+    <string name="disney">Disney</string>
+    <string name="pixar">Pixar</string>
+    <string name="national_geographic">National Geographic</string>
+    <string name="coming_soon">Coming Soon</string>
+    <string name="categories">Categories</string>
+    <string name="close_drawer_icon">Close icon to close navigation drawer</string>
+
 </resources>
