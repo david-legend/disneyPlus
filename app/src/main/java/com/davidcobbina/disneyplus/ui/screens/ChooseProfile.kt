@@ -1,12 +1,8 @@
 package com.davidcobbina.disneyplus.ui.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,10 +12,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CircularImage
-import com.davidcobbina.disneyplus.ui.theme.blackGrey100
 
 //TODO:: Add bouncing animations to Profile Images
 @Composable
@@ -57,19 +52,12 @@ fun ChooseProfileScreen(modifier: Modifier) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            IconButton(
+            CircularIconButton(
+                contentDescription = stringResource(R.string.add_button_content_description),
+                iconColor= Color.White,
+                icon = Icons.Filled.Add,
                 onClick = { /*TODO*/ },
-                modifier = Modifier.background(
-                    color = MaterialTheme.colorScheme.secondary,
-                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.borderRadiusLarge))
-                )
-            ) {
-                Icon(
-                    Icons.Filled.Add,
-                    contentDescription = stringResource(R.string.add_button_content_description),
-                    tint = Color.White
-                )
-            }
+            )
             Spacer(modifier = modifier.weight(1.0f))
             Text(text = stringResource(R.string.edit), style = MaterialTheme.typography.bodyLarge)
         }

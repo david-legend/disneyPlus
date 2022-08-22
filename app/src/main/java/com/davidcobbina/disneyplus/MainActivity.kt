@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -16,11 +17,20 @@ import com.davidcobbina.disneyplus.ui.screens.NavigationDrawer
 import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 
 //TODO: Mascot Selector
+//TODO: Fix app screens for landscape mode
+
+
+
 //TODO: Downloads
 //TODO: Movie Detail ->
 //TODO: Search On HomePage
 //TODO: Link Pages Together
 //TODO: Add any missing animations
+
+//TODO: Revisits
+//TODO: Add Gradient Cover to footer of nav drawer
+
+@ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +41,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+@ExperimentalMaterialApi
 fun DisneyPlusApp() {
     DisneyPlusTheme {
         // A surface container using the 'background' color from the theme
@@ -39,14 +50,15 @@ fun DisneyPlusApp() {
             color = MaterialTheme.colorScheme.background
         ) {
 //            ChooseProfileScreen(modifier = Modifier)
-//            HomeScreen()
-            NavigationDrawer()
+            HomeScreen()
+//            NavigationDrawer()
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
+@ExperimentalMaterialApi
 fun DefaultPreview() {
     DisneyPlusTheme {
         DisneyPlusApp()

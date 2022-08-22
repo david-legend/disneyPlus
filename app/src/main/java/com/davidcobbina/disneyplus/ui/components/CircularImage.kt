@@ -25,6 +25,7 @@ fun CircularImage(
     painter: Painter,
     contentDescription: String,
     modifier: Modifier = Modifier,
+    imageModifier: Modifier = Modifier,
     imageTitle: String = "",
     contentScale: ContentScale = ContentScale.Crop,
     imageSize: Dp = 100.dp,
@@ -39,7 +40,7 @@ fun CircularImage(
             painter = painter,
             contentDescription = contentDescription,
             contentScale = contentScale,            // crop the image if it's not a square
-            modifier = Modifier
+            modifier = imageModifier
                 .size(imageSize)
                 .clip(CircleShape)       // add a border (optional)
         )

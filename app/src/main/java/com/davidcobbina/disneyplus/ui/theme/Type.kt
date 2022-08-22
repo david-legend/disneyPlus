@@ -1,6 +1,5 @@
 package com.davidcobbina.disneyplus.ui.theme
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -31,19 +30,19 @@ val Typography = Typography(
     titleLarge = TextStyle(
         fontFamily = SFPro,
         fontSize = 22.sp,
-        color = blackGrey50,
+        color = grey100,
         fontWeight = FontWeight.W400
     ),
     titleMedium = TextStyle(
         fontFamily = SFPro,
         fontSize = 16.sp,
-        color = blackGrey50,
+        color = grey100,
 
-    ),
+        ),
     titleSmall = TextStyle(
         fontFamily = SFPro,
         fontSize = 14.sp,
-        color = blackGrey50,
+        color = grey100,
         fontWeight = FontWeight.Bold
     ),
     bodyLarge = TextStyle(
@@ -54,8 +53,8 @@ val Typography = Typography(
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
     ),
-    bodyMedium = TextStyle(fontFamily = SFPro, color = grey200, fontSize = 14.sp),
-    bodySmall = TextStyle(fontFamily = SFPro, color = grey200, fontSize = 12.sp),
+    bodyMedium = TextStyle(fontFamily = SFPro, color = grey300, fontSize = 14.sp),
+    bodySmall = TextStyle(fontFamily = SFPro, color = grey300, fontSize = 12.sp),
     labelLarge = TextStyle(fontFamily = SFPro, fontSize = 14.sp),
     labelMedium = TextStyle(fontFamily = SFPro, fontSize = 12.sp),
     labelSmall = TextStyle(fontFamily = SFPro, fontSize = 11.sp),

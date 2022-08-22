@@ -18,23 +18,33 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.FranchiseStudioData
-import com.davidcobbina.disneyplus.data.NavItemData
+import com.davidcobbina.disneyplus.data.FranchiseStudio
+import com.davidcobbina.disneyplus.data.NavItem
 import com.davidcobbina.disneyplus.data.franchiseStudioList
 import com.davidcobbina.disneyplus.data.navItemsList
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.NavItem
 
-//TODO: Add selected to navigation Drawer and dot
-//TODO: Add Cover to bottom of nav drawer
 
-val topSpacing: Dp = 180.dp
+val topSpacing: Dp = 250.dp
 val mediumSpacing: Dp = 60.dp
 val footerSpacing: Dp = 120.dp
 
 @Composable
 fun NavigationDrawer() {
-    Box() {
+    Box(
+//        modifier = Modifier
+//            .background(
+//                brush = Brush.verticalGradient(
+//                    colorStops = arrayOf(
+//                        Pair(0.20f, Color.Transparent),
+//                        Pair(0.70f, Color(0x961C1C1E)),
+//                        Pair(0.98f, black),
+//                    )
+//
+//                )
+//            )
+    ) {
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState()),
@@ -63,7 +73,7 @@ fun NavigationDrawer() {
 
 
 @Composable
-fun NavigationList(navItems: List<NavItemData>) {
+fun NavigationList(navItems: List<NavItem>) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth(fraction = 1f)
@@ -82,7 +92,7 @@ fun NavigationList(navItems: List<NavItemData>) {
 }
 
 @Composable
-fun FranchiseStudioList(franchiseStudioData: List<FranchiseStudioData>) {
+fun FranchiseStudioList(franchiseStudioData: List<FranchiseStudio>) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth(fraction = 1f)

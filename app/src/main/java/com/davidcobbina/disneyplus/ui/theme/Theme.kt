@@ -18,26 +18,38 @@ import androidx.core.view.ViewCompat
 
 private val DarkColorScheme = darkColorScheme(
     primary = black,
-    onPrimary = blackGrey50,
-    secondary = grey100,
+    onPrimary = grey100,
+    primaryContainer = black100,
+    onPrimaryContainer = grey100,
+    secondary = black500,
     onSecondary = grey50,
+    secondaryContainer = black150,
+    onSecondaryContainer = Color.White,
     tertiary = blue,
+    tertiaryContainer = grey600,
+    onTertiaryContainer = Color.White,
     background = black,
-    surface = black50,
-    onSurface = grey150,
+    surface = black300,
+    onSurface = grey500,
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = black,
-    onPrimary = blackGrey50,
-    secondary = grey100,
+    onPrimary = grey100,
+    primaryContainer = black100,
+    onPrimaryContainer = grey100,
+    secondary = black500,
     onSecondary = grey50,
+    secondaryContainer = black150,
+    onSecondaryContainer = Color.White,
     tertiary = blue,
+    tertiaryContainer = grey600,
+    onTertiaryContainer = Color.White,
     background = black,
-    surface = black50,
-    onSurface = grey150,
+    surface = black300,
+    onSurface = grey500,
 
-)
+    )
 
 @Composable
 fun DisneyPlusTheme(
@@ -48,13 +60,13 @@ fun DisneyPlusTheme(
 ) {
     val colorScheme =
         when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+                val context = LocalContext.current
+                if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+            }
+            darkTheme -> DarkColorScheme
+            else -> LightColorScheme
         }
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
@@ -64,6 +76,7 @@ fun DisneyPlusTheme(
     }
 
     MaterialTheme(
+
         colorScheme = colorScheme,
         typography = Typography,
         content = content

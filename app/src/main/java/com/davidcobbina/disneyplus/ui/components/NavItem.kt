@@ -15,7 +15,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.ui.theme.blackGrey50
+import com.davidcobbina.disneyplus.ui.theme.grey100
 
 @Composable
 fun NavItem(
@@ -23,7 +23,7 @@ fun NavItem(
     title: String,
     textStyle: TextStyle,
     contentDescription: String,
-    iconColor: Color = blackGrey50,
+    iconColor: Color = grey100,
     isSelected: Boolean = false,
     selectedColor: Color = Color.White,
     dotSize: Dp = 4.dp,
