@@ -19,6 +19,7 @@
     <dimen name="marginLarge">20dp</dimen>
     <dimen name="marginExtraLarge">36dp</dimen>
 
+    <dimen name="borderRadiusNone">4dp</dimen>
     <dimen name="borderRadiusExtraSmall">4dp</dimen>
     <dimen name="borderRadiusSmall">8dp</dimen>
     <dimen name="borderRadiusMedium">16dp</dimen>

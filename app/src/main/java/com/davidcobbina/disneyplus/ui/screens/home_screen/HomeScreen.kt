@@ -103,7 +103,7 @@ fun HomeScreen() {
                 }
             }
             CircularImage(
-                painter = painterResource(R.drawable.jasmine),
+                painter = painterResource(R.drawable.pocahontas),
                 imageSize = 50.dp,
                 hasTitle = false,
                 contentDescription = stringResource(R.string.profile_content_description),

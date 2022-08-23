@@ -11,10 +11,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -23,32 +23,34 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.avatarList
-import com.davidcobbina.disneyplus.ui.components.CircularIconButton
+import com.davidcobbina.disneyplus.data.avatarCategories
+import com.davidcobbina.disneyplus.data.avatarProfilesList
+import com.davidcobbina.disneyplus.ui.components.AvatarCategoryItem
 import com.davidcobbina.disneyplus.ui.components.MovieItem
 
 import com.davidcobbina.disneyplus.ui.components.CircularButton
-import com.davidcobbina.disneyplus.ui.theme.black100
-import com.davidcobbina.disneyplus.ui.theme.black300
 import kotlinx.coroutines.launch
 
 
 //TODO:: Add selector UI for mascot category
-//TODO:: Add select state
-//TODO:: Add more images for either categories
 
 
 @ExperimentalMaterialApi
 @Composable
 fun ChooseAvatarSheetContent(sheetState: BottomSheetState) {
+    val screenWidth = LocalConfiguration.current.screenWidthDp
     val bottomSheetHeight = (LocalConfiguration.current.screenHeightDp * 0.7).dp
+    val avatarSelectorPadding = screenWidth * 0.1
+    val avatarCategoryItemWidth = screenWidth - (avatarSelectorPadding * 2)
+    val selectorBorderRadius = dimensionResource(id = R.dimen.borderRadiusSmall)
     val scope = rememberCoroutineScope()
+
+
     Column(
         modifier = Modifier
             .height(bottomSheetHeight)
             .padding(
                 top = dimensionResource(id = R.dimen.paddingExtraLarge),
-                bottom = dimensionResource(id = R.dimen.paddingExtraLarge)
             )
     ) {
         Row(
@@ -78,13 +80,12 @@ fun ChooseAvatarSheetContent(sheetState: BottomSheetState) {
             Spacer(modifier = Modifier.weight(0.25f))
         }
 
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginExtraLarge)))
-
+        Spacer(modifier = Modifier.weight(0.3f))
         LazyRow(
             contentPadding = PaddingValues(start = 60.dp)
         ) {
 
-            itemsIndexed(avatarList) { _, data ->
+            itemsIndexed(avatarProfilesList) { _, data ->
                 MovieItem(
                     painter = painterResource(id = data.avatar),
                     contentDescription = stringResource(id = R.string.movie_cover_description),
@@ -95,5 +96,36 @@ fun ChooseAvatarSheetContent(sheetState: BottomSheetState) {
                 )
             }
         }
+
+        Spacer(modifier = Modifier.weight(0.6f))
+
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Row(
+                modifier = Modifier
+                    .background(
+                        color = MaterialTheme.colorScheme.secondaryContainer,
+                        shape = RoundedCornerShape(selectorBorderRadius)
+                    )
+            ) {
+                val itemWidth = avatarCategoryItemWidth / avatarCategories.size
+                avatarCategories.forEach { category ->
+                    AvatarCategoryItem(
+                        title = stringResource(id = category.title),
+                        isSelected = category.isSelected,
+                        modifier = Modifier.width(itemWidth.dp),
+                        activeBorderRadius = selectorBorderRadius,
+                        inactiveBackgroundColor = Color.Transparent,
+                    )
+                }
+            }
+
+        }
+        Spacer(modifier = Modifier.weight(0.1f))
+
     }
 }
+

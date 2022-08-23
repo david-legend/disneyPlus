@@ -1,5 +1,6 @@
 package com.davidcobbina.disneyplus.data
 
+import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.ui.graphics.Color
 import com.davidcobbina.disneyplus.R
 
@@ -8,8 +9,14 @@ data class AvatarProfile(val avatar: Int)
 data class FranchiseStudio(val title: Int, val logo: Int, val color: Color? = null)
 data class NavItem(val title: Int, val icon: Int, val isSelected: Boolean = false)
 
+data class AvatarCategory(val title: Int, val isSelected: Boolean = false)
+val AvatarCategoriesSaver = listSaver<AvatarCategory, Any>(
+    save = { listOf(it.title, it.isSelected) },
+    restore = { AvatarCategory(it[0] as Int, it[1] as Boolean) }
+)
+
 var suggestedMovieList = List(15) { DisneyMovie(R.drawable.mandalorian) }
-var avatarList = arrayListOf(
+var avatarProfilesList = arrayListOf(
     AvatarProfile(R.drawable.pocahontas),
     AvatarProfile(R.drawable.scar),
     AvatarProfile(R.drawable.timon),
@@ -34,3 +41,10 @@ var franchiseStudioList = arrayListOf(
     FranchiseStudio(R.string.national_geographic, R.drawable.national_geograhic),
 )
 
+
+var avatarCategories = arrayListOf(
+    AvatarCategory(R.string.princess, isSelected = true),
+    AvatarCategory(R.string.hero),
+    AvatarCategory(R.string.villain),
+    AvatarCategory(R.string.buddy),
+)

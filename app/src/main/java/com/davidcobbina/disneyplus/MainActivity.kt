@@ -16,7 +16,6 @@ import com.davidcobbina.disneyplus.ui.screens.HomeScreen
 import com.davidcobbina.disneyplus.ui.screens.NavigationDrawer
 import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 
-//TODO: Mascot Selector
 //TODO: Fix app screens for landscape mode
 
 
