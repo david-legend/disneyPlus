@@ -10,6 +10,15 @@ data class FranchiseStudio(val title: Int, val logo: Int, val color: Color? = nu
 data class NavItem(val title: Int, val icon: Int, val isSelected: Boolean = false)
 
 data class AvatarCategory(val title: Int, val isSelected: Boolean = false)
+data class DownloadedMovie(
+    val movieCover: Int,
+    val title: String,
+    val yearReleased: String,
+    val downloadedSize: String,
+    val isSeries: Boolean = false,
+    val numberOfEpisodes: Int? = 0
+)
+
 val AvatarCategoriesSaver = listSaver<AvatarCategory, Any>(
     save = { listOf(it.title, it.isSelected) },
     restore = { AvatarCategory(it[0] as Int, it[1] as Boolean) }
@@ -48,3 +57,12 @@ var avatarCategories = arrayListOf(
     AvatarCategory(R.string.villain),
     AvatarCategory(R.string.buddy),
 )
+
+var downloadedMovies = List(15) {
+    DownloadedMovie(
+        movieCover = R.drawable.mandalorian,
+        title = "The Mandalorian",
+        yearReleased = "2019",
+        downloadedSize = "2.7Gb"
+    )
+}

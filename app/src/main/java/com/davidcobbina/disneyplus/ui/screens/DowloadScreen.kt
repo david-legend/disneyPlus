@@ -1,10 +1,11 @@
 package com.davidcobbina.disneyplus.ui.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -12,30 +13,42 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.data.downloadedMovies
 import com.davidcobbina.disneyplus.ui.components.*
 
 
 @Composable
 fun DownloadScreen() {
+    val paddingSpacing = dimensionResource(id = R.dimen.marginLarge)
     Box(
-        modifier = Modifier.background(color = Color.White)
+        modifier = Modifier.padding(
+            vertical = paddingSpacing,
+            horizontal = paddingSpacing
+        )
     ) {
         LazyColumn() {
             item {
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.topSpacing)))
                 DownloadPageTitle()
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
-                Row() {
-                    StackedImage(
-                        painter = painterResource(id = R.drawable.mandalorian),
-                        contentDescription = ""
-                    )
-                }
+                Spacer(modifier = Modifier.height(paddingSpacing))
+            }
+
+            itemsIndexed(downloadedMovies) { _, movie ->
+                DownloadedMovieItem(
+                    movieCover = painterResource(id = movie.movieCover),
+                    title = movie.title,
+                    yearReleased = movie.yearReleased,
+                    downloadedSize = movie.downloadedSize
+                )
+                Spacer(modifier = Modifier.height(paddingSpacing))
             }
 
 
@@ -52,10 +65,7 @@ fun DownloadScreen() {
             onClick = { /*TODO*/ },
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .padding(
-                    horizontal = dimensionResource(id = R.dimen.paddingLarge),
-                    vertical = dimensionResource(id = R.dimen.paddingLarge)
-                )
+                .padding(vertical = paddingSpacing)
                 .clickable {
                     //pop current screen off
                 }
@@ -94,24 +104,65 @@ fun DownloadPageTitle() {
 }
 
 @Composable
-fun DownloadedMovieItem() {
-    Row() {
+fun DownloadedMovieItem(
+    movieCover: Painter,
+    title: String,
+    yearReleased: String,
+    downloadedSize: String,
+    isSeries: Boolean = false,
+    numberOfEpisodes: Int? = 0,
+    imageContentDescription: String? = null,
+    titleStyle: TextStyle = MaterialTheme.typography.titleLarge.copy(color = Color.White),
+    subtitleStyle: TextStyle = MaterialTheme.typography.bodyMedium.copy(
+        color = MaterialTheme.colorScheme.onPrimary,
+        fontSize = 16.sp,
+    ),
+) {
+    val itemSize = if (isSeries) "Total of $downloadedSize" else downloadedSize
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
         StackedImage(
-            painter = painterResource(id = R.drawable.mandalorian),
-            contentDescription = ""
+            painter = movieCover,
+            contentDescription = imageContentDescription
         )
+        Spacer(modifier = Modifier.padding(16.dp))
         Column() {
-            Text("The mandalorian")
-            Row() {
-                Text("2019")
+            Text(title, style = titleStyle)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(yearReleased, style = subtitleStyle)
                 Dot(
                     modifier = Modifier.padding(horizontal = 4.dp),
                     dotColor = MaterialTheme.colorScheme.onPrimary,
                     dotSize = 2.dp
                 )
-                Text("Total od 902.7mb")
+                Text(itemSize, style = subtitleStyle)
             }
         }
+        Spacer(modifier = Modifier.weight(weight = 1f))
+        CircularIconButton(
+            hasSmallerSize = true,
+            modifier = Modifier
+                .size(
+                    dimensionResource(id = R.dimen.roundedButtonMedium),
+                    dimensionResource(id = R.dimen.roundedButtonMedium)
+                ),
+            child = {
+                if (isSeries) {
+                    Text(
+                        "$numberOfEpisodes", style = MaterialTheme.typography.titleMedium.copy(
+                            color = MaterialTheme.colorScheme.onPrimary,
+                        )
+                    )
+                } else {
+                    CustomIcon(
+                        icon = Icons.Default.ArrowForward,
+                        iconPadding = dimensionResource(id = R.dimen.paddingSmall)
+                    )
+                }
+            },
+            onClick = { /*TODO*/ }
+        )
 
     }
 }

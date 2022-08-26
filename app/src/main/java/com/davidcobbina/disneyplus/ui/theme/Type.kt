@@ -21,6 +21,7 @@ val SFPro = FontFamily(
 fun DisneyPlusTypography() {
 
 }
+
 val Typography = Typography(
     displayLarge = TextStyle(fontFamily = SFPro, color = Color.White, fontSize = 57.sp),
     displayMedium = TextStyle(fontFamily = SFPro, color = Color.White, fontSize = 45.sp),
@@ -43,8 +44,7 @@ val Typography = Typography(
         fontFamily = SFPro,
         fontSize = 16.sp,
         color = grey100,
-
-        ),
+    ),
     titleSmall = TextStyle(
         fontFamily = SFPro,
         fontSize = 14.sp,

@@ -34,9 +34,10 @@ fun CircularIconButton(
     hasSmallerSize: Boolean = false,
 ) {
     if (hasSmallerSize) {
+        val buttonSize = dimensionResource(id = R.dimen.roundedButtonSmall)
         Box(
             modifier = modifier
-                .size(40.dp, 40.dp)
+                .size(buttonSize, buttonSize)
                 .background(color = buttonColor, shape = RoundedCornerShape(24.dp))
                 .clickable {
                     onClick()

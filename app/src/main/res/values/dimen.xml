@@ -38,4 +38,10 @@
 
     <dimen name="topSpacing">180dp</dimen>
 
+    <dimen name="roundedButtonExtraSmall">36dp</dimen>
+    <dimen name="roundedButtonSmall">40dp</dimen>
+    <dimen name="roundedButtonMedium">44dp</dimen>
+    <dimen name="roundedButtonLarge">48dp</dimen>
+    <dimen name="roundedButtonExtraLarge">54dp</dimen>
+
 </resources>
