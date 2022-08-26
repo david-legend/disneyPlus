@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CircularImage
+import com.davidcobbina.disneyplus.ui.components.CustomIcon
 
 //TODO:: Add bouncing animations to Profile Images
 @Composable
@@ -53,9 +54,13 @@ fun ChooseProfileScreen(modifier: Modifier) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             CircularIconButton(
-                contentDescription = stringResource(R.string.add_button_content_description),
-                iconColor= Color.White,
-                icon = Icons.Filled.Add,
+                child = {
+                    CustomIcon(
+                        contentDescription = stringResource(R.string.add_button_content_description),
+                        iconColor = Color.White,
+                        icon = Icons.Filled.Add
+                    )
+                },
                 onClick = { /*TODO*/ },
             )
             Spacer(modifier = modifier.weight(1.0f))

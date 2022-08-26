@@ -35,4 +35,7 @@
 
     <dimen name="circularButtonSizeSmall">20dp</dimen>
 
+
+    <dimen name="topSpacing">180dp</dimen>
+
 </resources>

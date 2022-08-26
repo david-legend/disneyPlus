@@ -23,6 +23,7 @@ import com.davidcobbina.disneyplus.data.NavItem
 import com.davidcobbina.disneyplus.data.franchiseStudioList
 import com.davidcobbina.disneyplus.data.navItemsList
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
+import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import com.davidcobbina.disneyplus.ui.components.NavItem
 
 
@@ -124,8 +125,12 @@ fun CloseNavigationButton() {
     ) {
         Spacer(modifier = Modifier.weight(1.0f))
         CircularIconButton(
-            icon = Icons.Filled.Close,
-            contentDescription = stringResource(id = R.string.close_drawer_icon),
+            child = {
+                CustomIcon(
+                    icon = Icons.Filled.Close,
+                    contentDescription = stringResource(id = R.string.close_drawer_icon),
+                )
+            },
             onClick = {/*TODO*/ }
         )
     }

@@ -1,6 +1,7 @@
 package com.davidcobbina.disneyplus.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -15,6 +16,11 @@ val SFPro = FontFamily(
 )
 
 // Set of Material typography styles to start with
+
+@Composable
+fun DisneyPlusTypography() {
+
+}
 val Typography = Typography(
     displayLarge = TextStyle(fontFamily = SFPro, color = Color.White, fontSize = 57.sp),
     displayMedium = TextStyle(fontFamily = SFPro, color = Color.White, fontSize = 45.sp),

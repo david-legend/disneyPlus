@@ -11,6 +11,7 @@
 
     //Home Screen
     <string name="everything">EveryThing</string>
+    <string name="everything_dropdown">Dropdown Icon that takes user to menu list</string>
     <string name="categorise_movie_dropdown">Drop down Icon that allows user to categorise Movies</string>
     <string name="search_movie_icon">Search Icon for searching through movies</string>
     <string name="download_icon">Download icon that navigates to all downloads</string>
@@ -40,4 +41,7 @@
     <string name="hero">Hero</string>
     <string name="villain">Villain</string>
     <string name="buddy">Buddy</string>
+
+    //Downloads Screen
+    <string name="downloads_dropdown">Dropdown Icon that takes user to menu list</string>
 </resources>

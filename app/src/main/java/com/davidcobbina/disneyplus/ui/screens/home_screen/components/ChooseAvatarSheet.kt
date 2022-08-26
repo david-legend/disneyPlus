@@ -28,7 +28,8 @@ import com.davidcobbina.disneyplus.data.avatarProfilesList
 import com.davidcobbina.disneyplus.ui.components.AvatarCategoryItem
 import com.davidcobbina.disneyplus.ui.components.MovieItem
 
-import com.davidcobbina.disneyplus.ui.components.CircularButton
+import com.davidcobbina.disneyplus.ui.components.CircularIconButton
+import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import kotlinx.coroutines.launch
 
 
@@ -65,8 +66,15 @@ fun ChooseAvatarSheetContent(sheetState: BottomSheetState) {
                 ),
             )
             Spacer(modifier = Modifier.weight(0.7f))
-            CircularButton(
-                icon = Icons.Default.Close,
+            CircularIconButton(
+                hasSmallerSize = true,
+                child = {
+                    CustomIcon(
+                        icon = Icons.Default.Close,
+                        iconPadding = dimensionResource(id = R.dimen.paddingSmall),
+                        contentDescription = stringResource(id = R.string.close_mascot_button_description),
+                    )
+                },
                 onClick = {
                     scope.launch {
                         if (sheetState.isExpanded) {
@@ -74,13 +82,13 @@ fun ChooseAvatarSheetContent(sheetState: BottomSheetState) {
                         }
                     }
                 },
-                contentDescription = stringResource(id = R.string.close_mascot_button_description),
-            )
+
+                )
 
             Spacer(modifier = Modifier.weight(0.25f))
         }
 
-        Spacer(modifier = Modifier.weight(0.3f))
+        Spacer(modifier = Modifier.weight(0.25f))
         LazyRow(
             contentPadding = PaddingValues(start = 60.dp)
         ) {
@@ -124,7 +132,7 @@ fun ChooseAvatarSheetContent(sheetState: BottomSheetState) {
             }
 
         }
-        Spacer(modifier = Modifier.weight(0.1f))
+        Spacer(modifier = Modifier.weight(0.15f))
 
     }
 }

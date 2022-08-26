@@ -27,6 +27,7 @@ import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.DisneyMovie
 import com.davidcobbina.disneyplus.data.suggestedMovieList
 import com.davidcobbina.disneyplus.ui.components.CircularImage
+import com.davidcobbina.disneyplus.ui.components.HeaderTextWithIcon
 import com.davidcobbina.disneyplus.ui.components.MovieItem
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.ChooseAvatarSheetContent
 import kotlinx.coroutines.launch
@@ -61,45 +62,45 @@ fun HomeScreen() {
         }) {
             LazyColumn() {
                 item {
-                    Box(modifier = Modifier.height(180.dp))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.topSpacing)))
                     HeaderSection()
-                    Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
                     MovieListSection(
                         stringResource(id = R.string.movie_suggestion_title),
                         suggestedMovieList,
                         isVertical = false
                     )
-                    Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
                     MovieListSection(
                         stringResource(id = R.string.keep_watching),
                         suggestedMovieList,
                         isVertical = false
                     )
-                    Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
                     MovieListSection(
                         stringResource(id = R.string.your_watchlist),
                         suggestedMovieList,
                         isVertical = false
                     )
-                    Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
                     MovieListSection(
                         stringResource(id = R.string.movies),
                         suggestedMovieList,
                         isVertical = false
                     )
-                    Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
                     MovieListSection(
                         stringResource(id = R.string.marvel),
                         suggestedMovieList,
                         isVertical = false
                     )
-                    Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
                     MovieListSection(
                         stringResource(id = R.string.star_wars),
                         suggestedMovieList,
                         isVertical = false
                     )
-                    Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
                 }
             }
             CircularImage(
@@ -133,21 +134,10 @@ fun HeaderSection() {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(end = dimensionResource(id = R.dimen.paddingLarge))
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = stringResource(id = R.string.everything),
-                style = MaterialTheme.typography.headlineMedium
-            )
-            Icon(
-                Icons.Filled.KeyboardArrowDown,
-                contentDescription = stringResource(id = R.string.categorise_movie_dropdown),
-                modifier = Modifier.size(dimensionResource(id = R.dimen.iconSizeLarge)),
-                tint = MaterialTheme.colorScheme.onPrimary
-
-            )
-        }
+        HeaderTextWithIcon(
+            title = stringResource(id = R.string.everything),
+            contentDescription = stringResource(id = R.string.everything_dropdown)
+        )
         Spacer(modifier = Modifier.weight(1.0f))
         IconButton(
             onClick = { /*TODO*/ }, Modifier.background(

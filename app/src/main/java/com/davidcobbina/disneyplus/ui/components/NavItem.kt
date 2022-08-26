@@ -40,14 +40,7 @@ fun NavItem(
             style = if (isSelected) textStyle.copy(color = selectedColor) else textStyle
         )
         if (isSelected) Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.marginSmall)))
-        if (isSelected) Box(
-            modifier = Modifier
-                .height(dotSize)
-                .width(dotSize)
-                .background(
-                    color = selectedColor,
-                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.borderRadiusExtraLarge))
-                ),
-        )
+        if (isSelected) Dot(dotSize = dotSize, dotColor = selectedColor)
+
     }
 }

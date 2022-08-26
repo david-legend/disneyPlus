@@ -12,11 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.davidcobbina.disneyplus.ui.screens.ChooseProfileScreen
+import com.davidcobbina.disneyplus.ui.screens.DownloadScreen
 import com.davidcobbina.disneyplus.ui.screens.HomeScreen
 import com.davidcobbina.disneyplus.ui.screens.NavigationDrawer
 import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 
-//TODO: Fix app screens for landscape mode
 
 
 
@@ -26,6 +26,7 @@ import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 //TODO: Link Pages Together
 //TODO: Add any missing animations
 
+//TODO: Fix app screens for landscape mode
 //TODO: Revisits
 //TODO: Add Gradient Cover to footer of nav drawer
 
@@ -49,7 +50,8 @@ fun DisneyPlusApp() {
             color = MaterialTheme.colorScheme.background
         ) {
 //            ChooseProfileScreen(modifier = Modifier)
-            HomeScreen()
+//            HomeScreen()
+            DownloadScreen()
 //            NavigationDrawer()
         }
     }
