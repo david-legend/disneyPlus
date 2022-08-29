@@ -19,7 +19,18 @@ import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.MovieDetailHeaderSection
+import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.SimilarMoviesSection
 
+
+
+//TODO:: More Like this Section
+
+//TODO:: BottomSheet Show
+//TODO:: Movie Description
+//TODO:: Series List
+//TODO:: More Like This Section
+
+// Done
 //TODO:: Header Section
 //      1. Close button to navigate back
 //      2. Scrollable Images with border radius
@@ -27,12 +38,6 @@ import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.Mov
 //      4. Play button
 //      5. More button
 //      6. Movie Title At the Center
-
-//TODO:: BottomSheet Show
-//TODO:: Movie Description
-//TODO:: Series List
-//TODO:: More Like This Section
-
 @Composable
 fun MovieDetailScreen() {
     val paddingSpacing = dimensionResource(id = R.dimen.marginMedium)
@@ -40,6 +45,7 @@ fun MovieDetailScreen() {
         LazyColumn() {
             item {
                 MovieDetailHeaderSection()
+                SimilarMoviesSection()
             }
         }
         CircularIconButton(
