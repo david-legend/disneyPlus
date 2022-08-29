@@ -11,24 +11,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.davidcobbina.disneyplus.ui.screens.ChooseProfileScreen
-import com.davidcobbina.disneyplus.ui.screens.DownloadScreen
-import com.davidcobbina.disneyplus.ui.screens.HomeScreen
-import com.davidcobbina.disneyplus.ui.screens.NavigationDrawer
+import com.davidcobbina.disneyplus.ui.screens.*
 import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 
 
 
+//TODO: Movie Detail
 
-//TODO: Downloads
-//TODO: Movie Detail ->
 //TODO: Search On HomePage
-//TODO: Link Pages Together
+//TODO: Link Pages Together (Navigation In Compose)
 //TODO: Add any missing animations
 
+// After completing all screens
 //TODO: Fix app screens for landscape mode
 //TODO: Revisits
-//TODO: Add Gradient Cover to footer of nav drawer
+//    1. Implement Stacked Downloaded Images
+//    2. Add Gradient Cover to footer of nav drawer
+
 
 @ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
@@ -51,8 +50,9 @@ fun DisneyPlusApp() {
         ) {
 //            ChooseProfileScreen(modifier = Modifier)
 //            HomeScreen()
-            DownloadScreen()
+//            DownloadScreen()
 //            NavigationDrawer()
+            MovieDetailScreen()
         }
     }
 }

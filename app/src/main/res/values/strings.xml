@@ -44,4 +44,8 @@
 
     //Downloads Screen
     <string name="downloads_dropdown">Dropdown Icon that takes user to menu list</string>
+
+    //Movie Detail Screen
+    <string name="add_movie">Add Movie To List</string>
+    <string name="more_options">Open More Options</string>
 </resources>

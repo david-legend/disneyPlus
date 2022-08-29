@@ -39,6 +39,7 @@ fun DownloadScreen() {
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.topSpacing)))
                 DownloadPageTitle()
                 Spacer(modifier = Modifier.height(paddingSpacing))
+
             }
 
             itemsIndexed(downloadedMovies) { _, movie ->

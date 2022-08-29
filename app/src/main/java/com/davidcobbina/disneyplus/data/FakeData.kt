@@ -66,3 +66,8 @@ var downloadedMovies = List(15) {
         downloadedSize = "2.7Gb"
     )
 }
+
+var movieDetailCover = arrayListOf(
+    DisneyMovie(R.drawable.mandalorian_sunny),
+//    DisneyMovie(R.drawable.mandalorian_drive),
+)
