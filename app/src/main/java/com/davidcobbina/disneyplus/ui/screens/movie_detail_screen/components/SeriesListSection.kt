@@ -1,6 +1,7 @@
 package com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,12 +18,15 @@ import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.ui.components.*
 
 @Composable
-fun SeriesListSection() {
+fun SeriesListSection(
+    onHeaderClick: () -> Unit
+) {
     val paddingSpacing = dimensionResource(id = R.dimen.marginMedium)
     DisneyPlusContainer(
         title = {
             TextWithIcon(
                 title = "Season 2",
+                modifier = Modifier.clickable { onHeaderClick() },
                 textModifier = Modifier.padding(end = dimensionResource(id = R.dimen.paddingSmall)),
                 contentDescription = stringResource(id = R.string.everything_dropdown)
             )

@@ -27,9 +27,10 @@ import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
+import kotlinx.coroutines.CoroutineScope
 
 @Composable
-fun MovieDetailHeaderSection() {
+fun MovieDetailHeaderSection(onMoreClick: () -> Unit) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val headerImageWidth = screenWidth.dp
@@ -100,11 +101,11 @@ fun MovieDetailHeaderSection() {
                         CustomIcon(
                             contentDescription = stringResource(R.string.add_movie),
                             iconColor = Color.White,
-                            icon = Icons.Default.MoreVert,
+                            icon = painterResource(id = R.drawable.ic_more_horizontal),
                         )
                     },
                     buttonColor = MaterialTheme.colorScheme.onSurface,
-                    onClick = { /*TODO*/ },
+                    onClick = onMoreClick,
                 )
             }
         }

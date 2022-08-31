@@ -1,4 +1,4 @@
-package com.davidcobbina.disneyplus.ui.screens
+package com.davidcobbina.disneyplus.ui.screens.home_screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

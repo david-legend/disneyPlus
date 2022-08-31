@@ -12,6 +12,8 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.167" />
         <entry key="app/src/main/res/drawable/ic_layers.xml" value="0.167" />
         <entry key="app/src/main/res/drawable/ic_monitor.xml" value="0.167" />
+        <entry key="app/src/main/res/drawable/ic_more_horizontal.xml" value="0.256" />
+        <entry key="app/src/main/res/drawable/ic_smartphone.xml" value="0.208" />
       </map>
     </option>
   </component>
