@@ -45,7 +45,7 @@ fun TrailerAndInfoSection(
                         description = stringResource(id = R.string.lorem_ipsum),
                         genres = arrayListOf("Animation", "Musical", "Action", "Comedy")
                     )
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                 }
                 LazyRow(
                     contentPadding = PaddingValues(horizontal = paddingSpacing),

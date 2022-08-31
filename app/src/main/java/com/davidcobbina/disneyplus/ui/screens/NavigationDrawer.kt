@@ -60,7 +60,7 @@ fun NavigationDrawer() {
                 text = stringResource(id = R.string.categories),
                 style = MaterialTheme.typography.titleLarge,
             )
-            Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+            Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
             Text(
                 text = stringResource(id = R.string.coming_soon),
                 style = MaterialTheme.typography.titleLarge,
@@ -87,7 +87,7 @@ fun NavigationList(navItems: List<NavItem>) {
                 contentDescription = stringResource(id = navItem.title),
                 isSelected = navItem.isSelected,
             )
-            Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+            Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
         }
     }
 }
@@ -119,7 +119,7 @@ fun CloseNavigationButton() {
             .fillMaxWidth(fraction = 1f)
             .padding(
                 vertical = dimensionResource(
-                    id = R.dimen.marginLarge
+                    id = R.dimen.spacingMd
                 )
             )
     ) {

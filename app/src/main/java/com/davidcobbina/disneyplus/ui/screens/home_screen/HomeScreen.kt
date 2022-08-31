@@ -63,43 +63,43 @@ fun HomeScreen() {
                 item {
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.topSpacing)))
                     HeaderSection()
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         stringResource(id = R.string.movie_suggestion_title),
                         suggestedMovieList,
                         isVertical = false
                     )
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         stringResource(id = R.string.keep_watching),
                         suggestedMovieList,
                         isVertical = false
                     )
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         stringResource(id = R.string.your_watchlist),
                         suggestedMovieList,
                         isVertical = false
                     )
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         stringResource(id = R.string.movies),
                         suggestedMovieList,
                         isVertical = false
                     )
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         stringResource(id = R.string.marvel),
                         suggestedMovieList,
                         isVertical = false
                     )
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         stringResource(id = R.string.star_wars),
                         suggestedMovieList,
                         isVertical = false
                     )
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                 }
             }
             CircularImage(
@@ -153,7 +153,7 @@ fun HeaderSection() {
                 tint = MaterialTheme.colorScheme.onSecondary,
             )
         }
-        Box(modifier = Modifier.width(dimensionResource(id = R.dimen.marginMedium)))
+        Box(modifier = Modifier.width(dimensionResource(id = R.dimen.spacingSm)))
         IconButton(
             onClick = { /*TODO*/ }, Modifier.background(
                 color = MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(
@@ -181,7 +181,7 @@ fun MovieListSection(
         LazyColumn() {
             item {
                 Text(text = sectionTitle, style = MaterialTheme.typography.titleLarge)
-                Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginMedium)))
+                Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingSm)))
             }
             itemsIndexed(movieItems) { _, movieItem ->
                 MovieItem(
@@ -194,7 +194,7 @@ fun MovieListSection(
     } else {
         Column() {
             Text(text = sectionTitle, style = MaterialTheme.typography.titleLarge)
-            Box(modifier = Modifier.height(dimensionResource(id = R.dimen.marginMedium)))
+            Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingSm)))
             LazyRow() {
                 itemsIndexed(movieItems) { _, movieItem ->
                     MovieItem(

@@ -1,8 +1,6 @@
 package com.davidcobbina.disneyplus.ui.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,12 +32,12 @@ fun NavItem(
             contentDescription = contentDescription,
             tint = if (isSelected) selectedColor else iconColor
         )
-        Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.marginMedium)))
+        Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.spacingSm)))
         Text(
             text = title,
             style = if (isSelected) textStyle.copy(color = selectedColor) else textStyle
         )
-        if (isSelected) Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.marginSmall)))
+        if (isSelected) Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.spacingXXs)))
         if (isSelected) Dot(dotSize = dotSize, dotColor = selectedColor)
 
     }

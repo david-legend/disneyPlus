@@ -1,4 +1,4 @@
-package com.davidcobbina.disneyplus.ui.screens
+package com.davidcobbina.disneyplus.ui.screens.movie_detail_screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 
 
 
-//TODO:: BottomSheet Show
+//TODO:: Style BottomSheet Content
 
 // Done
 //TODO:: Header Section
@@ -40,10 +40,12 @@ import kotlinx.coroutines.launch
 //      6. Movie Title At the Center
 //TODO:: More Like this Section
 //TODO:: Movie Description
+//TODO:: BottomSheet Show
+
 @Composable
 @ExperimentalMaterialApi
 fun MovieDetailScreen() {
-    val paddingSpacing = dimensionResource(id = R.dimen.marginMedium)
+    val paddingSpacing = dimensionResource(id = R.dimen.spacingSm)
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
     val scope = rememberCoroutineScope()
@@ -69,7 +71,7 @@ fun MovieDetailScreen() {
                 }
             }
         }) {
-            LazyColumn() {
+            LazyColumn () {
                 item {
                     MovieDetailHeaderSection(onMoreClick = {
                         scope.launch {
@@ -92,7 +94,7 @@ fun MovieDetailScreen() {
                     )
                     Spacer(modifier = Modifier.height(paddingSpacing))
                     SimilarMoviesSection()
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginSmall)))
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingXXs)))
                     TrailerAndInfoSection(hasMovieDescription = true)
 
                 }

@@ -27,7 +27,7 @@ import com.davidcobbina.disneyplus.ui.components.*
 
 @Composable
 fun DownloadScreen() {
-    val paddingSpacing = dimensionResource(id = R.dimen.marginLarge)
+    val paddingSpacing = dimensionResource(id = R.dimen.spacingMd)
     Box(
         modifier = Modifier.padding(
             vertical = paddingSpacing,
@@ -83,7 +83,7 @@ fun DownloadPageTitle() {
             title = stringResource(id = R.string.downloads),
             contentDescription = stringResource(id = R.string.downloads_dropdown)
         )
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginExtraMedium)))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginXs)))
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {

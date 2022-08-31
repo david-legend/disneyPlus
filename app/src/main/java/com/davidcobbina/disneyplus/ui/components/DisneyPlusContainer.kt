@@ -43,7 +43,7 @@ fun DisneyPlusContainer(
         horizontalAlignment = horizontalAlignment,
     ) {
         title()
-        Spacer(modifier = spacerModifier.height(dimensionResource(id = R.dimen.marginMedium)))
+        Spacer(modifier = spacerModifier.height(dimensionResource(id = R.dimen.spacingSm)))
         content()
     }
 }

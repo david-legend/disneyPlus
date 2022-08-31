@@ -90,7 +90,7 @@ fun EpisodeListItem(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginLarge)))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
         Row(
 
         ) {

@@ -13,11 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.data.actionsList
+import com.davidcobbina.disneyplus.ui.components.ActionListTile
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import kotlinx.coroutines.launch
@@ -70,6 +73,29 @@ fun MoreActionsSheet(sheetState: BottomSheetState, title: String) {
                 },
             )
             Spacer(modifier = Modifier.weight(0.25f))
+        }
+        Column() {
+            for (action in actionsList) {
+                ActionListTile(title = action.title, icon = painterResource(id = action.icon))
+            }
+        }
+        Spacer(modifier = Modifier.weight(1f))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            CircularIconButton(
+                child = {
+                    CustomIcon(icon = painterResource(id = R.drawable.ic_heart))
+                },
+                onClick = { /*TODO*/ },
+            )
+            CircularIconButton(
+                child = {
+                    CustomIcon(icon = painterResource(id = R.drawable.ic_thumbs_down))
+                },
+                onClick = { /*TODO*/ },
+            )
         }
     }
 }

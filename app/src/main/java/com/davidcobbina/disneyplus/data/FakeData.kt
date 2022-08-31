@@ -19,10 +19,8 @@ data class DownloadedMovie(
     val numberOfEpisodes: Int? = 0
 )
 
-val AvatarCategoriesSaver = listSaver<AvatarCategory, Any>(
-    save = { listOf(it.title, it.isSelected) },
-    restore = { AvatarCategory(it[0] as Int, it[1] as Boolean) }
-)
+data class ActionList(val title: String, val icon: Int)
+
 
 var suggestedMovieList = List(15) { DisneyMovie(R.drawable.mandalorian) }
 var avatarProfilesList = arrayListOf(
@@ -74,3 +72,16 @@ var movieDetailCover = arrayListOf(
 var trailers = List(5) {
     DisneyMovie(R.drawable.mandalorian_sunny)
 }
+
+var actionsList = arrayListOf(
+    ActionList("Download", R.drawable.ic_arrow_down),
+    ActionList("Share", R.drawable.ic_share),
+    ActionList("More Like This", R.drawable.ic_search),
+    ActionList("Cast on TV", R.drawable.ic_cast),
+)
+
+var seasonsList = arrayListOf(
+    "Season 1",
+    "Season 2",
+    "Season 3",
+)

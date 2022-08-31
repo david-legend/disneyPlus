@@ -8,7 +8,6 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -27,7 +26,6 @@ import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
-import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun MovieDetailHeaderSection(onMoreClick: () -> Unit) {
@@ -35,7 +33,7 @@ fun MovieDetailHeaderSection(onMoreClick: () -> Unit) {
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val headerImageWidth = screenWidth.dp
     val headerImageHeight = (screenHeight * 0.60).dp
-    val paddingSpacing = dimensionResource(id = R.dimen.marginMedium)
+    val paddingSpacing = dimensionResource(id = R.dimen.spacingSm)
     Box(
         modifier = Modifier
             .width(headerImageWidth)

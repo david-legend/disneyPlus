@@ -21,7 +21,7 @@ import com.davidcobbina.disneyplus.ui.components.*
 fun SeriesListSection(
     onHeaderClick: () -> Unit
 ) {
-    val paddingSpacing = dimensionResource(id = R.dimen.marginMedium)
+    val paddingSpacing = dimensionResource(id = R.dimen.spacingSm)
     DisneyPlusContainer(
         title = {
             TextWithIcon(

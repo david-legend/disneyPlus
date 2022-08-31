@@ -13,11 +13,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.data.actionsList
+import com.davidcobbina.disneyplus.data.seasonsList
+import com.davidcobbina.disneyplus.ui.components.ActionListTile
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import kotlinx.coroutines.launch
@@ -27,7 +31,7 @@ import kotlinx.coroutines.launch
 @ExperimentalMaterialApi
 fun SeasonsListSheet(sheetState: BottomSheetState, title: String) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
-    val bottomSheetHeight = (LocalConfiguration.current.screenHeightDp * 0.7).dp
+    val bottomSheetHeight = (LocalConfiguration.current.screenHeightDp * 0.5).dp
     val avatarSelectorPadding = screenWidth * 0.1
     val avatarCategoryItemWidth = screenWidth - (avatarSelectorPadding * 2)
     val selectorBorderRadius = dimensionResource(id = R.dimen.borderRadiusSmall)
@@ -70,6 +74,19 @@ fun SeasonsListSheet(sheetState: BottomSheetState, title: String) {
                 },
             )
             Spacer(modifier = Modifier.weight(0.25f))
+
+        }
+
+        Column {
+            for (season in seasonsList) {
+                Text(
+                    text = season,
+                    style = MaterialTheme.typography.headlineSmall.copy(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
         }
     }
 }
