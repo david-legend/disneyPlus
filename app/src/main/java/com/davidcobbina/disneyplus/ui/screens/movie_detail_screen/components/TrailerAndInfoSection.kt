@@ -1,6 +1,5 @@
 package com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -9,7 +8,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -31,8 +29,15 @@ fun TrailerAndInfoSection(
     val paddingSpacing = 16.dp
     val itemWidth: Dp = (LocalConfiguration.current.screenWidthDp.dp / 2) - (paddingSpacing + 4.dp)
     DisneyPlusContainer(
-        title = stringResource(id = R.string.trailers_and_info),
-        child = {
+        title = {
+            RatingTitle(
+                title = "Mulan",
+                painter = painterResource(id = R.drawable.imdb),
+                rating = "7.6"
+            )
+//            DefaultTitle(title = stringResource(id = R.string.trailers_and_info))
+        },
+        content = {
             Column(
             ) {
                 if (hasMovieDescription) {

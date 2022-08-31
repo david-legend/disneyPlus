@@ -1,6 +1,5 @@
 package com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components
 
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,6 +11,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.suggestedMovieList
+import com.davidcobbina.disneyplus.ui.components.DefaultTitle
 import com.davidcobbina.disneyplus.ui.components.DisneyPlusContainer
 import com.davidcobbina.disneyplus.ui.components.MovieItem
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
@@ -22,11 +22,14 @@ import com.google.accompanist.flowlayout.SizeMode
 fun SimilarMoviesSection() {
     val horizontalPadding = 10.dp
     val spacingBetweenMovies = 6.dp
-    val itemWidth: Dp = (LocalConfiguration.current.screenWidthDp.dp / 3) - (horizontalPadding + spacingBetweenMovies)
+    val itemWidth: Dp =
+        (LocalConfiguration.current.screenWidthDp.dp / 3) - (horizontalPadding + spacingBetweenMovies)
     val itemHeight: Dp = itemWidth + itemWidth / 2
     DisneyPlusContainer(
-        title = stringResource(id = R.string.more_like_this),
-        child = {
+        title = {
+            DefaultTitle(title = stringResource(id = R.string.more_like_this))
+        },
+        content = {
             FlowRow(
                 modifier = Modifier.padding(horizontal = horizontalPadding),
                 mainAxisSize = SizeMode.Expand,
