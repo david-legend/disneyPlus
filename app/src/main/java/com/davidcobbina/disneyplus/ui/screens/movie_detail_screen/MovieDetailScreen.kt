@@ -2,6 +2,8 @@ package com.davidcobbina.disneyplus.ui.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -18,9 +20,10 @@ import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
+import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.MovieDescriptionSection
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.MovieDetailHeaderSection
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.SimilarMoviesSection
-
+import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.TrailerAndInfoSection
 
 
 //TODO:: More Like this Section
@@ -45,11 +48,16 @@ fun MovieDetailScreen() {
         LazyColumn() {
             item {
                 MovieDetailHeaderSection()
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginSmall)))
                 SimilarMoviesSection()
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginSmall)))
+                TrailerAndInfoSection(hasMovieDescription = true)
+
             }
         }
         CircularIconButton(
             child = {
+
                 CustomIcon(
                     contentDescription = stringResource(R.string.add_button_content_description),
                     iconColor = Color.White,

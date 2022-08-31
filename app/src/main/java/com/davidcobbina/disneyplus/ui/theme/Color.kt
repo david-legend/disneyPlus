@@ -32,6 +32,7 @@ val black300 = Color(0xFF151517) // For Surfaces of components, such as cards, s
 // Color used for text and icons displayed on top of the surface colors
 val grey500 = Color(0xFF636366) // for Text and Icons on Surfaces
 val grey600 = Color(0xFF58585B)
+val grey700 = Color(0xFF505055)
 
 
 // for Regular Text

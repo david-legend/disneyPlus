@@ -46,6 +46,11 @@
     <string name="downloads_dropdown">Dropdown Icon that takes user to menu list</string>
 
     //Movie Detail Screen
+    <string name="trailer">Trailer</string>
+    <string name="trailer_duration">1:39</string>
     <string name="add_movie">Add Movie To List</string>
     <string name="more_options">Open More Options</string>
+    <string name="more_like_this">More Like This</string>
+    <string name="trailers_and_info">Trailers &amp; Info</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem.</string>
 </resources>

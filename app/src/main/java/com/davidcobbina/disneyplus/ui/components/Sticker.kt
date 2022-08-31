@@ -2,33 +2,31 @@ package com.davidcobbina.disneyplus.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
 
 @Composable
-fun Dot(
+fun Sticker(
+    child: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    dotColor: Color = Color.White,
-    dotSize: Dp = 4.dp,
-    padding: Dp = dimensionResource(id = R.dimen.paddingExtraSmall)
+    backgroundColor: Color = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f),
+    borderRadius: Dp = dimensionResource(id = R.dimen.borderRadiusExtraSmall)
 ) {
     Box(
         modifier = modifier
-            .padding(padding)
-            .height(dotSize)
-            .width(dotSize)
-            .background(
-                color = dotColor,
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.borderRadiusMedium))
+            .background(backgroundColor, shape = RoundedCornerShape(borderRadius))
+            .padding(
+                horizontal = dimensionResource(id = R.dimen.paddingSmall),
+                vertical = dimensionResource(id = R.dimen.paddingExtraSmall)
             )
-    )
+    ) {
+        child()
+    }
 }

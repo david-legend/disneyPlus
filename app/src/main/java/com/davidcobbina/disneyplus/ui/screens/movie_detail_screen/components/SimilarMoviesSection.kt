@@ -1,5 +1,6 @@
 package com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components
 
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,7 +25,7 @@ fun SimilarMoviesSection() {
     val itemWidth: Dp = (LocalConfiguration.current.screenWidthDp.dp / 3) - (horizontalPadding + spacingBetweenMovies)
     val itemHeight: Dp = itemWidth + itemWidth / 2
     DisneyPlusContainer(
-        title = "More like this",
+        title = stringResource(id = R.string.more_like_this),
         child = {
             FlowRow(
                 modifier = Modifier.padding(horizontal = horizontalPadding),

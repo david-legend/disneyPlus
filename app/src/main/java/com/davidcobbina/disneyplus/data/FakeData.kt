@@ -69,5 +69,8 @@ var downloadedMovies = List(15) {
 
 var movieDetailCover = arrayListOf(
     DisneyMovie(R.drawable.mandalorian_sunny),
-//    DisneyMovie(R.drawable.mandalorian_drive),
 )
+
+var trailers = List(5) {
+    DisneyMovie(R.drawable.mandalorian_sunny)
+}

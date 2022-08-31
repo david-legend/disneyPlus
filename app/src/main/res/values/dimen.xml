@@ -4,6 +4,12 @@
     <dimen name="textHeadingSmall">20sp</dimen>
 
 
+    <dimen name="elevationNone">0dp</dimen>
+    <dimen name="elevationExtraSmall">2dp</dimen>
+    <dimen name="elevationSmall">4dp</dimen>
+    <dimen name="elevationMedium">8dp</dimen>
+
+
     <dimen name="paddingNone">0dp</dimen>
     <dimen name="paddingExtraSmall">4dp</dimen>
     <dimen name="paddingSmall">8dp</dimen>
