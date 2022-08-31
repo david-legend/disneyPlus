@@ -13,14 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
-import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.MovieDescriptionSection
+import com.davidcobbina.disneyplus.ui.components.TextListWithDots
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.MovieDetailHeaderSection
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.SimilarMoviesSection
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.TrailerAndInfoSection
@@ -48,7 +46,9 @@ fun MovieDetailScreen() {
         LazyColumn() {
             item {
                 MovieDetailHeaderSection()
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginSmall)))
+                Spacer(modifier = Modifier.height(paddingSpacing))
+                TextListWithDots(texts = arrayListOf("2019", "2 Seasons", "PJ-13", "CC", "4k"))
+                Spacer(modifier = Modifier.height(paddingSpacing))
                 SimilarMoviesSection()
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginSmall)))
                 TrailerAndInfoSection(hasMovieDescription = true)
