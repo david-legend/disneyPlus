@@ -32,7 +32,11 @@ fun MovieDescriptionSection(
     ) {
         Text(text = description, style = descriptionStyle, textAlign = TextAlign.Center)
         Spacer(modifier = spacerModifier.height(16.dp))
-        TextListWithPunctuation(texts = genres, textStyle = genreStyle, modifier = textListModifier)
+        TextListWithPunctuation(
+            texts = genres,
+            textStyle = genreStyle,
+            modifier = textListModifier.fillMaxWidth()
+        )
 
     }
 }

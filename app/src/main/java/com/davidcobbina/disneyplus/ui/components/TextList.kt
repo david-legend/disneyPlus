@@ -55,7 +55,7 @@ fun TextListWithPunctuation(
 ) {
     val textLength = texts.size - 1
     Row(
-        modifier = modifier.fillMaxWidth(1f),
+        modifier = modifier,
         horizontalArrangement = horizontalArrangement,
         verticalAlignment = verticalAlignment
     ) {

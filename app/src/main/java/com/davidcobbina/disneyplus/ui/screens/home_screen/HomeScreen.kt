@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -27,7 +26,7 @@ import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.DisneyMovie
 import com.davidcobbina.disneyplus.data.suggestedMovieList
 import com.davidcobbina.disneyplus.ui.components.CircularImage
-import com.davidcobbina.disneyplus.ui.components.HeaderTextWithIcon
+import com.davidcobbina.disneyplus.ui.components.TextWithIcon
 import com.davidcobbina.disneyplus.ui.components.MovieItem
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.ChooseAvatarSheetContent
 import kotlinx.coroutines.launch
@@ -134,7 +133,7 @@ fun HeaderSection() {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(end = dimensionResource(id = R.dimen.paddingLarge))
     ) {
-        HeaderTextWithIcon(
+        TextWithIcon(
             title = stringResource(id = R.string.everything),
             contentDescription = stringResource(id = R.string.everything_dropdown)
         )

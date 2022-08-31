@@ -53,4 +53,5 @@
     <string name="more_like_this">More Like This</string>
     <string name="trailers_and_info">Trailers &amp; Info</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem.</string>
+    <string name="imdb_image">IMDB Rating Image</string>
 </resources>

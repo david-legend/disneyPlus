@@ -79,7 +79,7 @@ fun DownloadScreen() {
 @Composable
 fun DownloadPageTitle() {
     Column {
-        HeaderTextWithIcon(
+        TextWithIcon(
             title = stringResource(id = R.string.downloads),
             contentDescription = stringResource(id = R.string.downloads_dropdown)
         )

@@ -20,16 +20,16 @@ import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import com.davidcobbina.disneyplus.ui.components.TextListWithDots
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.MovieDetailHeaderSection
+import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.SeriesListSection
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.SimilarMoviesSection
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.TrailerAndInfoSection
 
 
-//TODO:: More Like this Section
+
+
+//TODO:: Series List
 
 //TODO:: BottomSheet Show
-//TODO:: Movie Description
-//TODO:: Series List
-//TODO:: More Like This Section
 
 // Done
 //TODO:: Header Section
@@ -39,6 +39,8 @@ import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.Tra
 //      4. Play button
 //      5. More button
 //      6. Movie Title At the Center
+//TODO:: More Like this Section
+//TODO:: Movie Description
 @Composable
 fun MovieDetailScreen() {
     val paddingSpacing = dimensionResource(id = R.dimen.marginMedium)
@@ -48,6 +50,8 @@ fun MovieDetailScreen() {
                 MovieDetailHeaderSection()
                 Spacer(modifier = Modifier.height(paddingSpacing))
                 TextListWithDots(texts = arrayListOf("2019", "2 Seasons", "PJ-13", "CC", "4k"))
+                Spacer(modifier = Modifier.height(paddingSpacing))
+                SeriesListSection()
                 Spacer(modifier = Modifier.height(paddingSpacing))
                 SimilarMoviesSection()
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.marginSmall)))

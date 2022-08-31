@@ -18,7 +18,7 @@ import androidx.compose.ui.text.TextStyle
 import com.davidcobbina.disneyplus.R
 
 @Composable
-fun HeaderTextWithIcon(
+fun TextWithIcon(
     title: String,
     contentDescription: String,
     modifier: Modifier = Modifier,

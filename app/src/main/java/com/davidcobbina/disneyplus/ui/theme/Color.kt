@@ -25,9 +25,10 @@ val blue = Color(0xFF0D84FA)
 
 // Surface Color
 // For surfaces of components, such as cards, sheets, and menus
-val black100 = Color(0xFF272729) // For Surfaces of components, such as cards, sheets, and menus
-val black150 = Color(0xFF27272A) // For Surfaces of components, such as cards, sheets, and menus
-val black300 = Color(0xFF151517) // For Surfaces of components, such as cards, sheets, and menus
+val black400 = Color(0xFF2A2A2D)
+val black100 = Color(0xFF272729)
+val black150 = Color(0xFF27272A)
+val black300 = Color(0xFF151517)
 // OnSurface Colors
 // Color used for text and icons displayed on top of the surface colors
 val grey500 = Color(0xFF636366) // for Text and Icons on Surfaces
@@ -40,5 +41,7 @@ val grey300 = Color(0xFF8D8D93)
 
 // Color Variant for Some Icons
 val lightGreen = Color(0xFF38D759)
+val lightGreen100 = Color(0xFF6BD45F)
 // Color Variant for surfaces and backgrounds for components with Icon Variant Color
 val green50 = Color(0xFF203D29)
+val green100 = Color(0xFF263C2A)
