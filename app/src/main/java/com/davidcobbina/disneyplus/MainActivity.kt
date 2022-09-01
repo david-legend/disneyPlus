@@ -16,9 +16,11 @@ import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 
 
 //TODO: Movie Detail
+//TODO: Link Pages Together (Navigation In Compose)
+//TODO: Adaptive Layouts
 
 //TODO: Search On HomePage
-//TODO: Link Pages Together (Navigation In Compose)
+
 //TODO: Add any missing animations
 
 // After completing all screens

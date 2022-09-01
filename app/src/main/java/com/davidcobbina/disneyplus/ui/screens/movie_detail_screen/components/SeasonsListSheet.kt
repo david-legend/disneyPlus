@@ -13,15 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.actionsList
 import com.davidcobbina.disneyplus.data.seasonsList
-import com.davidcobbina.disneyplus.ui.components.ActionListTile
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import kotlinx.coroutines.launch
@@ -52,7 +49,6 @@ fun SeasonsListSheet(sheetState: BottomSheetState, title: String) {
                 text = title,
                 style = MaterialTheme.typography.headlineSmall.copy(
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
                 ),
             )
             Spacer(modifier = Modifier.weight(0.7f))
@@ -77,15 +73,17 @@ fun SeasonsListSheet(sheetState: BottomSheetState, title: String) {
 
         }
 
-        Column {
+        Column(modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.paddingMedium))) {
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
             for (season in seasonsList) {
                 Text(
                     text = season,
                     style = MaterialTheme.typography.headlineSmall.copy(
-                        fontSize = 18.sp,
+                        fontSize = 20.sp,
                         fontWeight = FontWeight.Bold
                     )
                 )
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
             }
         }
     }
