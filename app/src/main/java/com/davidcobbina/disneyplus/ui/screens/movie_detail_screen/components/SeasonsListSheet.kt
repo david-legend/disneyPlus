@@ -27,11 +27,7 @@ import kotlinx.coroutines.launch
 @Composable
 @ExperimentalMaterialApi
 fun SeasonsListSheet(sheetState: BottomSheetState, title: String) {
-    val screenWidth = LocalConfiguration.current.screenWidthDp
     val bottomSheetHeight = (LocalConfiguration.current.screenHeightDp * 0.5).dp
-    val avatarSelectorPadding = screenWidth * 0.1
-    val avatarCategoryItemWidth = screenWidth - (avatarSelectorPadding * 2)
-    val selectorBorderRadius = dimensionResource(id = R.dimen.borderRadiusSmall)
     val scope = rememberCoroutineScope()
 
     Column(
@@ -54,6 +50,7 @@ fun SeasonsListSheet(sheetState: BottomSheetState, title: String) {
             Spacer(modifier = Modifier.weight(0.7f))
             CircularIconButton(
                 hasSmallerSize = true,
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
                 child = {
                     CustomIcon(
                         icon = Icons.Default.Close,

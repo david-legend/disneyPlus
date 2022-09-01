@@ -41,6 +41,7 @@ fun MoreActionsSheet(sheetState: BottomSheetState, title: String) {
             .height(bottomSheetHeight)
             .padding(
                 top = dimensionResource(id = R.dimen.paddingExtraLarge),
+                bottom = dimensionResource(id = R.dimen.paddingLarge),
             )
     ) {
         Row(
@@ -51,11 +52,11 @@ fun MoreActionsSheet(sheetState: BottomSheetState, title: String) {
                 text = title,
                 style = MaterialTheme.typography.headlineSmall.copy(
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
                 ),
             )
             Spacer(modifier = Modifier.weight(0.7f))
             CircularIconButton(
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
                 hasSmallerSize = true,
                 child = {
                     CustomIcon(
@@ -81,16 +82,20 @@ fun MoreActionsSheet(sheetState: BottomSheetState, title: String) {
         }
         Spacer(modifier = Modifier.weight(1f))
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = dimensionResource(id = R.dimen.paddingMedium)),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             CircularIconButton(
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
                 child = {
                     CustomIcon(icon = painterResource(id = R.drawable.ic_heart))
                 },
                 onClick = { /*TODO*/ },
             )
             CircularIconButton(
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
                 child = {
                     CustomIcon(icon = painterResource(id = R.drawable.ic_thumbs_down))
                 },

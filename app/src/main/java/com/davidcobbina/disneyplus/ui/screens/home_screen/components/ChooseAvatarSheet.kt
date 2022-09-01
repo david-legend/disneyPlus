@@ -68,6 +68,7 @@ fun ChooseAvatarSheetContent(sheetState: BottomSheetState) {
             Spacer(modifier = Modifier.weight(0.7f))
             CircularIconButton(
                 hasSmallerSize = true,
+                buttonColor = MaterialTheme.colorScheme.primaryContainer,
                 child = {
                     CustomIcon(
                         icon = Icons.Default.Close,

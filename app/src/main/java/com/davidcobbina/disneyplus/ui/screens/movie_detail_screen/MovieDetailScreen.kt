@@ -60,8 +60,8 @@ fun MovieDetailScreen() {
             topEnd = dimensionResource(id = R.dimen.borderRadiusExtraLarge)
         ),
         sheetContent = {
-            SeasonsListSheet(sheetState = sheetState, title = "The Mandalorian")
-//            MoreActionsSheet(sheetState = sheetState, title = "The Mandalorian")
+//            SeasonsListSheet(sheetState = sheetState, title = "The Mandalorian")
+            MoreActionsSheet(sheetState = sheetState, title = "The Mandalorian")
         }
     ) {
         Box(modifier = Modifier.clickable {
