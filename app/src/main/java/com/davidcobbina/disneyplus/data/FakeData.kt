@@ -20,7 +20,13 @@ data class DownloadedMovie(
 )
 
 data class ActionList(val title: String, val icon: Int)
-
+data class EpisodeItem(
+    val title: String,
+    val episodeNumber: String,
+    val duration: String,
+    val description: Int,
+    val isDownloaded: Boolean = false
+)
 
 var suggestedMovieList = List(15) { DisneyMovie(R.drawable.mandalorian) }
 var avatarProfilesList = arrayListOf(
@@ -84,4 +90,44 @@ var seasonsList = arrayListOf(
     "Season 1",
     "Season 2",
     "Season 3",
+)
+var episodes = arrayListOf(
+    EpisodeItem(
+        title = "The Mandalorian",
+        "Episode 1",
+        duration = "39m",
+        description = R.string.lorem_ipsum,
+        isDownloaded = true
+    ),
+    EpisodeItem(
+        title = "The Mandalorian",
+        "Episode 2",
+        duration = "39m",
+        description = R.string.lorem_ipsum,
+    ), EpisodeItem(
+        title = "The Mandalorian",
+        "Episode 3",
+        duration = "39m",
+        description = R.string.lorem_ipsum,
+        isDownloaded = true
+    ),
+    EpisodeItem(
+        title = "The Mandalorian",
+        "Episode 4",
+        duration = "39m",
+        description = R.string.lorem_ipsum,
+    ),
+
+    EpisodeItem(
+        title = "The Mandalorian",
+        "Episode 5",
+        duration = "39m",
+        description = R.string.lorem_ipsum,
+    ), EpisodeItem(
+        title = "The Mandalorian",
+        "Episode 6",
+        duration = "39m",
+        description = R.string.lorem_ipsum,
+    )
+
 )

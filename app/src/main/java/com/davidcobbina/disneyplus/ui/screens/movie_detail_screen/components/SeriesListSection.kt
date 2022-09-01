@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.data.episodes
 import com.davidcobbina.disneyplus.ui.components.*
 
 @Composable
@@ -67,13 +68,21 @@ fun SeriesListSection(
                     )
                 }
                 Spacer(modifier = Modifier.height(paddingSpacing))
-                EpisodeListItem(
-                    episodeTitle = "The Mandalorian",
-                    episodeNumber = "Episode 1",
-                    episodeDuration = "39m",
-                    episodeDescription = stringResource(id = R.string.lorem_ipsum),
-//                    isDownloaded = true
-                )
+
+                Column() {
+                    for (episode in episodes) {
+                        EpisodeListItem(
+                            episodeTitle = episode.title,
+                            episodeNumber = episode.episodeNumber,
+                            episodeDuration = episode.duration,
+                            episodeDescription = stringResource(id = episode.description),
+                            isDownloaded = episode.isDownloaded
+                        )
+                        Spacer(modifier = Modifier.height(paddingSpacing))
+                    }
+                }
+
+
             }
 
         }

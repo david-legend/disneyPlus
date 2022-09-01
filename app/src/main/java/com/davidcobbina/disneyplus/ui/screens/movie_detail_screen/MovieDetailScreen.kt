@@ -93,9 +93,9 @@ fun MovieDetailScreen() {
                         }
                     )
                     Spacer(modifier = Modifier.height(paddingSpacing))
-                    SimilarMoviesSection()
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingXXs)))
                     TrailerAndInfoSection(hasMovieDescription = true)
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingXXs)))
+                    SimilarMoviesSection()
 
                 }
             }

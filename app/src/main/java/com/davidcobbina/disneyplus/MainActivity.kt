@@ -51,10 +51,10 @@ fun DisneyPlusApp() {
             color = MaterialTheme.colorScheme.background
         ) {
 //            ChooseProfileScreen(modifier = Modifier)
-            HomeScreen()
+//            HomeScreen()
 //            DownloadScreen()
 //            NavigationDrawer()
-//            MovieDetailScreen()
+            MovieDetailScreen()
         }
     }
 }
