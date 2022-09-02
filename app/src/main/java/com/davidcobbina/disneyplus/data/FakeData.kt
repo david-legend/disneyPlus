@@ -1,6 +1,5 @@
 package com.davidcobbina.disneyplus.data
 
-import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.ui.graphics.Color
 import com.davidcobbina.disneyplus.R
 
@@ -31,16 +30,19 @@ data class EpisodeItem(
 
 
 var userAccounts = arrayListOf(
-    UserAccount(R.drawable.jasmine, "Megan"),
-    UserAccount(R.drawable.scar, "Scar"),
-    UserAccount(R.drawable.mushu, "Mushu"),
+    UserAccount(R.drawable.merida, "Merida"),
+    UserAccount(R.drawable.moana, "Moana"),
+    UserAccount(R.drawable.olaf, "Olaf"),
+
 )
 var suggestedMovieList = List(15) { DisneyMovie(R.drawable.mandalorian) }
 var avatarProfilesList = arrayListOf(
-    AvatarProfile(R.drawable.pocahontas),
-    AvatarProfile(R.drawable.scar),
-    AvatarProfile(R.drawable.timon),
-    AvatarProfile(R.drawable.simba_kid),
+    AvatarProfile(R.drawable.merida),
+    AvatarProfile(R.drawable.moana),
+    AvatarProfile(R.drawable.olaf),
+    AvatarProfile(R.drawable.mr_incredible),
+    AvatarProfile(R.drawable.mushu),
+    AvatarProfile(R.drawable.simba),
 )
 
 

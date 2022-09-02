@@ -101,7 +101,7 @@ fun HomeScreen(navController: NavHostController) {
                 }
             }
             CircularImage(
-                painter = painterResource(R.drawable.pocahontas),
+                painter = painterResource(R.drawable.merida),
                 imageSize = 50.dp,
                 hasTitle = false,
                 contentDescription = stringResource(R.string.profile_content_description),

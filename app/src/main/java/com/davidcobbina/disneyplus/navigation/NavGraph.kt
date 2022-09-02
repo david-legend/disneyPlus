@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.davidcobbina.disneyplus.ui.screens.AddEditUserScreen
 import com.davidcobbina.disneyplus.ui.screens.DownloadScreen
 import com.davidcobbina.disneyplus.ui.screens.MenuScreen
 import com.davidcobbina.disneyplus.ui.screens.SelectAccountScreen
@@ -20,6 +21,9 @@ fun SetupNavGraph(navController: NavHostController) {
         builder = {
             composable(route = Screen.SelectAccountScreen.route) {
                 SelectAccountScreen(navController)
+            }
+            composable(route = Screen.AddEditUserScreen.route) {
+                AddEditUserScreen(navController)
             }
             composable(route = Screen.HomeScreen.route) {
                 HomeScreen(navController)

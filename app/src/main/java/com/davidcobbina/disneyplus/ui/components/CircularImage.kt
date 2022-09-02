@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
@@ -30,7 +31,9 @@ fun CircularImage(
     contentScale: ContentScale = ContentScale.Crop,
     imageSize: Dp = 100.dp,
     hasTitle: Boolean = true,
-    titleStyle: TextStyle = MaterialTheme.typography.bodyMedium
+    titleStyle: TextStyle = MaterialTheme.typography.bodyLarge.copy(
+        color = MaterialTheme.colorScheme.onPrimary
+    )
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

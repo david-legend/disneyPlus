@@ -17,12 +17,18 @@ import com.davidcobbina.disneyplus.ui.screens.SelectAccountScreen
 import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 
 
-//TODO: Movie Detail
-//TODO: Link Pages Together (Navigation In Compose)
-//TODO: Adaptive Layouts
+//TODO: Perfect select account screen and make it adaptive
+//      1. Proper Avatars
+//      2. Proper Styling
+//      3. make layout adaptive on tablets and landscape mode
+//      4. Make Add User Button Navigate to Add User Screen
+//      4. Think about what edit will do, if not remove it
 
+
+//TODO:: Implement Add User Screen - Draw Inspiration from Netflix
+//TODO:: Implement Login/SignUp Screen - Draw Inspiration from Netflix
+//TODO: Adaptive Layouts on All Screens
 //TODO: Search On HomePage
-
 //TODO: Add any missing animations
 
 // After completing all screens
