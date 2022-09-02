@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
@@ -27,24 +28,9 @@ import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.*
 import kotlinx.coroutines.launch
 
 
-
-//TODO:: Style BottomSheet Content
-
-// Done
-//TODO:: Header Section
-//      1. Close button to navigate back
-//      2. Scrollable Images with border radius
-//      5. Add button
-//      4. Play button
-//      5. More button
-//      6. Movie Title At the Center
-//TODO:: More Like this Section
-//TODO:: Movie Description
-//TODO:: BottomSheet Show
-
 @Composable
 @ExperimentalMaterialApi
-fun MovieDetailScreen() {
+fun MovieDetailScreen(navController: NavHostController) {
     val paddingSpacing = dimensionResource(id = R.dimen.spacingSm)
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
@@ -71,7 +57,7 @@ fun MovieDetailScreen() {
                 }
             }
         }) {
-            LazyColumn () {
+            LazyColumn() {
                 item {
                     MovieDetailHeaderSection(onMoreClick = {
                         scope.launch {
@@ -101,7 +87,6 @@ fun MovieDetailScreen() {
             }
             CircularIconButton(
                 child = {
-
                     CustomIcon(
                         contentDescription = stringResource(R.string.add_button_content_description),
                         iconColor = Color.White,
@@ -109,13 +94,12 @@ fun MovieDetailScreen() {
                     )
                 },
                 buttonColor = MaterialTheme.colorScheme.surface,
-                onClick = { /*TODO*/ },
+                onClick = { navController.popBackStack() },
                 modifier = Modifier
+
                     .align(Alignment.TopEnd)
                     .padding(horizontal = paddingSpacing, vertical = paddingSpacing)
-                    .clickable {
-                        //pop current screen off
-                    }
+
             )
         }
     }

@@ -4,6 +4,7 @@ import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.ui.graphics.Color
 import com.davidcobbina.disneyplus.R
 
+data class UserAccount(val avatar: Int, val username: String)
 data class DisneyMovie(val movieCover: Int)
 data class AvatarProfile(val avatar: Int)
 data class FranchiseStudio(val title: Int, val logo: Int, val color: Color? = null)
@@ -28,6 +29,12 @@ data class EpisodeItem(
     val isDownloaded: Boolean = false
 )
 
+
+var userAccounts = arrayListOf(
+    UserAccount(R.drawable.jasmine, "Megan"),
+    UserAccount(R.drawable.scar, "Scar"),
+    UserAccount(R.drawable.mushu, "Mushu"),
+)
 var suggestedMovieList = List(15) { DisneyMovie(R.drawable.mandalorian) }
 var avatarProfilesList = arrayListOf(
     AvatarProfile(R.drawable.pocahontas),

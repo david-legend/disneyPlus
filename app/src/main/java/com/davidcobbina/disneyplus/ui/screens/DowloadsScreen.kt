@@ -20,13 +20,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.downloadedMovies
 import com.davidcobbina.disneyplus.ui.components.*
 
 
 @Composable
-fun DownloadScreen() {
+fun DownloadScreen(navController: NavHostController) {
     val paddingSpacing = dimensionResource(id = R.dimen.spacingMd)
     Box(
         modifier = Modifier.padding(
@@ -63,7 +64,7 @@ fun DownloadScreen() {
                 )
             },
             buttonColor = MaterialTheme.colorScheme.surface,
-            onClick = { /*TODO*/ },
+            onClick = { navController.popBackStack() },
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(vertical = paddingSpacing)

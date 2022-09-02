@@ -1,19 +1,11 @@
 package com.davidcobbina.disneyplus.ui.screens.home_screen
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -22,19 +14,19 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.DisneyMovie
 import com.davidcobbina.disneyplus.data.suggestedMovieList
 import com.davidcobbina.disneyplus.ui.components.CircularImage
-import com.davidcobbina.disneyplus.ui.components.TextWithIcon
-import com.davidcobbina.disneyplus.ui.components.MovieItem
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.ChooseAvatarSheetContent
+import com.davidcobbina.disneyplus.ui.screens.home_screen.components.HeaderSection
+import com.davidcobbina.disneyplus.ui.screens.home_screen.components.MovieListSection
 import kotlinx.coroutines.launch
 
 
 @Composable
 @ExperimentalMaterialApi
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
     val scope = rememberCoroutineScope()
@@ -59,42 +51,48 @@ fun HomeScreen() {
                 }
             }
         }) {
-            LazyColumn() {
+            LazyColumn {
                 item {
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.topSpacing)))
-                    HeaderSection()
+                    HeaderSection(navController)
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
+                        navController,
                         stringResource(id = R.string.movie_suggestion_title),
                         suggestedMovieList,
                         isVertical = false
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
+                        navController,
                         stringResource(id = R.string.keep_watching),
                         suggestedMovieList,
                         isVertical = false
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
+                        navController,
                         stringResource(id = R.string.your_watchlist),
                         suggestedMovieList,
                         isVertical = false
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
+                        navController,
                         stringResource(id = R.string.movies),
                         suggestedMovieList,
                         isVertical = false
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
+                        navController,
                         stringResource(id = R.string.marvel),
                         suggestedMovieList,
                         isVertical = false
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
+                        navController,
                         stringResource(id = R.string.star_wars),
                         suggestedMovieList,
                         isVertical = false
@@ -127,87 +125,4 @@ fun HomeScreen() {
 }
 
 
-@Composable
-fun HeaderSection() {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(end = dimensionResource(id = R.dimen.paddingLarge))
-    ) {
-        TextWithIcon(
-            title = stringResource(id = R.string.everything),
-            contentDescription = stringResource(id = R.string.everything_dropdown)
-        )
-        Spacer(modifier = Modifier.weight(1.0f))
-        IconButton(
-            onClick = { /*TODO*/ }, Modifier.background(
-                color = MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(
-                    dimensionResource(id = R.dimen.borderRadiusExtraLarge)
-                )
-            )
-        ) {
-            Icon(
-                Icons.Default.Search,
-                contentDescription = stringResource(id = R.string.search_movie_icon),
-                modifier = Modifier
-                    .size(dimensionResource(id = R.dimen.iconSizeMedium)),
-                tint = MaterialTheme.colorScheme.onSecondary,
-            )
-        }
-        Box(modifier = Modifier.width(dimensionResource(id = R.dimen.spacingSm)))
-        IconButton(
-            onClick = { /*TODO*/ }, Modifier.background(
-                color = MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(
-                    dimensionResource(id = R.dimen.borderRadiusExtraLarge),
-                )
-            )
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_arrow_downward),
-                contentDescription = stringResource(id = R.string.download_icon),
-                modifier = Modifier.size(dimensionResource(id = R.dimen.iconSizeMedium)),
-                tint = MaterialTheme.colorScheme.onSecondary,
-            )
-        }
-    }
-}
-
-@Composable
-fun MovieListSection(
-    sectionTitle: String,
-    movieItems: List<DisneyMovie>,
-    isVertical: Boolean = true
-) {
-    if (isVertical) {
-        LazyColumn() {
-            item {
-                Text(text = sectionTitle, style = MaterialTheme.typography.titleLarge)
-                Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingSm)))
-            }
-            itemsIndexed(movieItems) { _, movieItem ->
-                MovieItem(
-                    painter = painterResource(id = movieItem.movieCover),
-                    contentDescription = stringResource(id = R.string.movie_cover_description),
-                    modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.paddingExtraMedium))
-                )
-            }
-        }
-    } else {
-        Column() {
-            Text(text = sectionTitle, style = MaterialTheme.typography.titleLarge)
-            Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingSm)))
-            LazyRow() {
-                itemsIndexed(movieItems) { _, movieItem ->
-                    MovieItem(
-                        painter = painterResource(id = movieItem.movieCover),
-                        contentDescription = stringResource(id = R.string.movie_cover_description),
-                        modifier = Modifier
-                            .padding(end = dimensionResource(id = R.dimen.paddingExtraMedium))
-
-                    )
-                }
-            }
-        }
-    }
-
-}
 

@@ -17,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.FranchiseStudio
 import com.davidcobbina.disneyplus.data.NavItem
@@ -32,7 +33,7 @@ val mediumSpacing: Dp = 60.dp
 val footerSpacing: Dp = 120.dp
 
 @Composable
-fun NavigationDrawer() {
+fun MenuScreen(navController: NavHostController) {
     Box(
 //        modifier = Modifier
 //            .background(
@@ -67,7 +68,7 @@ fun NavigationDrawer() {
             )
             Box(modifier = Modifier.height(footerSpacing))
         }
-        CloseNavigationButton()
+        CloseMenuButton(navController)
 
     }
 }
@@ -112,7 +113,7 @@ fun FranchiseStudioList(franchiseStudioData: List<FranchiseStudio>) {
 }
 
 @Composable
-fun CloseNavigationButton() {
+fun CloseMenuButton(navController: NavHostController) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -131,7 +132,7 @@ fun CloseNavigationButton() {
                     contentDescription = stringResource(id = R.string.close_drawer_icon),
                 )
             },
-            onClick = {/*TODO*/ }
+            onClick = { navController.popBackStack() }
         )
     }
 }
