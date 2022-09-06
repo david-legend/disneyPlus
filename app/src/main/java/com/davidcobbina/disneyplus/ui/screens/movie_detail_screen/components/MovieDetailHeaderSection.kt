@@ -24,15 +24,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.layout.WindowInfo
+import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
 
 @Composable
 fun MovieDetailHeaderSection(onMoreClick: () -> Unit) {
-    val screenWidth = LocalConfiguration.current.screenWidthDp
-    val screenHeight = LocalConfiguration.current.screenHeightDp
-    val headerImageWidth = screenWidth.dp
-    val headerImageHeight = (screenHeight * 0.60).dp
+    val windowInfo = rememberWindowInfo()
+    val screenHeight = windowInfo.screenHeight
+    val headerImageWidth = windowInfo.screenWidthDp
+    val headerImageHeight =
+        if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) (screenHeight * 0.60).dp else screenHeight.dp
     val paddingSpacing = dimensionResource(id = R.dimen.spacingSm)
     Box(
         modifier = Modifier

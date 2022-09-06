@@ -17,6 +17,9 @@ import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.episodes
 import com.davidcobbina.disneyplus.ui.components.*
+import com.google.accompanist.flowlayout.FlowMainAxisAlignment
+import com.google.accompanist.flowlayout.FlowRow
+import com.google.accompanist.flowlayout.SizeMode
 
 @Composable
 fun SeriesListSection(
@@ -70,16 +73,23 @@ fun SeriesListSection(
                 Spacer(modifier = Modifier.height(paddingSpacing))
 
                 Column() {
-                    for (episode in episodes) {
-                        EpisodeListItem(
-                            episodeTitle = episode.title,
-                            episodeNumber = episode.episodeNumber,
-                            episodeDuration = episode.duration,
-                            episodeDescription = stringResource(id = episode.description),
-                            isDownloaded = episode.isDownloaded
-                        )
-                        Spacer(modifier = Modifier.height(paddingSpacing))
+                    FlowRow(
+                        mainAxisSize = SizeMode.Expand,
+                        mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween,
+                        crossAxisSpacing = dimensionResource(id = R.dimen.spacingMd),
+                    ) {
+                        for (episode in episodes) {
+                            EpisodeListItem(
+                                episodeTitle = episode.title,
+                                episodeNumber = episode.episodeNumber,
+                                episodeDuration = episode.duration,
+                                episodeDescription = stringResource(id = episode.description),
+                                isDownloaded = episode.isDownloaded
+                            )
+                            Spacer(modifier = Modifier.height(paddingSpacing))
+                        }
                     }
+
                 }
 
 

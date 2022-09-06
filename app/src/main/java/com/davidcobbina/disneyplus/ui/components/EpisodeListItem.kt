@@ -1,5 +1,6 @@
 package com.davidcobbina.disneyplus.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -7,13 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.layout.WindowInfo
+import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.theme.black400
 import com.davidcobbina.disneyplus.ui.theme.green50
 import com.davidcobbina.disneyplus.ui.theme.lightGreen
@@ -37,14 +39,21 @@ fun EpisodeListItem(
     ),
     isDownloaded: Boolean = false
 ) {
-    val screenWidth = LocalConfiguration.current.screenWidthDp
-    val episodePreviewWidth = (screenWidth * 0.5)
+    val windowInfo = rememberWindowInfo()
+    val paddingLeft = dimensionResource(id = R.dimen.paddingExtraMedium)
+    val paddingRight = dimensionResource(id = R.dimen.paddingSmall)
+    val screenWidth = windowInfo.screenWidth - (paddingLeft.value + paddingRight.value)
+    val itemWidth =
+        if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) screenWidth else (screenWidth * 0.5)
+    val episodePreviewWidth = (itemWidth.toInt() * 0.5)
     val episodePreviewHeight = (episodePreviewWidth * 0.7)
     Column(
-        modifier = Modifier.padding(
-            start = dimensionResource(id = R.dimen.paddingExtraMedium),
-            end = dimensionResource(id = R.dimen.paddingSmall)
-        )
+        modifier = Modifier
+            .width(itemWidth.toInt().dp)
+            .padding(
+                start = paddingLeft,
+                end = paddingRight
+            )
     ) {
         Row(
             modifier = Modifier
