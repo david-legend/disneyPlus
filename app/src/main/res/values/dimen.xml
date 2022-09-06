@@ -18,6 +18,7 @@
     <dimen name="paddingLarge">20dp</dimen>
     <dimen name="paddingExtraLarge">36dp</dimen>
 
+    <dimen name="spacingNone">0dp</dimen>
     <dimen name="spacingXXXs">4dp</dimen>
     <dimen name="spacingXXs">8dp</dimen>
     <dimen name="marginXs">12dp</dimen>
@@ -26,7 +27,7 @@
     <dimen name="spacingLg">24dp</dimen>
     <dimen name="spacingXl">28dp</dimen>
     <dimen name="spacingXXl">36dp</dimen>
-    <dimen name="spacingXXXl">24dp</dimen>
+    <dimen name="spacingXXXl">48dp</dimen>
 
     <dimen name="borderRadiusNone">4dp</dimen>
     <dimen name="borderRadiusExtraSmall">4dp</dimen>

@@ -3,7 +3,6 @@ package com.davidcobbina.disneyplus.ui.screens
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Close
@@ -23,34 +22,57 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.downloadedMovies
+import com.davidcobbina.disneyplus.layout.WindowInfo
+import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.components.*
+import com.google.accompanist.flowlayout.FlowMainAxisAlignment
+import com.google.accompanist.flowlayout.FlowRow
+import com.google.accompanist.flowlayout.SizeMode
 
+
+//TODO:: Stacked Images..
 
 @Composable
 fun DownloadScreen(navController: NavHostController) {
     val paddingSpacing = dimensionResource(id = R.dimen.spacingMd)
+    val windowInfo = rememberWindowInfo()
+    val screenWidthWithoutPadding = windowInfo.screenWidth - paddingSpacing.value - 20
+    val itemSize =
+        if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact)
+            screenWidthWithoutPadding else (screenWidthWithoutPadding * 0.5)
     Box(
-        modifier = Modifier.padding(
-            vertical = paddingSpacing,
-            horizontal = paddingSpacing
-        )
+        modifier = Modifier
+            .padding(
+                vertical = paddingSpacing,
+                horizontal = paddingSpacing
+            )
+            .fillMaxSize()
     ) {
-        LazyColumn() {
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
             item {
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.topSpacing)))
+                if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) {
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.topSpacing)))
+                } else {
+                    Spacer(modifier = Modifier.height(paddingSpacing))
+                }
+
                 DownloadPageTitle()
                 Spacer(modifier = Modifier.height(paddingSpacing))
-
-            }
-
-            itemsIndexed(downloadedMovies) { _, movie ->
-                DownloadedMovieItem(
-                    movieCover = painterResource(id = movie.movieCover),
-                    title = movie.title,
-                    yearReleased = movie.yearReleased,
-                    downloadedSize = movie.downloadedSize
-                )
-                Spacer(modifier = Modifier.height(paddingSpacing))
+                FlowRow(
+                    mainAxisSize = SizeMode.Expand,
+                    mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween,
+                    crossAxisSpacing = dimensionResource(id = R.dimen.spacingMd),
+                ) {
+                    for (movie in downloadedMovies) {
+                        DownloadedMovieItem(
+                            movieCover = painterResource(id = R.drawable.mandalorian_cover),
+                            itemSize = itemSize.toInt(),
+                            title = movie.title,
+                            yearReleased = movie.yearReleased,
+                            downloadedSize = movie.downloadedSize
+                        )
+                    }
+                }
             }
 
 
@@ -111,6 +133,7 @@ fun DownloadedMovieItem(
     title: String,
     yearReleased: String,
     downloadedSize: String,
+    itemSize: Int,
     isSeries: Boolean = false,
     numberOfEpisodes: Int? = 0,
     imageContentDescription: String? = null,
@@ -120,51 +143,74 @@ fun DownloadedMovieItem(
         fontSize = 16.sp,
     ),
 ) {
-    val itemSize = if (isSeries) "Total of $downloadedSize" else downloadedSize
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        StackedImage(
-            painter = movieCover,
-            contentDescription = imageContentDescription
-        )
-        Spacer(modifier = Modifier.padding(16.dp))
-        Column() {
-            Text(title, style = titleStyle)
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(yearReleased, style = subtitleStyle)
-                Dot(
-                    modifier = Modifier.padding(horizontal = 4.dp),
-                    dotColor = MaterialTheme.colorScheme.onPrimary,
-                    dotSize = 2.dp
-                )
-                Text(itemSize, style = subtitleStyle)
-            }
-        }
-        Spacer(modifier = Modifier.weight(weight = 1f))
-        CircularIconButton(
-            hasSmallerSize = true,
-            modifier = Modifier
-                .size(
-                    dimensionResource(id = R.dimen.roundedButtonMedium),
-                    dimensionResource(id = R.dimen.roundedButtonMedium)
-                ),
-            child = {
-                if (isSeries) {
-                    Text(
-                        "$numberOfEpisodes", style = MaterialTheme.typography.titleMedium.copy(
-                            color = MaterialTheme.colorScheme.onPrimary,
-                        )
-                    )
-                } else {
-                    CustomIcon(
-                        icon = Icons.Default.ArrowForward,
-                        iconPadding = dimensionResource(id = R.dimen.paddingSmall)
-                    )
-                }
-            },
-            onClick = { /*TODO*/ }
-        )
+    val downloadSize = if (isSeries) "Total of $downloadedSize" else downloadedSize
+    val windowInfo = rememberWindowInfo()
+    val movieCoverWidth = itemSize * 0.3
+    val movieCoverHeight = movieCoverWidth + (movieCoverWidth / 4)
 
-    }
+        Row(
+            modifier = Modifier.width(itemSize.dp)
+        ) {
+            StackedImage(
+                painter = movieCover,
+                contentDescription = imageContentDescription,
+                modifier = Modifier
+                    .width(movieCoverWidth.dp)
+                    .height(movieCoverHeight.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Column(modifier = Modifier.height(movieCoverHeight.dp)) {
+                Text(title, style = titleStyle)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(yearReleased, style = subtitleStyle)
+                    Dot(
+                        modifier = Modifier.padding(horizontal = 4.dp),
+                        dotColor = MaterialTheme.colorScheme.onPrimary,
+                        dotSize = 2.dp
+                    )
+                    Text(downloadSize, style = subtitleStyle)
+                }
+                //when screenWidth is not compact, change position of View Button to bottom of text
+                if (windowInfo.screenWidthInfo !is WindowInfo.WindowType.Compact) {
+                    Spacer(modifier = Modifier.weight(weight = 1f))
+                    ViewMovieButton(isSeries, numberOfEpisodes)
+                }
+
+            }
+            //when screenWidth is compact, position of View Button to the right of movie title
+            if (windowInfo.screenWidthInfo is  WindowInfo.WindowType.Compact) {
+                Spacer(modifier = Modifier.weight(weight = 1f))
+                ViewMovieButton(isSeries, numberOfEpisodes)
+            }
+
+        }
+
+}
+
+
+@Composable
+fun ViewMovieButton(isSeries: Boolean, numberOfEpisodes: Int? = 0) {
+    CircularIconButton(
+        hasSmallerSize = true,
+        modifier = Modifier
+            .size(
+                dimensionResource(id = R.dimen.roundedButtonMedium),
+                dimensionResource(id = R.dimen.roundedButtonMedium)
+            ),
+        child = {
+            if (isSeries) {
+                Text(
+                    "$numberOfEpisodes", style = MaterialTheme.typography.titleMedium.copy(
+                        color = MaterialTheme.colorScheme.onPrimary,
+                    )
+                )
+            } else {
+                CustomIcon(
+                    icon = Icons.Default.ArrowForward,
+                    iconPadding = dimensionResource(id = R.dimen.paddingSmall)
+                )
+            }
+        },
+        onClick = { /*TODO*/ }
+    )
 }

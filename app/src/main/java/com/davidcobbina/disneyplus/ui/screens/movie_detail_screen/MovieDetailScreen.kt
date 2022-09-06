@@ -46,8 +46,8 @@ fun MovieDetailScreen(navController: NavHostController) {
             topEnd = dimensionResource(id = R.dimen.borderRadiusExtraLarge)
         ),
         sheetContent = {
-//            SeasonsListSheet(sheetState = sheetState, title = "The Mandalorian")
-            MoreActionsSheet(sheetState = sheetState, title = "The Mandalorian")
+            SeasonsListSheet(sheetState = sheetState, title = "The Mandalorian")
+//            MoreActionsSheet(sheetState = sheetState, title = "The Mandalorian")
         }
     ) {
         Box(modifier = Modifier.clickable {
@@ -66,22 +66,22 @@ fun MovieDetailScreen(navController: NavHostController) {
                             }
                         }
                     })
-                    Spacer(modifier = Modifier.height(paddingSpacing))
-                    TextListWithDots(texts = arrayListOf("2019", "2 Seasons", "PJ-13", "CC", "4k"))
-                    Spacer(modifier = Modifier.height(paddingSpacing))
-                    SeriesListSection(
-                        onHeaderClick = {
-                            scope.launch {
-                                if (sheetState.isCollapsed) {
-                                    sheetState.expand()
-                                }
-                            }
-                        }
-                    )
-                    Spacer(modifier = Modifier.height(paddingSpacing))
-                    TrailerAndInfoSection(hasMovieDescription = true)
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingXXs)))
-                    SimilarMoviesSection()
+//                    Spacer(modifier = Modifier.height(paddingSpacing))
+//                    TextListWithDots(texts = arrayListOf("2019", "2 Seasons", "PJ-13", "CC", "4k"))
+//                    Spacer(modifier = Modifier.height(paddingSpacing))
+//                    SeriesListSection(
+//                        onHeaderClick = {
+//                            scope.launch {
+//                                if (sheetState.isCollapsed) {
+//                                    sheetState.expand()
+//                                }
+//                            }
+//                        }
+//                    )
+//                    Spacer(modifier = Modifier.height(paddingSpacing))
+//                    TrailerAndInfoSection(hasMovieDescription = true)
+//                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingXXs)))
+//                    SimilarMoviesSection()
 
                 }
             }
