@@ -25,6 +25,8 @@ import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.avatarCategories
 import com.davidcobbina.disneyplus.data.avatarProfilesList
+import com.davidcobbina.disneyplus.layout.WindowInfo
+import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.components.AvatarCategoryItem
 import com.davidcobbina.disneyplus.ui.components.MovieItem
 
@@ -39,8 +41,13 @@ import kotlinx.coroutines.launch
 @ExperimentalMaterialApi
 @Composable
 fun ChooseAvatarSheetContent(sheetState: BottomSheetState) {
-    val screenWidth = LocalConfiguration.current.screenWidthDp
-    val bottomSheetHeight = (LocalConfiguration.current.screenHeightDp * 0.7).dp
+    val windowInfo = rememberWindowInfo()
+    val screenWidth = windowInfo.screenWidth
+    val screenHeight = windowInfo.screenHeight
+    val bottomSheetHeight =
+        if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) (screenHeight * 0.7).dp else screenHeight.dp
+    val avatarImageSize =
+        if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) 200.dp else 150.dp
     val avatarSelectorPadding = screenWidth * 0.1
     val avatarCategoryItemWidth = screenWidth - (avatarSelectorPadding * 2)
     val selectorBorderRadius = dimensionResource(id = R.dimen.borderRadiusSmall)
@@ -97,8 +104,8 @@ fun ChooseAvatarSheetContent(sheetState: BottomSheetState) {
                 MovieItem(
                     painter = painterResource(id = data.avatar),
                     contentDescription = stringResource(id = R.string.movie_cover_description),
-                    width = 200.dp,
-                    height = 200.dp,
+                    width = avatarImageSize,
+                    height = avatarImageSize,
                     borderRadius = 150.dp,
                     modifier = Modifier.padding(end = dimensionResource(id = R.dimen.paddingMedium))
                 )

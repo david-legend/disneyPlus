@@ -17,25 +17,33 @@ import com.davidcobbina.disneyplus.ui.screens.SelectAccountScreen
 import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 
 
-//TODO: Perfect select account screen and make it adaptive
-//      1. Proper Avatars
-//      2. Proper Styling
-//      3. make layout adaptive on tablets and landscape mode
-//      4. Make Add User Button Navigate to Add User Screen
-//      4. Think about what edit will do, if not remove it
-
-
-//TODO:: Implement Add User Screen - Draw Inspiration from Netflix
-//TODO:: Implement Login/SignUp Screen - Draw Inspiration from Netflix
 //TODO: Adaptive Layouts on All Screens
-//TODO: Search On HomePage
-//TODO: Add any missing animations
+//    1. Fine tune home screen adaptiveness --> Done
+//    1. Fine tune menu screen adaptiveness
+//    1. Fine tune download screen adaptiveness
+//    1. Add proper images for homeScreen
+//    1. Add proper images for Download Screen
+//    1. Fine tune movieDetail screen
+
+
+//TODO:: Passing Data Around
+
+
+
+//Next Phase
+//TODO:: Implement Onboarding Screen - Draw Inspiration from Netflix
+//TODO:: Implement Login/SignUp Screen - Draw Inspiration from Netflix
+//TODO:: Implement Add User Screen - Draw Inspiration from Netflix
+
+
 
 // After completing all screens
-//TODO: Fix app screens for landscape mode
 //TODO: Revisits
-//    1. Implement Stacked Downloaded Images
+//    1. Implement Stacked Downloaded Images (Download Screen)
 //    2. Add Gradient Cover to footer of nav drawer
+//    2. Add Gradient Cover to footer of movieDetail
+//TODO: Search On HomePage
+//TODO: Add any missing animations
 
 
 @ExperimentalMaterialApi

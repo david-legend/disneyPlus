@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.DisneyMovie
@@ -32,7 +34,9 @@ fun MovieListSection(
     if (isVertical) {
         LazyColumn() {
             item {
-                Text(text = sectionTitle, style = MaterialTheme.typography.titleLarge)
+                Text(text = sectionTitle, style = MaterialTheme.typography.titleMedium.copy(
+                    fontSize = 18.sp, fontWeight = FontWeight.W600
+                ))
                 Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingSm)))
             }
             itemsIndexed(movieItems) { _, movieItem ->
@@ -49,7 +53,9 @@ fun MovieListSection(
         }
     } else {
         Column() {
-            Text(text = sectionTitle, style = MaterialTheme.typography.titleLarge)
+            Text(text = sectionTitle, style = MaterialTheme.typography.titleMedium.copy(
+                fontSize = 18.sp, fontWeight = FontWeight.W600
+            ))
             Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingSm)))
             LazyRow() {
                 itemsIndexed(movieItems) { _, movieItem ->

@@ -38,12 +38,13 @@ val Typography = Typography(
         fontFamily = SFPro,
         fontSize = 22.sp,
         color = grey100,
-        fontWeight = FontWeight.W400
+        fontWeight = FontWeight.W600
     ),
     titleMedium = TextStyle(
         fontFamily = SFPro,
         fontSize = 16.sp,
         color = grey100,
+        fontWeight = FontWeight.W400
     ),
     titleSmall = TextStyle(
         fontFamily = SFPro,

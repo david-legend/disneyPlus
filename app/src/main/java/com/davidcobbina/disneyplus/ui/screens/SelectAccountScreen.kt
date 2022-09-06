@@ -38,7 +38,7 @@ fun SelectAccountScreen(navController: NavHostController) {
     val screenHorizontalSpacing = dimensionResource(id = R.dimen.paddingMedium)
     val screenVerticalSpacing = dimensionResource(id = R.dimen.paddingLarge)
     val windowInfo = rememberWindowInfo()
-    val screenWidthWithoutPadding = windowInfo.screenWidth - (screenHorizontalSpacing * 2)
+    val screenWidthWithoutPadding = windowInfo.screenWidthDp - (screenHorizontalSpacing * 2)
 
     Box(
         modifier = Modifier.padding(
@@ -107,29 +107,6 @@ fun SelectAccountScreen(navController: NavHostController) {
         }
 
     }
-//    Column(
-//        horizontalAlignment = Alignment.CenterHorizontally,
-//        modifier = Modifier.padding(
-//            horizontal = dimensionResource(id = R.dimen.paddingMedium),
-//            vertical = dimensionResource(id = R.dimen.paddingLarge)
-//        )
-//    ) {
-
-//        for (account in userAccounts) {
-//            CircularImage(
-//                modifier = Modifier.clickable {
-//                    navController.navigate(route = Screen.HomeScreen.route)
-//                },
-//                painter = painterResource(account.avatar),
-//                contentDescription = stringResource(R.string.profile_content_description),
-//                imageTitle = account.username
-//            )
-//            Spacer(modifier = Modifier.weight(0.4f))
-//        }
-
-//        Spacer(modifier = Modifier.weight(1.0f))
-
-//    }
 }
 
 

@@ -20,16 +20,20 @@ fun rememberWindowInfo(): WindowInfo {
             configuration.screenHeightDp < 900 -> WindowInfo.WindowType.Medium
             else -> WindowInfo.WindowType.Expanded
         },
-        screenWidth = configuration.screenWidthDp.dp,
-        screenHeight = configuration.screenHeightDp.dp
+        screenWidthDp = configuration.screenWidthDp.dp,
+        screenHeightDp = configuration.screenHeightDp.dp,
+        screenWidth = configuration.screenWidthDp,
+        screenHeight = configuration.screenHeightDp
     )
 }
 
 data class WindowInfo(
     val screenWidthInfo: WindowType,
     val screenHeightInfo: WindowType,
-    val screenWidth: Dp,
-    val screenHeight: Dp,
+    val screenWidthDp: Dp,
+    val screenHeightDp: Dp,
+    val screenWidth: Int,
+    val screenHeight: Int,
 ) {
     sealed class WindowType {
         object Compact : WindowType()
