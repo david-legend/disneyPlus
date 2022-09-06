@@ -42,7 +42,7 @@ val Typography = Typography(
     ),
     titleMedium = TextStyle(
         fontFamily = SFPro,
-        fontSize = 16.sp,
+        fontSize = 20.sp,
         color = grey100,
         fontWeight = FontWeight.W400
     ),

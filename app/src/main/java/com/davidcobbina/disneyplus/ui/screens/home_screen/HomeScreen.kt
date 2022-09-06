@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.suggestedMovieList
+import com.davidcobbina.disneyplus.layout.WindowInfo
+import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.components.CircularImage
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.ChooseAvatarSheetContent
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.HeaderSection
@@ -27,6 +29,10 @@ import kotlinx.coroutines.launch
 @Composable
 @ExperimentalMaterialApi
 fun HomeScreen(navController: NavHostController) {
+    val windowInfo = rememberWindowInfo()
+    val screenPadding =
+        if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact)
+            dimensionResource(id = R.dimen.paddingNone) else dimensionResource(id = R.dimen.paddingSmall)
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
     val scope = rememberCoroutineScope()
@@ -44,13 +50,17 @@ fun HomeScreen(navController: NavHostController) {
             ChooseAvatarSheetContent(sheetState)
         },
     ) {
-        Box(modifier = Modifier.clickable {
-            scope.launch {
-                if (sheetState.isExpanded) {
-                    sheetState.collapse()
+        Box(
+            modifier = Modifier
+                .clickable {
+                    scope.launch {
+                        if (sheetState.isExpanded) {
+                            sheetState.collapse()
+                        }
+                    }
                 }
-            }
-        }) {
+                .padding(screenPadding)
+        ) {
             LazyColumn {
                 item {
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.topSpacing)))

@@ -19,7 +19,7 @@ import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 
 //TODO: Adaptive Layouts on All Screens
 //    1. Fine tune home screen adaptiveness --> Done
-//    1. Fine tune menu screen adaptiveness
+//    1. Fine tune menu screen adaptiveness --> Done
 //    1. Fine tune download screen adaptiveness
 //    1. Add proper images for homeScreen
 //    1. Add proper images for Download Screen
