@@ -34,7 +34,7 @@ var userAccounts = arrayListOf(
     UserAccount(R.drawable.moana, "Moana"),
     UserAccount(R.drawable.olaf, "Olaf"),
 
-)
+    )
 var suggestedMovieList = List(15) { DisneyMovie(R.drawable.mandalorian) }
 var avatarProfilesList = arrayListOf(
     AvatarProfile(R.drawable.merida),
@@ -132,7 +132,8 @@ var episodes = arrayListOf(
         "Episode 5",
         duration = "39m",
         description = R.string.lorem_ipsum,
-    ), EpisodeItem(
+    ),
+    EpisodeItem(
         title = "The Mandalorian",
         "Episode 6",
         duration = "39m",

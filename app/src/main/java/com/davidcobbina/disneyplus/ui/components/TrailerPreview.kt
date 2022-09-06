@@ -18,6 +18,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.layout.WindowInfo
+import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 
 @Composable
 fun Trailer(
@@ -30,16 +32,19 @@ fun Trailer(
     imageModifier: Modifier = Modifier,
     contentDescription: String? = null,
 ) {
-    val screenWidth = LocalConfiguration.current.screenWidthDp
-    val trailerWidth = (screenWidth * 0.75).dp
+    val windowInfo = rememberWindowInfo()
+    val screenWidth = windowInfo.screenWidth
+    val trailerWidth =
+        if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) (screenWidth * 0.75) else (screenWidth * 0.4)
+    val trailerHeight = trailerWidth * 0.65
     Box(modifier = modifier) {
         Image(
             painter = painter,
             contentDescription = contentDescription,
             contentScale = ContentScale.FillBounds,
             modifier = imageModifier
-                .width(trailerWidth)
-                .height(200.dp)
+                .width(trailerWidth.dp)
+                .height(trailerHeight.dp)
                 .shadow(
                     elevation = dimensionResource(id = R.dimen.elevationSmall),
                     shape = RoundedCornerShape(8.dp)

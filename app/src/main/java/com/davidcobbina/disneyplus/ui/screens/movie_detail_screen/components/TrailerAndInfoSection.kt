@@ -1,5 +1,6 @@
 package com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -8,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -16,6 +18,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.trailers
+import com.davidcobbina.disneyplus.layout.WindowInfo
+import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.components.*
 import com.davidcobbina.disneyplus.ui.theme.grey600
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
@@ -27,7 +31,11 @@ fun TrailerAndInfoSection(
     hasMovieDescription: Boolean = false
 ) {
     val paddingSpacing = 16.dp
-    val itemWidth: Dp = (LocalConfiguration.current.screenWidthDp.dp / 2) - (paddingSpacing + 4.dp)
+    val containerPadding = 8
+    val windowInfo = rememberWindowInfo()
+    val screenWidth = windowInfo.screenWidth - (paddingSpacing.value + containerPadding)
+    val itemWidth: Dp = if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact)
+        (screenWidth / 2).dp else (screenWidth / 4).dp
     DisneyPlusContainer(
         title = {
             RatingTitle(
@@ -35,10 +43,10 @@ fun TrailerAndInfoSection(
                 painter = painterResource(id = R.drawable.imdb),
                 rating = "7.6"
             )
-//            DefaultTitle(title = stringResource(id = R.string.trailers_and_info))
         },
         content = {
             Column(
+//                modifier = Modifier.width(screenWidth.dp)
             ) {
                 if (hasMovieDescription) {
                     MovieDescriptionSection(
@@ -65,7 +73,6 @@ fun TrailerAndInfoSection(
                     FlowRow(
                         mainAxisSize = SizeMode.Expand,
                         crossAxisSpacing = paddingSpacing,
-                        mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween
                     ) {
                         TextList(
                             title = "Director",

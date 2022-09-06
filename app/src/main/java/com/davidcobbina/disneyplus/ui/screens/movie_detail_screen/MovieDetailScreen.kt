@@ -78,10 +78,10 @@ fun MovieDetailScreen(navController: NavHostController) {
                             }
                         }
                     )
-//                    Spacer(modifier = Modifier.height(paddingSpacing))
-//                    TrailerAndInfoSection(hasMovieDescription = true)
-//                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingXXs)))
-//                    SimilarMoviesSection()
+                    Spacer(modifier = Modifier.height(paddingSpacing))
+                    TrailerAndInfoSection(hasMovieDescription = true)
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingXXs)))
+                    SimilarMoviesSection()
 
                 }
             }
