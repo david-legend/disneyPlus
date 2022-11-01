@@ -8,6 +8,12 @@ data class DisneyMovie(val movieCover: Int)
 data class AvatarProfile(val avatar: Int)
 data class FranchiseStudio(val title: Int, val logo: Int, val color: Color? = null)
 data class NavItem(val title: Int, val icon: Int, val isSelected: Boolean = false)
+data class SettingsListItem(
+    val title: Int,
+    val subtitle: Int,
+    val leadingIcon: Int,
+    val trailingIcon: Int
+)
 
 data class AvatarCategory(val title: Int, val isSelected: Boolean = false)
 data class DownloadedMovie(
@@ -140,4 +146,25 @@ var episodes = arrayListOf(
         description = R.string.lorem_ipsum,
     )
 
+)
+
+var settingsList = arrayListOf(
+    SettingsListItem(
+        title = R.string.maturity_rating_title,
+        subtitle = R.string.maturity_rating_subtitle,
+        leadingIcon = R.drawable.ic_alert_octagon,
+        trailingIcon = R.drawable.ic_chevron_right,
+    ),
+    SettingsListItem(
+        title = R.string.display_language_title,
+        subtitle = R.string.display_language_subtitle,
+        leadingIcon = R.drawable.ic_baseline_language,
+        trailingIcon = R.drawable.ic_chevron_right,
+    ),
+    SettingsListItem(
+        title = R.string.audios_and_subtitles_title,
+        subtitle = R.string.audios_and_subtitles_subtitle,
+        leadingIcon = R.drawable.ic_baseline_subtitles,
+        trailingIcon = R.drawable.ic_chevron_right,
+    )
 )

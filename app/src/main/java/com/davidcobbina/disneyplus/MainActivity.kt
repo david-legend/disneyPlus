@@ -62,9 +62,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     navController = rememberNavController()
-//                    SetupNavGraph(navController = navController)
+                    SetupNavGraph(navController = navController)
 //                    HomeScreen(navController = navController)
-                    MovieDetailScreen(navController = navController)
+//                    MovieDetailScreen(navController = navController)
                 }
             }
         }

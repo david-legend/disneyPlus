@@ -22,6 +22,7 @@ val grey50 = Color(0xFF84848A) // General Color for  icons
 //Tertiary Color
 // used to balance primary and secondary colors, or bring heightened attention to an element eg. input field.
 val blue = Color(0xFF0D84FA)
+val blue300 = Color(0xFF3951FC)
 
 // Surface Color
 // For surfaces of components, such as cards, sheets, and menus

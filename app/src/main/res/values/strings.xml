@@ -7,6 +7,7 @@
     <string name="marc">Marc</string>
     <string name="profile_content_description">Profile Image Of User</string>
     <string name="edit">Edit</string>
+    <string name="done">Done</string>
     <string name="add_button_content_description">Button For Adding More Profile</string>
 
     //Home Screen
@@ -54,4 +55,22 @@
     <string name="trailers_and_info">Trailers &amp; Info</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem.</string>
     <string name="imdb_image">IMDB Rating Image</string>
+
+
+    //Add Edit User Screen
+    <string name="maturity_rating_title">Maturity Rating</string>
+    <string name="maturity_rating_subtitle">No Restrictions</string>
+
+    <string name="display_language_title">Display Language</string>
+    <string name="display_language_subtitle">English</string>
+
+    <string name="audios_and_subtitles_title">Audio &amp; Subtitles</string>
+    <string name="audios_and_subtitles_subtitle">English</string>
+
+    <string name="autoplay_next_episode_title">Autoplay next episode</string>
+    <string name="autoplay_next_episode_subtitle">Play next episode</string>
+
+    <string name="autoplay_previews_title">Autoplay Previews</string>
+    <string name="autoplay_previews_subtitle">Play previews</string>
+    <string name="changes">Changes made here apply to all devices</string>
 </resources>

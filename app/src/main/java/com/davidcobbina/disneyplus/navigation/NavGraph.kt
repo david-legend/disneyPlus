@@ -17,7 +17,7 @@ import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.MovieDetailScr
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SelectAccountScreen.route,
+        startDestination = Screen.AddEditUserScreen.route,
         builder = {
             composable(route = Screen.SelectAccountScreen.route) {
                 SelectAccountScreen(navController)

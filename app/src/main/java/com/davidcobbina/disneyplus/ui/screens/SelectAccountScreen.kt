@@ -26,11 +26,10 @@ import com.davidcobbina.disneyplus.navigation.Screen
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CircularImage
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
+import com.davidcobbina.disneyplus.ui.components.EditableItem
 import com.davidcobbina.disneyplus.ui.theme.blue
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
-
-
 
 
 @Composable
@@ -39,6 +38,7 @@ fun SelectAccountScreen(navController: NavHostController) {
     val screenVerticalSpacing = dimensionResource(id = R.dimen.paddingLarge)
     val windowInfo = rememberWindowInfo()
     val screenWidthWithoutPadding = windowInfo.screenWidthDp - (screenHorizontalSpacing * 2)
+    val editProfiles = false
 
     Box(
         modifier = Modifier.padding(
@@ -63,16 +63,22 @@ fun SelectAccountScreen(navController: NavHostController) {
                     ) {
 
                         for (account in userAccounts) {
-                            CircularImage(
-                                modifier = Modifier
-                                    .width(screenWidthWithoutPadding)
-                                    .clickable {
-                                        navController.navigate(route = Screen.HomeScreen.route)
-                                    },
-                                painter = painterResource(account.avatar),
-                                contentDescription = stringResource(R.string.profile_content_description),
-                                imageTitle = account.username
+                            EditableItem(
+                                isEditable = editProfiles,
+                                child = {
+                                    CircularImage(
+                                        modifier = Modifier
+                                            .width(screenWidthWithoutPadding)
+                                            .clickable {
+                                                navController.navigate(route = Screen.HomeScreen.route)
+                                            },
+                                        painter = painterResource(account.avatar),
+                                        contentDescription = stringResource(R.string.profile_content_description),
+                                        imageTitle = account.username
+                                    )
+                                }
                             )
+
                         }
                     }
                 } else {
@@ -103,7 +109,7 @@ fun SelectAccountScreen(navController: NavHostController) {
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomCenter
         ) {
-            AddEditButtons(navController = navController)
+            AddEditButtons(navController = navController, isEdit = editProfiles)
         }
 
     }
@@ -111,7 +117,7 @@ fun SelectAccountScreen(navController: NavHostController) {
 
 
 @Composable
-fun AddEditButtons(navController: NavHostController) {
+fun AddEditButtons(navController: NavHostController, isEdit: Boolean) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
@@ -129,7 +135,7 @@ fun AddEditButtons(navController: NavHostController) {
         )
         Spacer(modifier = Modifier.weight(1.0f))
         Text(
-            text = stringResource(R.string.edit),
+            text = if (isEdit) stringResource(R.string.done) else stringResource(R.string.edit),
             style = MaterialTheme.typography.bodyLarge.copy(
                 fontSize = 20.sp, color = blue
             ),
