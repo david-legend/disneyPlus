@@ -1,5 +1,6 @@
 package com.davidcobbina.disneyplus.navigation
 
+const val LOGIN_CREATE_ACCOUNT_ROUTE = "movieDetail"
 const val SELECT_ACCOUNT_ROUTE = "choose_account"
 const val ADD_EDIT_USER_ROUTE = "add_edit"
 const val HOME_ROUTE = "home"
@@ -8,6 +9,7 @@ const val DOWNLOADS_ROUTE = "downloads"
 const val MOVIE_DETAIL_ROUTE = "movieDetail"
 
 sealed class Screen(val route: String) {
+    object LoginCreateAccountScreen : Screen(route = LOGIN_CREATE_ACCOUNT_ROUTE)
     object SelectAccountScreen : Screen(route = SELECT_ACCOUNT_ROUTE)
     object AddEditUserScreen : Screen(route = ADD_EDIT_USER_ROUTE)
     object HomeScreen : Screen(route = HOME_ROUTE)

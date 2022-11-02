@@ -5,10 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.davidcobbina.disneyplus.ui.screens.AddEditUserScreen
-import com.davidcobbina.disneyplus.ui.screens.DownloadScreen
-import com.davidcobbina.disneyplus.ui.screens.MenuScreen
-import com.davidcobbina.disneyplus.ui.screens.SelectAccountScreen
+import com.davidcobbina.disneyplus.ui.screens.*
 import com.davidcobbina.disneyplus.ui.screens.home_screen.HomeScreen
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.MovieDetailScreen
 
@@ -19,6 +16,9 @@ fun SetupNavGraph(navController: NavHostController) {
         navController = navController,
         startDestination = Screen.AddEditUserScreen.route,
         builder = {
+            composable(route = Screen.LoginCreateAccountScreen.route) {
+                LoginCreateAccountScreen(navController)
+            }
             composable(route = Screen.SelectAccountScreen.route) {
                 SelectAccountScreen(navController)
             }

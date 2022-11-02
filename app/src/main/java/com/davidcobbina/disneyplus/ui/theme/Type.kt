@@ -56,9 +56,7 @@ val Typography = Typography(
         fontFamily = SFPro,
         fontWeight = FontWeight.Normal,
         color = grey100,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+        fontSize = 16.sp
     ),
     bodyMedium = TextStyle(fontFamily = SFPro, color = grey300, fontSize = 14.sp),
     bodySmall = TextStyle(fontFamily = SFPro, color = grey300, fontSize = 12.sp),

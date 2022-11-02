@@ -6,16 +6,23 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.settingsList
@@ -23,23 +30,29 @@ import com.davidcobbina.disneyplus.ui.components.*
 
 @Composable
 fun AddEditUserScreen(navController: NavHostController) {
+    val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
     val autoPlayEpisodeState = remember { mutableStateOf(true) }
     val autoPlayPreviewsState = remember { mutableStateOf(true) }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .clickable {
+                focusManager.clearFocus()
+            }
             .padding(16.dp)
     ) {
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             item {
-                AddEditUserAppBar()
+                AddEditUserAppBar(navController)
                 Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                 EditProfilePhoto()
                 Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
-//                AddEditUserName()
+                AddEditUserName(focusRequester)
+                Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingXXl)))
 
             }
 
@@ -91,15 +104,39 @@ fun AddEditUserScreen(navController: NavHostController) {
 }
 
 @Composable
-fun AddEditUserAppBar() {
+fun AddEditUserAppBar(navController: NavHostController) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.Top,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(text = "Cancel")
-        Text(text = "Edit Profile")
-        Text(text = "Done")
+        TextButton(onClick = { navController.popBackStack()}) {
+            Text(
+                text = stringResource(id = R.string.cancel),
+                style = MaterialTheme.typography.titleSmall.copy(
+                    color = Color.White,
+                    fontSize = 16.sp
+                )
+            )
+        }
+
+        Text(
+            text = stringResource(id = R.string.edit_profile),
+            style = MaterialTheme.typography.titleMedium.copy(
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+            )
+        )
+        TextButton(onClick = { navController.popBackStack()}) {
+            Text(
+                text = stringResource(id = R.string.done),
+                style = MaterialTheme.typography.titleSmall.copy(
+                    color = Color.White,
+                    fontSize = 16.sp
+                )
+            )
+        }
+
     }
 }
 
@@ -121,19 +158,19 @@ fun EditProfilePhoto() {
     )
 }
 
-//@Composable
-//fun AddEditUserName() {
-//    TextField(
-//        modifier = modifier,
-//        value = email ?: "",
-//        onValueChange = { email ->
-//            onEmailChanged(email)
-//        },
-//        label = {
-//            Text(text = stringResource(
-//                id = R.string.label_email)
-//            )
-//        },
-//        singleLine = true
-//    )
-//}
+@Composable
+fun AddEditUserName(focusRequester: FocusRequester) {
+    val userNameState = remember { mutableStateOf(TextFieldValue()) }
+    DisneyOutlineTextField(
+        modifier = Modifier.focusRequester(focusRequester),
+        value = userNameState.value,
+        singleLine = true,
+        onValueChange = { userNameState.value = it },
+        label = {
+            Text(
+                text = stringResource(id = R.string.profile_name_label)
+            )
+        },
+    )
+
+}

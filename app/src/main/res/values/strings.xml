@@ -58,6 +58,10 @@
 
 
     //Add Edit User Screen
+    <string name="cancel">Cancel</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="profile_name_label">Edit Profile</string>
+
     <string name="maturity_rating_title">Maturity Rating</string>
     <string name="maturity_rating_subtitle">No Restrictions</string>
 
