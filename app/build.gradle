@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.davidcobbina.disneyplus"
-        minSdk 21
+        minSdk 21 //revert back to 21
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -64,4 +64,5 @@ dependencies {
 
 
     implementation "androidx.navigation:navigation-compose:$nav_version"
+    implementation 'com.airbnb.android:lottie-compose:5.2.0'
 }

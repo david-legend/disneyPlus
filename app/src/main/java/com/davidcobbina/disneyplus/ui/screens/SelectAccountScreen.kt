@@ -8,6 +8,10 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,8 +41,7 @@ fun SelectAccountScreen(navController: NavHostController) {
     val screenHorizontalSpacing = dimensionResource(id = R.dimen.paddingMedium)
     val screenVerticalSpacing = dimensionResource(id = R.dimen.paddingLarge)
     val windowInfo = rememberWindowInfo()
-    val screenWidthWithoutPadding = windowInfo.screenWidthDp - (screenHorizontalSpacing * 2)
-    val editProfiles = false
+    var editProfile by rememberSaveable { mutableStateOf(false) }
 
     Box(
         modifier = Modifier.padding(
@@ -46,61 +49,18 @@ fun SelectAccountScreen(navController: NavHostController) {
             vertical = screenVerticalSpacing
         )
     ) {
-        LazyColumn(
-            horizontalAlignment = Alignment.CenterHorizontally,
-
-            ) {
+        LazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
             item {
                 Text(
                     text = stringResource(R.string.who_is_watching),
                     style = MaterialTheme.typography.headlineMedium
                 )
                 Spacer(modifier = Modifier.height(screenVerticalSpacing * 4))
-                if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) {
-                    FlowRow(
-                        mainAxisSize = SizeMode.Expand,
-                        crossAxisSpacing = screenVerticalSpacing
-                    ) {
-
-                        for (account in userAccounts) {
-                            EditableItem(
-                                isEditable = editProfiles,
-                                child = {
-                                    CircularImage(
-                                        modifier = Modifier
-                                            .width(screenWidthWithoutPadding)
-                                            .clickable {
-                                                navController.navigate(route = Screen.HomeScreen.route)
-                                            },
-                                        painter = painterResource(account.avatar),
-                                        contentDescription = stringResource(R.string.profile_content_description),
-                                        imageTitle = account.username
-                                    )
-                                }
-                            )
-
-                        }
-                    }
-                } else {
-                    FlowRow(
-                        mainAxisSize = SizeMode.Expand,
-                        crossAxisSpacing = screenVerticalSpacing
-                    ) {
-                        val itemWidth = screenWidthWithoutPadding / 3
-                        for (account in userAccounts) {
-                            CircularImage(
-                                modifier = Modifier
-                                    .width(itemWidth)
-                                    .clickable {
-                                        navController.navigate(route = Screen.HomeScreen.route)
-                                    },
-                                painter = painterResource(account.avatar),
-                                contentDescription = stringResource(R.string.profile_content_description),
-                                imageTitle = account.username
-                            )
-                        }
-                    }
-                }
+                UserProfileList(
+                    windowInfo, editProfile,
+                    onTapWithEdit = { navController.navigate(Screen.AddEditUserScreen.route) },
+                    onTapWithoutEdit = { navController.navigate(Screen.HomeScreen.route) }
+                )
 
             }
         }
@@ -109,30 +69,112 @@ fun SelectAccountScreen(navController: NavHostController) {
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomCenter
         ) {
-            AddEditButtons(navController = navController, isEdit = editProfiles)
+            AddEditButtons(
+                navController = navController,
+                isEdit = editProfile,
+                onEditChange = { editProfile = !it },
+            )
         }
 
     }
 }
 
+@Composable
+fun UserProfileList(
+    windowInfo: WindowInfo,
+    isEdit: Boolean,
+    onTapWithoutEdit: () -> Unit,
+    onTapWithEdit: () -> Unit
+) {
+    val horizontalScreenSpacing = dimensionResource(id = R.dimen.paddingMedium)
+    val screenVerticalSpacing = dimensionResource(id = R.dimen.paddingLarge)
+    val screenWidthWithoutPadding = windowInfo.screenWidthDp - (horizontalScreenSpacing * 2)
+
+    if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) {
+        FlowRow(
+            mainAxisSize = SizeMode.Expand,
+            crossAxisSpacing = screenVerticalSpacing
+        ) {
+
+            for (account in userAccounts) {
+                EditableItem(
+                    isEditable = isEdit,
+                    child = {
+                        CircularImage(
+                            modifier = Modifier
+                                .width(screenWidthWithoutPadding)
+                                .clickable {
+                                    if (isEdit) {
+                                        onTapWithEdit()
+                                    } else {
+                                        onTapWithoutEdit()
+                                    }
+                                },
+                            painter = painterResource(account.avatar),
+                            contentDescription = stringResource(R.string.profile_content_description),
+                            imageTitle = account.username
+                        )
+                    }
+                )
+
+            }
+        }
+    } else {
+        FlowRow(
+            mainAxisSize = SizeMode.Expand,
+            crossAxisSpacing = screenVerticalSpacing
+        ) {
+            val itemWidth = screenWidthWithoutPadding / 3
+            for (account in userAccounts) {
+                EditableItem(
+                    isEditable = isEdit,
+                    child = {
+                        CircularImage(
+                            modifier = Modifier
+                                .width(itemWidth)
+                                .clickable {
+                                    if (isEdit) {
+                                        onTapWithEdit()
+                                    } else {
+                                        onTapWithoutEdit()
+                                    }
+                                },
+                            painter = painterResource(account.avatar),
+                            contentDescription = stringResource(R.string.profile_content_description),
+                            imageTitle = account.username
+                        )
+                    },
+                )
+            }
+        }
+    }
+}
+
 
 @Composable
-fun AddEditButtons(navController: NavHostController, isEdit: Boolean) {
+fun AddEditButtons(
+    navController: NavHostController,
+    isEdit: Boolean,
+    onEditChange: (Boolean) -> Unit,
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
 
     ) {
-        CircularIconButton(
-            child = {
-                CustomIcon(
-                    contentDescription = stringResource(R.string.add_button_content_description),
-                    iconColor = Color.White,
-                    icon = Icons.Filled.Add
-                )
-            },
-            onClick = { navController.navigate(Screen.AddEditUserScreen.route) },
-        )
+        if (!isEdit) {
+            CircularIconButton(
+                child = {
+                    CustomIcon(
+                        contentDescription = stringResource(R.string.add_button_content_description),
+                        iconColor = Color.White,
+                        icon = Icons.Filled.Add
+                    )
+                },
+                onClick = { navController.navigate(Screen.AddEditUserScreen.route) },
+            )
+        }
+
         Spacer(modifier = Modifier.weight(1.0f))
         Text(
             text = if (isEdit) stringResource(R.string.done) else stringResource(R.string.edit),
@@ -140,7 +182,7 @@ fun AddEditButtons(navController: NavHostController, isEdit: Boolean) {
                 fontSize = 20.sp, color = blue
             ),
             modifier = Modifier.clickable {
-                navController.navigate(Screen.AddEditUserScreen.route)
+                onEditChange(isEdit)
             }
         )
     }

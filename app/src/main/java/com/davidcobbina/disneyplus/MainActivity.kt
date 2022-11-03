@@ -61,6 +61,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
                     navController = rememberNavController()
                     SetupNavGraph(navController = navController)
 //                    HomeScreen(navController = navController)

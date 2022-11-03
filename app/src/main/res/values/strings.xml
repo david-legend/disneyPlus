@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">DisneyPlus</string>
+
+    //Login Create Account Screen
+    <string name="login_heading_title">Ready to watch ?</string>
+    <string name="login_heading_subtitle">Enter your email to create or sign in to your account.</string>
+    <string name="email_label">Email</string>
+    <string name="get_started">GET STARTED</string>
+
+
     //Choose Profile Screen
     <string name="who_is_watching">Who\'s watching ?</string>
     <string name="megan">Megan</string>

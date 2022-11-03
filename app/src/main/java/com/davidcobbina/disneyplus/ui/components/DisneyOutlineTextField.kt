@@ -27,7 +27,7 @@ fun DisneyOutlineTextField(
     textFieldColors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(
         textColor = Color.White,
         cursorColor = Color.White,
-        focusedBorderColor = MaterialTheme.colorScheme.onSurface,
+        focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
         unfocusedBorderColor = MaterialTheme.colorScheme.primaryContainer,
         disabledBorderColor = MaterialTheme.colorScheme.primaryContainer,
         focusedLabelColor = MaterialTheme.colorScheme.secondaryContainer,

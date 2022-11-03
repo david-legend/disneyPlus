@@ -14,8 +14,11 @@ import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.MovieDetailScr
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.AddEditUserScreen.route,
+        startDestination = Screen.SelectAccountScreen.route,
         builder = {
+            composable(route = Screen.SplashScreen.route) {
+                SplashScreen(navController = navController)
+            }
             composable(route = Screen.LoginCreateAccountScreen.route) {
                 LoginCreateAccountScreen(navController)
             }

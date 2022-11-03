@@ -46,3 +46,6 @@ val lightGreen100 = Color(0xFF6BD45F)
 // Color Variant for surfaces and backgrounds for components with Icon Variant Color
 val green50 = Color(0xFF203D29)
 val green100 = Color(0xFF263C2A)
+
+//red
+val red = Color(0xFFCB0001)
