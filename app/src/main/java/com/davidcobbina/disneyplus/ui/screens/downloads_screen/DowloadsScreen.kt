@@ -21,19 +21,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.downloadedMovies
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.components.*
+import com.davidcobbina.disneyplus.ui.screens.downloads_screen.DownloadsViewModel
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
+import  androidx.lifecycle.viewmodel.compose.viewModel
 
 
 //TODO:: Stacked Images..
 
 @Composable
-fun DownloadScreen(navController: NavHostController) {
+fun DownloadScreen(navController: NavHostController, viewModel: DownloadsViewModel = viewModel()) {
     val paddingSpacing = dimensionResource(id = R.dimen.spacingMd)
     val windowInfo = rememberWindowInfo()
     val screenWidthWithoutPadding = windowInfo.screenWidth - paddingSpacing.value - 20
@@ -63,7 +64,7 @@ fun DownloadScreen(navController: NavHostController) {
                     mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween,
                     crossAxisSpacing = dimensionResource(id = R.dimen.spacingMd),
                 ) {
-                    for (movie in downloadedMovies) {
+                    for (movie in viewModel.data.downloadedMovies) {
                         DownloadedMovieItem(
                             movieCover = painterResource(id = R.drawable.mandalorian_cover),
                             itemSize = itemSize.toInt(),
@@ -148,42 +149,42 @@ fun DownloadedMovieItem(
     val movieCoverWidth = itemSize * 0.3
     val movieCoverHeight = movieCoverWidth + (movieCoverWidth / 4)
 
-        Row(
-            modifier = Modifier.width(itemSize.dp)
-        ) {
-            StackedImage(
-                painter = movieCover,
-                contentDescription = imageContentDescription,
-                modifier = Modifier
-                    .width(movieCoverWidth.dp)
-                    .height(movieCoverHeight.dp)
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Column(modifier = Modifier.height(movieCoverHeight.dp)) {
-                Text(title, style = titleStyle)
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(yearReleased, style = subtitleStyle)
-                    Dot(
-                        modifier = Modifier.padding(horizontal = 4.dp),
-                        dotColor = MaterialTheme.colorScheme.onPrimary,
-                        dotSize = 2.dp
-                    )
-                    Text(downloadSize, style = subtitleStyle)
-                }
-                //when screenWidth is not compact, change position of View Button to bottom of text
-                if (windowInfo.screenWidthInfo !is WindowInfo.WindowType.Compact) {
-                    Spacer(modifier = Modifier.weight(weight = 1f))
-                    ViewMovieButton(isSeries, numberOfEpisodes)
-                }
-
+    Row(
+        modifier = Modifier.width(itemSize.dp)
+    ) {
+        StackedImage(
+            painter = movieCover,
+            contentDescription = imageContentDescription,
+            modifier = Modifier
+                .width(movieCoverWidth.dp)
+                .height(movieCoverHeight.dp)
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Column(modifier = Modifier.height(movieCoverHeight.dp)) {
+            Text(title, style = titleStyle)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(yearReleased, style = subtitleStyle)
+                Dot(
+                    modifier = Modifier.padding(horizontal = 4.dp),
+                    dotColor = MaterialTheme.colorScheme.onPrimary,
+                    dotSize = 2.dp
+                )
+                Text(downloadSize, style = subtitleStyle)
             }
-            //when screenWidth is compact, position of View Button to the right of movie title
-            if (windowInfo.screenWidthInfo is  WindowInfo.WindowType.Compact) {
+            //when screenWidth is not compact, change position of View Button to bottom of text
+            if (windowInfo.screenWidthInfo !is WindowInfo.WindowType.Compact) {
                 Spacer(modifier = Modifier.weight(weight = 1f))
                 ViewMovieButton(isSeries, numberOfEpisodes)
             }
 
         }
+        //when screenWidth is compact, position of View Button to the right of movie title
+        if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) {
+            Spacer(modifier = Modifier.weight(weight = 1f))
+            ViewMovieButton(isSeries, numberOfEpisodes)
+        }
+
+    }
 
 }
 

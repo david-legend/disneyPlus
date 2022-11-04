@@ -12,14 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.seasonsList
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
@@ -29,7 +27,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 @ExperimentalMaterialApi
-fun SeasonsListSheet(sheetState: BottomSheetState, title: String) {
+fun SeasonsListSheet(sheetState: BottomSheetState, title: String, seasonsList: List<String>) {
     val windowInfo = rememberWindowInfo()
     val screenHeight = windowInfo.screenHeight
     val bottomSheetHeight =

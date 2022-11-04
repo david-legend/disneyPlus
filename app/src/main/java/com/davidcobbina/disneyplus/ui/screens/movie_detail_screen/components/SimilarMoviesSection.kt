@@ -9,18 +9,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.suggestedMovieList
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
+import com.davidcobbina.disneyplus.model.DisneyMovie
 import com.davidcobbina.disneyplus.ui.components.DefaultTitle
 import com.davidcobbina.disneyplus.ui.components.DisneyPlusContainer
 import com.davidcobbina.disneyplus.ui.components.MovieItem
-import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
 
 @Composable
-fun SimilarMoviesSection() {
+fun SimilarMoviesSection(suggestedMovieList: List<DisneyMovie>) {
     val spacing = 10.dp
     val containerPadding = 8
     val windowInfo = rememberWindowInfo()

@@ -19,15 +19,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.FranchiseStudio
-import com.davidcobbina.disneyplus.data.NavItem
-import com.davidcobbina.disneyplus.data.franchiseStudioList
-import com.davidcobbina.disneyplus.data.navItemsList
+import com.davidcobbina.disneyplus.model.FranchiseStudio
+import com.davidcobbina.disneyplus.model.NavItem
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import com.davidcobbina.disneyplus.ui.components.NavItem
+import com.davidcobbina.disneyplus.ui.screens.menu_screen.MenuViewModel
+import  androidx.lifecycle.viewmodel.compose.viewModel
 
 
 val topSpacing: Dp = 250.dp
@@ -35,7 +35,7 @@ val mediumSpacing: Dp = 60.dp
 val footerSpacing: Dp = 120.dp
 
 @Composable
-fun MenuScreen(navController: NavHostController) {
+fun MenuScreen(navController: NavHostController, viewModel: MenuViewModel = viewModel()) {
     val windowInfo = rememberWindowInfo()
 
     Box(
@@ -57,13 +57,13 @@ fun MenuScreen(navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) {
-            Box(modifier = Modifier.height(topSpacing))
+                Box(modifier = Modifier.height(topSpacing))
             } else {
                 Box(modifier = Modifier.height(mediumSpacing))
             }
-            NavigationList(navItemsList)
+            NavigationList(viewModel.data.navItems)
             Box(modifier = Modifier.height(mediumSpacing))
-            FranchiseStudioList(franchiseStudioList)
+            FranchiseStudioList(viewModel.data.franchiseStudioList)
             Box(modifier = Modifier.height(mediumSpacing))
             Text(
                 text = stringResource(id = R.string.categories),

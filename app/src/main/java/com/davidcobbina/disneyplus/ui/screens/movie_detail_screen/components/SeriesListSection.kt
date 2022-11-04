@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.episodes
+import com.davidcobbina.disneyplus.model.Episode
 import com.davidcobbina.disneyplus.ui.components.*
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
@@ -23,7 +23,8 @@ import com.google.accompanist.flowlayout.SizeMode
 
 @Composable
 fun SeriesListSection(
-    onHeaderClick: () -> Unit
+    onHeaderClick: () -> Unit,
+    episodes: List<Episode>,
 ) {
     val paddingSpacing = dimensionResource(id = R.dimen.spacingSm)
     DisneyPlusContainer(

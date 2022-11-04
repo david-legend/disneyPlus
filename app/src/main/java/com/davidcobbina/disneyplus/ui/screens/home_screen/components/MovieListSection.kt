@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.DisneyMovie
+import com.davidcobbina.disneyplus.model.DisneyMovie
 import com.davidcobbina.disneyplus.navigation.Screen
 import com.davidcobbina.disneyplus.ui.components.MovieItem
 

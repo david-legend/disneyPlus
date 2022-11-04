@@ -26,11 +26,15 @@ import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import com.davidcobbina.disneyplus.ui.components.TextListWithDots
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.*
 import kotlinx.coroutines.launch
+import  androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
 @ExperimentalMaterialApi
-fun MovieDetailScreen(navController: NavHostController) {
+fun MovieDetailScreen(
+    navController: NavHostController,
+    viewModel: MovieDetailViewModel = viewModel()
+) {
     val paddingSpacing = dimensionResource(id = R.dimen.spacingSm)
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
@@ -46,8 +50,16 @@ fun MovieDetailScreen(navController: NavHostController) {
             topEnd = dimensionResource(id = R.dimen.borderRadiusExtraLarge)
         ),
         sheetContent = {
-//            SeasonsListSheet(sheetState = sheetState, title = "The Mandalorian")
-            MoreActionsSheet(sheetState = sheetState, title = "The Mandalorian")
+//            SeasonsListSheet(
+//                sheetState = sheetState,
+//                title = "The Mandalorian",
+//                seasonsList = viewModel.data.seasonsList
+//            )
+            MoreActionsSheet(
+                sheetState = sheetState,
+                title = "The Mandalorian",
+                actionsList = viewModel.data.actionList
+            )
         }
     ) {
         Box(modifier = Modifier.clickable {
@@ -76,12 +88,16 @@ fun MovieDetailScreen(navController: NavHostController) {
                                     sheetState.expand()
                                 }
                             }
-                        }
+                        },
+                        episodes = viewModel.data.episodes
                     )
                     Spacer(modifier = Modifier.height(paddingSpacing))
-                    TrailerAndInfoSection(hasMovieDescription = true)
+                    TrailerAndInfoSection(
+                        hasMovieDescription = true,
+                        trailers = viewModel.data.trailers
+                    )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingXXs)))
-                    SimilarMoviesSection()
+                    SimilarMoviesSection(suggestedMovieList = viewModel.data.suggestedMovieList)
 
                 }
             }

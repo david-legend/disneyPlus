@@ -25,11 +25,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.settingsList
 import com.davidcobbina.disneyplus.ui.components.*
+import com.davidcobbina.disneyplus.ui.screens.add_edit_user_screen.AddEditUserViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun AddEditUserScreen(navController: NavHostController) {
+fun AddEditUserScreen(
+    navController: NavHostController,
+    viewModel: AddEditUserViewModel = viewModel()
+) {
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
     val autoPlayEpisodeState = remember { mutableStateOf(true) }
@@ -56,7 +60,7 @@ fun AddEditUserScreen(navController: NavHostController) {
 
             }
 
-            itemsIndexed(settingsList) { _, settings ->
+            itemsIndexed(viewModel.data.settingsList) { _, settings ->
                 DefaultSettingsTile(
                     title = stringResource(id = settings.title),
                     subtitle = stringResource(id = settings.subtitle),
@@ -110,7 +114,7 @@ fun AddEditUserAppBar(navController: NavHostController) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        TextButton(onClick = { navController.popBackStack()}) {
+        TextButton(onClick = { navController.popBackStack() }) {
             Text(
                 text = stringResource(id = R.string.cancel),
                 style = MaterialTheme.typography.titleSmall.copy(
@@ -127,7 +131,7 @@ fun AddEditUserAppBar(navController: NavHostController) {
                 fontWeight = FontWeight.Bold,
             )
         )
-        TextButton(onClick = { navController.popBackStack()}) {
+        TextButton(onClick = { navController.popBackStack() }) {
             Text(
                 text = stringResource(id = R.string.done),
                 style = MaterialTheme.typography.titleSmall.copy(

@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.userAccounts
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.navigation.Screen
@@ -31,13 +30,19 @@ import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CircularImage
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import com.davidcobbina.disneyplus.ui.components.EditableItem
+import com.davidcobbina.disneyplus.ui.screens.select_account_sreen.SelectAccountViewModel
 import com.davidcobbina.disneyplus.ui.theme.blue
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
+import  androidx.lifecycle.viewmodel.compose.viewModel
+import com.davidcobbina.disneyplus.model.DisneyUser
 
 
 @Composable
-fun SelectAccountScreen(navController: NavHostController) {
+fun SelectAccountScreen(
+    navController: NavHostController,
+    viewModel: SelectAccountViewModel = viewModel()
+) {
     val screenHorizontalSpacing = dimensionResource(id = R.dimen.paddingMedium)
     val screenVerticalSpacing = dimensionResource(id = R.dimen.paddingLarge)
     val windowInfo = rememberWindowInfo()
@@ -59,7 +64,8 @@ fun SelectAccountScreen(navController: NavHostController) {
                 UserProfileList(
                     windowInfo, editProfile,
                     onTapWithEdit = { navController.navigate(Screen.AddEditUserScreen.route) },
-                    onTapWithoutEdit = { navController.navigate(Screen.HomeScreen.route) }
+                    onTapWithoutEdit = { navController.navigate(Screen.HomeScreen.route) },
+                    userAccounts = viewModel.data.userAccounts
                 )
 
             }
@@ -84,7 +90,8 @@ fun UserProfileList(
     windowInfo: WindowInfo,
     isEdit: Boolean,
     onTapWithoutEdit: () -> Unit,
-    onTapWithEdit: () -> Unit
+    onTapWithEdit: () -> Unit,
+    userAccounts: List<DisneyUser>
 ) {
     val horizontalScreenSpacing = dimensionResource(id = R.dimen.paddingMedium)
     val screenVerticalSpacing = dimensionResource(id = R.dimen.paddingLarge)

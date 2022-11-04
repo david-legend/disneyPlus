@@ -15,7 +15,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -23,10 +22,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.avatarCategories
-import com.davidcobbina.disneyplus.data.avatarProfilesList
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
+import com.davidcobbina.disneyplus.model.AvatarCategory
+import com.davidcobbina.disneyplus.model.AvatarProfile
 import com.davidcobbina.disneyplus.ui.components.AvatarCategoryItem
 import com.davidcobbina.disneyplus.ui.components.MovieItem
 
@@ -40,7 +39,7 @@ import kotlinx.coroutines.launch
 
 @ExperimentalMaterialApi
 @Composable
-fun ChooseAvatarSheetContent(sheetState: BottomSheetState) {
+fun ChooseAvatarSheetContent(sheetState: BottomSheetState, avatarProfiles: List<AvatarProfile>, avatarCategories: List<AvatarCategory>) {
     val windowInfo = rememberWindowInfo()
     val screenWidth = windowInfo.screenWidth
     val screenHeight = windowInfo.screenHeight
@@ -100,7 +99,7 @@ fun ChooseAvatarSheetContent(sheetState: BottomSheetState) {
             contentPadding = PaddingValues(start = 60.dp)
         ) {
 
-            itemsIndexed(avatarProfilesList) { _, data ->
+            itemsIndexed(avatarProfiles) { _, data ->
                 MovieItem(
                     painter = painterResource(id = data.avatar),
                     contentDescription = stringResource(id = R.string.movie_cover_description),
