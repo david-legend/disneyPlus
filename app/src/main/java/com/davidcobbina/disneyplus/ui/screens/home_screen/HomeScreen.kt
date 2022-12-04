@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,6 +15,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.layout.WindowInfo
@@ -23,12 +25,14 @@ import com.davidcobbina.disneyplus.ui.screens.home_screen.components.ChooseAvata
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.HeaderSection
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.MovieListSection
 import kotlinx.coroutines.launch
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
 @ExperimentalMaterialApi
-fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = viewModel()) {
+fun HomeScreen(navController: NavHostController, homeViewModel: HomeViewModel = hiltViewModel()) {
+    val recommendedMovies = homeViewModel.moviesFeed.collectAsState()
+    val isRecommendedMoviesLoading = homeViewModel.moviesFeedLoading.collectAsState()
+
     val windowInfo = rememberWindowInfo()
     val screenPadding =
         if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact)
@@ -49,8 +53,8 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = view
         sheetContent = {
             ChooseAvatarSheetContent(
                 sheetState,
-                viewModel.data.avatarProfiles,
-                viewModel.data.avatarCategories
+                homeViewModel.data.avatarProfiles,
+                homeViewModel.data.avatarCategories
             )
         },
     ) {
@@ -70,46 +74,54 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = view
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.topSpacing)))
                     HeaderSection(navController)
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
+
                     MovieListSection(
                         navController,
                         stringResource(id = R.string.movie_suggestion_title),
-                        viewModel.data.suggestedMovies,
-                        isVertical = false
+                        recommendedMovies.value,
+                        isVertical = false,
+                        isLoading = isRecommendedMoviesLoading.value
                     )
+
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         navController,
                         stringResource(id = R.string.keep_watching),
-                        viewModel.data.suggestedMovies,
-                        isVertical = false
+                        recommendedMovies.value,
+                        isVertical = false,
+                        isLoading = isRecommendedMoviesLoading.value
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         navController,
                         stringResource(id = R.string.your_watchlist),
-                        viewModel.data.suggestedMovies,
-                        isVertical = false
+                        recommendedMovies.value,
+                        isVertical = false,
+                        isLoading = isRecommendedMoviesLoading.value
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         navController,
                         stringResource(id = R.string.movies),
-                        viewModel.data.suggestedMovies,
-                        isVertical = false
+                        recommendedMovies.value,
+                        isVertical = false,
+                        isLoading = isRecommendedMoviesLoading.value
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         navController,
                         stringResource(id = R.string.marvel),
-                        viewModel.data.suggestedMovies,
-                        isVertical = false
+                        recommendedMovies.value,
+                        isVertical = false,
+                        isLoading = isRecommendedMoviesLoading.value
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         navController,
                         stringResource(id = R.string.star_wars),
-                        viewModel.data.suggestedMovies,
-                        isVertical = false
+                        recommendedMovies.value,
+                        isVertical = false,
+                        isLoading = isRecommendedMoviesLoading.value
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                 }

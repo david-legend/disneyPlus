@@ -5,14 +5,26 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.data.MoviesRepository
+import com.davidcobbina.disneyplus.data.api.ApiConstants
+import com.davidcobbina.disneyplus.data.model.*
 import com.davidcobbina.disneyplus.model.ActionList
 import com.davidcobbina.disneyplus.model.DisneyMovie
-import com.davidcobbina.disneyplus.model.Episode
+import com.davidcobbina.disneyplus.util.covertMinutesToHourMinute
+import com.davidcobbina.disneyplus.util.extractDataFromArray
+import com.davidcobbina.disneyplus.util.parseYearFromDate
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 data class MovieDetailState(
 
-    val suggestedMovieList: List<DisneyMovie> = List(15) { DisneyMovie(R.drawable.mandalorian) },
     val trailers: List<DisneyMovie> = List(5) {
         DisneyMovie(R.drawable.mandalorian_sunny)
     },
@@ -22,55 +34,108 @@ data class MovieDetailState(
         ActionList("More Like This", R.drawable.ic_search),
         ActionList("Cast on TV", R.drawable.ic_cast),
     ),
-    val seasonsList: List<String> = arrayListOf(
-        "Season 1",
-        "Season 2",
-        "Season 3",
-    ),
-    val episodes: List<Episode> = arrayListOf(
-        Episode(
-            title = "The Mandalorian",
-            "Episode 1",
-            duration = "39m",
-            description = R.string.lorem_ipsum,
-            isDownloaded = true
-        ),
-        Episode(
-            title = "The Mandalorian",
-            "Episode 2",
-            duration = "39m",
-            description = R.string.lorem_ipsum,
-        ), Episode(
-            title = "The Mandalorian",
-            "Episode 3",
-            duration = "39m",
-            description = R.string.lorem_ipsum,
-            isDownloaded = true
-        ),
-        Episode(
-            title = "The Mandalorian",
-            "Episode 4",
-            duration = "39m",
-            description = R.string.lorem_ipsum,
-        ),
 
-        Episode(
-            title = "The Mandalorian",
-            "Episode 5",
-            duration = "39m",
-            description = R.string.lorem_ipsum,
-        ),
-        Episode(
-            title = "The Mandalorian",
-            "Episode 6",
-            duration = "39m",
-            description = R.string.lorem_ipsum,
-        )
-    )
 )
 
+@HiltViewModel
+class MovieDetailViewModel @Inject constructor(
+    private val moviesRepository: MoviesRepository
+) : ViewModel() {
 
-class MovieDetailViewModel() : ViewModel() {
+    private val movieDetailEventChannel = Channel<MovieDetailEvent>()
+    val movieDetailEvent = movieDetailEventChannel.receiveAsFlow()
+
+    private val _movieDetailLoading = MutableStateFlow(false)
+    val movieDetailLoading: StateFlow<Boolean>
+        get() = _movieDetailLoading
+
+    private val _movieDetail = MutableStateFlow<MovieDetail?>(null)
+    val movieDetail: StateFlow<MovieDetail?>
+        get() = _movieDetail
+
+    fun getMovieDetail(movieId: String) {
+        viewModelScope.launch {
+            _movieDetailLoading.value = true
+            val detail = moviesRepository.getMovieDetail(movieId)
+            detail.metaData = processMetaData(detail)
+            _movieDetail.value = detail
+            _movieDetailLoading.value = false
+
+        }
+    }
+
+
+    private val _similarMoviesLoading = MutableStateFlow(false)
+    val similarMoviesLoading: StateFlow<Boolean>
+        get() = _similarMoviesLoading
+
+    private val _similarMovies = MutableStateFlow(emptyList<Movie>())
+    val similarMovies: StateFlow<List<Movie>>
+        get() = _similarMovies
+
+    fun getRecommendations(movieId: String) {
+        viewModelScope.launch {
+            _similarMoviesLoading.value = true
+            val similarMovies =  moviesRepository.getSimilarMovies(movieId)
+            _similarMovies.value = similarMovies
+            _similarMoviesLoading.value = false
+
+        }
+    }
+
+    private val _movieCredits = MutableStateFlow<MovieCredits?>(null)
+    val movieCredits: StateFlow<MovieCredits?>
+        get() = _movieCredits
+
+    fun getMovieCredits(movieId: String) {
+        viewModelScope.launch {
+            val credits = moviesRepository.getMovieCredits(movieId)
+            credits.primaryCast = processCast(credits.cast)
+            _movieCredits.value = credits
+        }
+    }
+
+    fun onCloseButtonPressed() = viewModelScope.launch {
+        movieDetailEventChannel.send(MovieDetailEvent.NavigateToHomeScreen)
+    }
+
+    private fun processMetaData(detail: MovieDetail): List<String> {
+        val metaData = mutableListOf<String>()
+        metaData.add(parseYearFromDate(detail.releaseDate))
+        metaData.add(covertMinutesToHourMinute(detail.runtime))
+        metaData.add("CC")
+        metaData.add("HD")
+        return metaData
+    }
+
+    private fun processCast(cast: List<Cast>): List<Department> {
+        val result = mutableListOf<Department>()
+        result.add(
+            Department(
+                type = ApiConstants.DIRECTORS,
+                names = extractDataFromArray(ApiConstants.DIRECTING, cast, 2)
+            )
+        )
+        result.add(
+            Department(
+                type = ApiConstants.ACTORS,
+                names = extractDataFromArray(ApiConstants.ACTING, cast, 2)
+            )
+        )
+        result.add(
+            Department(
+                type = ApiConstants.MUSIC,
+                names = extractDataFromArray(ApiConstants.SOUND, cast, 2)
+            )
+        )
+        return result
+    }
+
+
+    sealed class MovieDetailEvent {
+        object NavigateToHomeScreen : MovieDetailEvent()
+    }
 
     var data by mutableStateOf(MovieDetailState())
+
 }

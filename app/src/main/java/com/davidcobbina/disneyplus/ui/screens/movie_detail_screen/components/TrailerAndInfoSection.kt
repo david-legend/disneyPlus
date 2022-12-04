@@ -14,6 +14,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.data.model.Genre
+import com.davidcobbina.disneyplus.data.model.Movie
+import com.davidcobbina.disneyplus.data.model.MovieCredits
+import com.davidcobbina.disneyplus.data.model.MovieDetail
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.model.DisneyMovie
@@ -25,7 +29,10 @@ import com.google.accompanist.flowlayout.SizeMode
 @Composable
 fun TrailerAndInfoSection(
     hasMovieDescription: Boolean = false,
-    trailers: List<DisneyMovie>,
+    movie: Movie,
+    genres: List<Genre>,
+//    movieDetail: MovieDetail?,
+    movieCredits: MovieCredits?,
 ) {
     val paddingSpacing = 16.dp
     val containerPadding = 8
@@ -36,9 +43,9 @@ fun TrailerAndInfoSection(
     DisneyPlusContainer(
         title = {
             RatingTitle(
-                title = "Mulan",
+                title = movie.getMovieTitle(),
                 painter = painterResource(id = R.drawable.imdb),
-                rating = "7.6"
+                rating = movie.voteAverage.toString()
             )
         },
         content = {
@@ -47,22 +54,22 @@ fun TrailerAndInfoSection(
             ) {
                 if (hasMovieDescription) {
                     MovieDescriptionSection(
-                        description = stringResource(id = R.string.lorem_ipsum),
-                        genres = arrayListOf("Animation", "Musical", "Action", "Comedy")
+                        description = movie.overview,
+                        genres = genres
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                 }
-                LazyRow(
-                    contentPadding = PaddingValues(horizontal = paddingSpacing),
-                    content = {
-                        itemsIndexed(trailers) { _, item ->
-                            Trailer(
-                                painter = painterResource(id = item.movieCover)
-                            )
-                            Spacer(modifier = Modifier.width(16.dp))
-                        }
-                    },
-                )
+//                LazyRow(
+//                    contentPadding = PaddingValues(horizontal = paddingSpacing),
+//                    content = {
+//                        itemsIndexed(trailers) { _, item ->
+//                            Trailer(
+//                                painter = painterResource(id = item.movieCover)
+//                            )
+//                            Spacer(modifier = Modifier.width(16.dp))
+//                        }
+//                    },
+//                )
                 Spacer(modifier = Modifier.height(30.dp))
                 Row(
                     modifier = Modifier.padding(start = paddingSpacing)
@@ -71,24 +78,20 @@ fun TrailerAndInfoSection(
                         mainAxisSize = SizeMode.Expand,
                         crossAxisSpacing = paddingSpacing,
                     ) {
-                        TextList(
-                            title = "Director",
-                            children = arrayListOf("Tony Bancroft", "Barry Cook"),
-                            modifier = Modifier
-                                .width(itemWidth)
-                        )
-                        TextList(
-                            title = "Director",
-                            children = arrayListOf("Tony Bancroft", "Barry Cook"),
-                            modifier = Modifier
-                                .width(itemWidth)
-                        )
-                        TextList(
-                            title = "Director",
-                            children = arrayListOf("Tony Bancroft", "Barry Cook"),
-                            modifier = Modifier
-                                .width(itemWidth)
-                        )
+
+                        if (movieCredits != null) {
+                            for (cast in movieCredits.primaryCast) {
+                                if (cast.names.isNotEmpty()) {
+                                    TextList(
+                                        title = cast.type,
+                                        children = cast.names,
+                                        modifier = Modifier
+                                            .width(itemWidth)
+                                    )
+                                }
+                            }
+                        }
+
                         Box(
                             contentAlignment = Alignment.BottomStart,
                             modifier = Modifier.width(itemWidth)

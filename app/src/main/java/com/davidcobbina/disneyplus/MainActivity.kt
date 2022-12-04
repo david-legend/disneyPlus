@@ -18,25 +18,13 @@ import com.davidcobbina.disneyplus.ui.screens.SelectAccountScreen
 import com.davidcobbina.disneyplus.ui.screens.home_screen.HomeScreen
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.MovieDetailScreen
 import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
-
-
-//TODO: Adaptive Layouts on All Screens
-//    1. Fine tune home screen adaptiveness --> Done
-//    1. Fine tune menu screen adaptiveness --> Done
-//    1. Fine tune download screen adaptiveness --> Done
-//    1. Add proper images for homeScreen
-//    1. Add proper images for Download Screen
-//    1. Fine tune movieDetail screen
+import dagger.hilt.android.AndroidEntryPoint
 
 
 //TODO:: Passing Data Around
 
 
 
-//Next Phase
-//TODO:: Implement Onboarding Screen - Draw Inspiration from Netflix
-//TODO:: Implement Login/SignUp Screen - Draw Inspiration from Netflix
-//TODO:: Implement Add User Screen - Draw Inspiration from Netflix
 
 
 
@@ -49,6 +37,7 @@ import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 //TODO: Add any missing animations
 
 
+@AndroidEntryPoint
 @ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
     private lateinit var navController: NavHostController

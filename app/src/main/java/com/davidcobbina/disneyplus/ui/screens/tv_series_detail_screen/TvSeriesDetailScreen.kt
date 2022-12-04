@@ -1,4 +1,4 @@
-package com.davidcobbina.disneyplus.ui.screens.movie_detail_screen
+package com.davidcobbina.disneyplus.ui.screens.tv_series_detail_screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -23,6 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.data.api.ApiConstants
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import com.davidcobbina.disneyplus.ui.components.TextListWithDots
@@ -36,20 +37,23 @@ import com.davidcobbina.disneyplus.ui.components.shimmers.TrailerAndInfoShimmer
 
 @Composable
 @ExperimentalMaterialApi
-fun MovieDetailScreen(
+fun TvSeriesDetailScreen(
     navController: NavHostController,
     movie: Movie,
-    viewModel: MovieDetailViewModel = hiltViewModel()
+    viewModel: TvSeriesDetailViewModel = hiltViewModel()
 ) {
 
-    val isMovieDetailLoading by viewModel.movieDetailLoading.collectAsState()
-    val movieDetailState by viewModel.movieDetail.collectAsState()
+    val isMovieDetailLoading by viewModel.tvSeriesDetailLoading.collectAsState()
+    val movieDetailState by viewModel.tvSeriesDetail.collectAsState()
 
     val isSimilarMoviesLoading by viewModel.similarMoviesLoading.collectAsState()
     val similarMoviesState by viewModel.similarMovies.collectAsState()
 
 //    val movieCreditsLoading by viewModel.movieCreditsLoading.collectAsState()
-    val movieCredits by viewModel.movieCredits.collectAsState()
+    val movieCredits by viewModel.credits.collectAsState()
+
+    val isSeasonDetailLoading by viewModel.seasonDetailLoading.collectAsState()
+    val seasonDetailState by viewModel.seasonDetail.collectAsState()
 
     val paddingSpacing = dimensionResource(id = R.dimen.spacingSm)
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
@@ -58,15 +62,16 @@ fun MovieDetailScreen(
 
     val lifecycleOwner = LocalLifecycleOwner.current
     LaunchedEffect(key1 = movie.id) {
-        viewModel.getMovieDetail(movie.id.toString())
+        viewModel.getTvSeriesDetail(movie.id.toString())
         viewModel.getRecommendations(movie.id.toString())
         viewModel.getMovieCredits(movie.id.toString())
+        viewModel.getTvSeriesSeasonDetail(movie.id.toString(), viewModel.seasonNumber.value.toString())
     }
 
     lifecycleOwner.lifecycleScope.launchWhenStarted {
-        viewModel.movieDetailEvent.collect { event ->
+        viewModel.tvSeriesDetailEvent.collect { event ->
             when (event) {
-                is MovieDetailViewModel.MovieDetailEvent.NavigateToHomeScreen -> {
+                is TvSeriesDetailViewModel.TvSeriesDetailEvent.NavigateToHomeScreen -> {
                     navController.popBackStack()
                 }
             }
@@ -83,6 +88,11 @@ fun MovieDetailScreen(
             topEnd = dimensionResource(id = R.dimen.borderRadiusExtraLarge)
         ),
         sheetContent = {
+//            SeasonsListSheet(
+//                sheetState = sheetState,
+//                title = "The Mandalorian",
+//                seasonsList = viewModel.data.seasonsList
+//            )
             MoreActionsSheet(
                 sheetState = sheetState,
                 title = movie.getMovieTitle(),
@@ -97,7 +107,7 @@ fun MovieDetailScreen(
                 }
             }
         }) {
-            LazyColumn{
+            LazyColumn() {
                 item {
                     MovieDetailHeaderSection(
                         movieCoverUrl = movie.posterPath,
@@ -118,6 +128,20 @@ fun MovieDetailScreen(
                         }
                     } else {
                         TextListWithDots(texts = movieDetailState?.metaData ?: emptyList())
+                    }
+
+                    if (movie.mediaType == ApiConstants.MEDIA_TYPE_TV) {
+                        Spacer(modifier = Modifier.height(paddingSpacing))
+                        SeriesListSection(
+                            onHeaderClick = {
+                                scope.launch {
+                                    if (sheetState.isCollapsed) {
+                                        sheetState.expand()
+                                    }
+                                }
+                            },
+                            episodes = viewModel.data.episodes
+                        )
                     }
 
                     Spacer(modifier = Modifier.height(paddingSpacing))

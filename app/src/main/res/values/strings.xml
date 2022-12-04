@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">DisneyPlus</string>
+    <string name="image_base_url">https://image.tmdb.org/t/p/w500/</string>
 
     //Login Create Account Screen
     <string name="login_heading_title">Ready to watch ?</string>
@@ -56,6 +57,8 @@
 
     //Movie Detail Screen
     <string name="trailer">Trailer</string>
+    <string name="play">Play</string>
+    <string name="episode1">Episode 1</string>
     <string name="trailer_duration">1:39</string>
     <string name="add_movie">Add Movie To List</string>
     <string name="more_options">Open More Options</string>

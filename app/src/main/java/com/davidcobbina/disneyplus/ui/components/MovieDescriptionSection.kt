@@ -10,11 +10,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.davidcobbina.disneyplus.data.model.Genre
 
+class TextData
 @Composable
 fun MovieDescriptionSection(
     description: String,
-    genres: List<String>,
+    genres: List<Genre>,
     modifier: Modifier = Modifier,
     textListModifier: Modifier = Modifier,
     spacerModifier: Modifier = Modifier,
@@ -27,13 +29,18 @@ fun MovieDescriptionSection(
         fontSize = 16.sp
     )
 ) {
+    val textList  = mutableListOf<String>()
+    for (genre in genres) {
+        textList.add(genre.name)
+    }
+
     Column(
         modifier = modifier
     ) {
         Text(text = description, style = descriptionStyle, textAlign = TextAlign.Center)
         Spacer(modifier = spacerModifier.height(16.dp))
         TextListWithPunctuation(
-            texts = genres,
+            texts = textList,
             textStyle = genreStyle,
             modifier = textListModifier.fillMaxWidth()
         )

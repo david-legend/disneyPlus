@@ -24,18 +24,25 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.data.api.ApiConstants
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
+import com.davidcobbina.disneyplus.ui.components.MovieItem
 
 @Composable
-fun MovieDetailHeaderSection(onMoreClick: () -> Unit) {
+fun MovieDetailHeaderSection(
+    onMoreClick: () -> Unit,
+    mediaType: String,
+    movieCoverUrl: String,
+    contentDescription: String?
+) {
     val windowInfo = rememberWindowInfo()
     val screenHeight = windowInfo.screenHeight
     val headerImageWidth = windowInfo.screenWidthDp
     val headerImageHeight =
-        if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) (screenHeight * 0.60).dp else screenHeight.dp
+        if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) (screenHeight * 0.75).dp else screenHeight.dp
     val paddingSpacing = dimensionResource(id = R.dimen.spacingSm)
     Box(
         modifier = Modifier
@@ -43,16 +50,15 @@ fun MovieDetailHeaderSection(onMoreClick: () -> Unit) {
             .height(headerImageHeight)
 
     ) {
-        Image(
+        MovieItem(
+            url = movieCoverUrl, contentDescription = contentDescription,
             modifier = Modifier
                 .matchParentSize()
                 .shadow(
                     elevation = 4.dp,
                     shape = RoundedCornerShape(bottomStart = 48.dp, bottomEnd = 48.dp)
                 ),
-            painter = painterResource(id = R.drawable.mandalorian_cover),
-            contentDescription = "",
-            contentScale = ContentScale.FillBounds,
+            contentScale = ContentScale.Crop,
         )
 
         Row(
@@ -74,11 +80,13 @@ fun MovieDetailHeaderSection(onMoreClick: () -> Unit) {
                         icon = Icons.Default.PlayArrow,
                         iconSize = 24.dp,
                         iconColor = MaterialTheme.colorScheme.primary,
-                        iconPadding = 0.dp, //dimensionResource(id = R.dimen.paddingSmall)
+                        iconPadding = 0.dp,
                         modifier = Modifier.padding(end = 4.dp)
                     )
                     Text(
-                        text = "Episode 3",
+                        text = if (mediaType == ApiConstants.MEDIA_TYPE_MOVIE) stringResource(id = R.string.play) else stringResource(
+                            id = R.string.episode1
+                        ),
                         style = MaterialTheme.typography.titleSmall
                             .copy(color = MaterialTheme.colorScheme.primary, fontSize = 16.sp)
                     )
@@ -112,18 +120,18 @@ fun MovieDetailHeaderSection(onMoreClick: () -> Unit) {
         }
 
 
-        Column(
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.mandalorian_title),
-                colorFilter = ColorFilter.tint(color = Color.White),
-                contentDescription = "brand"
-            )
-        }
+//        Column(
+//            modifier = Modifier
+//                .fillMaxHeight()
+//                .fillMaxWidth(),
+//            verticalArrangement = Arrangement.Center,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//            Image(
+//                painter = painterResource(id = R.drawable.mandalorian_title),
+//                colorFilter = ColorFilter.tint(color = Color.White),
+//                contentDescription = "brand"
+//            )
+//        }
     }
 }
