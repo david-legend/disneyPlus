@@ -123,7 +123,6 @@ class TvSeriesDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _seasonDetailLoading.value = true
             val detail = moviesRepository.getTvSeriesSeasonDetail(tvId, seasonNumber)
-            Log.i("MODEL33", detail.toString())
             _seasonDetail.value = detail
             _seasonDetailLoading.value = false
 
@@ -157,7 +156,7 @@ class TvSeriesDetailViewModel @Inject constructor(
     private fun processMetaData(detail: TvSeriesDetail): List<String> {
         val metaData = mutableListOf<String>()
         metaData.add(parseYearFromDate(detail.firstAirDate))
-        metaData.add("${detail.numberOfSeasons} Seasons")
+        metaData.add("${detail.numberOfSeasons} Season${if (detail.numberOfSeasons > 1) "s" else ""}")
         metaData.add("CC")
         metaData.add("4K")
         return metaData
@@ -187,8 +186,14 @@ class TvSeriesDetailViewModel @Inject constructor(
     }
 
 
+
+    fun onSeasonChange() = viewModelScope.launch {
+        tvSeriesDetailEventChannel.send(TvSeriesDetailEvent.ChangeSeason)
+    }
+
     sealed class TvSeriesDetailEvent {
         object NavigateToHomeScreen : TvSeriesDetailEvent()
+        object ChangeSeason : TvSeriesDetailEvent()
     }
 
     var data by mutableStateOf(TvSeriesDetailState())

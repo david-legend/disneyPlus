@@ -17,7 +17,7 @@ fun TextListShimmer(
     textHeight: Dp = 12.dp,
     textSpacing: Dp = 12.dp,
     isVertical: Boolean = false,
-    columnHorizontalArrangement: Arrangement.Horizontal = Arrangement.Center,
+    rowHorizontalArrangement: Arrangement.Horizontal = Arrangement.Center,
     rowVerticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     columnVerticalArrangement: Arrangement.Vertical = Arrangement.Center,
     columnHorizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
@@ -43,7 +43,7 @@ fun TextListShimmer(
     } else {
         Row(
             modifier = modifier.fillMaxWidth(1f),
-            horizontalArrangement = columnHorizontalArrangement,
+            horizontalArrangement = rowHorizontalArrangement,
             verticalAlignment = rowVerticalAlignment
         ) {
             for (index in 0..textLength) {

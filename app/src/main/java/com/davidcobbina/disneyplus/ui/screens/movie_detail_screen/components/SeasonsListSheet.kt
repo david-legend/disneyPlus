@@ -1,5 +1,6 @@
 package com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.BottomSheetState
@@ -18,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.data.model.Season
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
@@ -27,7 +29,12 @@ import kotlinx.coroutines.launch
 
 @Composable
 @ExperimentalMaterialApi
-fun SeasonsListSheet(sheetState: BottomSheetState, title: String, seasonsList: List<String>) {
+fun SeasonsListSheet(
+    sheetState: BottomSheetState,
+    title: String,
+    seasonsList: List<Season>,
+    onSeasonTap: () -> Unit,
+) {
     val windowInfo = rememberWindowInfo()
     val screenHeight = windowInfo.screenHeight
     val bottomSheetHeight =
@@ -80,11 +87,14 @@ fun SeasonsListSheet(sheetState: BottomSheetState, title: String, seasonsList: L
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                 for (season in seasonsList) {
                     Text(
-                        text = season,
+                        text = season.name,
                         style = MaterialTheme.typography.headlineSmall.copy(
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold
-                        )
+                        ),
+                        modifier = Modifier.clickable {
+                            onSeasonTap()
+                        }
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                 }

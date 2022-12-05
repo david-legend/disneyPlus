@@ -31,9 +31,18 @@ import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.*
 import kotlinx.coroutines.launch
 import com.davidcobbina.disneyplus.data.model.Movie
 import com.davidcobbina.disneyplus.ui.components.shimmers.AnimatedShimmer
+import com.davidcobbina.disneyplus.ui.components.shimmers.EpisodeGridShimmer
 import com.davidcobbina.disneyplus.ui.components.shimmers.TextListShimmer
 import com.davidcobbina.disneyplus.ui.components.shimmers.TrailerAndInfoShimmer
 
+
+//TODO:: Fix Long Text titles
+//TODO:: Populate Episode Section Data
+//TODO:: Add Trailer Data
+//TODO:: Add Navigation of Similar Movie Section
+
+//LATER
+//TODO:: Add Animation of Close and Open Episode Accordion
 
 @Composable
 @ExperimentalMaterialApi
@@ -43,13 +52,12 @@ fun TvSeriesDetailScreen(
     viewModel: TvSeriesDetailViewModel = hiltViewModel()
 ) {
 
-    val isMovieDetailLoading by viewModel.tvSeriesDetailLoading.collectAsState()
-    val movieDetailState by viewModel.tvSeriesDetail.collectAsState()
+    val isTvSeriesDetailLoading by viewModel.tvSeriesDetailLoading.collectAsState()
+    val tvSeriesDetailState by viewModel.tvSeriesDetail.collectAsState()
 
     val isSimilarMoviesLoading by viewModel.similarMoviesLoading.collectAsState()
     val similarMoviesState by viewModel.similarMovies.collectAsState()
 
-//    val movieCreditsLoading by viewModel.movieCreditsLoading.collectAsState()
     val movieCredits by viewModel.credits.collectAsState()
 
     val isSeasonDetailLoading by viewModel.seasonDetailLoading.collectAsState()
@@ -65,7 +73,10 @@ fun TvSeriesDetailScreen(
         viewModel.getTvSeriesDetail(movie.id.toString())
         viewModel.getRecommendations(movie.id.toString())
         viewModel.getMovieCredits(movie.id.toString())
-        viewModel.getTvSeriesSeasonDetail(movie.id.toString(), viewModel.seasonNumber.value.toString())
+        viewModel.getTvSeriesSeasonDetail(
+            movie.id.toString(),
+            viewModel.seasonNumber.value.toString()
+        )
     }
 
     lifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -73,6 +84,9 @@ fun TvSeriesDetailScreen(
             when (event) {
                 is TvSeriesDetailViewModel.TvSeriesDetailEvent.NavigateToHomeScreen -> {
                     navController.popBackStack()
+                }
+                is TvSeriesDetailViewModel.TvSeriesDetailEvent.ChangeSeason -> {
+//                    viewModel.getTvSeriesSeasonDetail(movie.id.toString(), seasonNumber)
                 }
             }
         }
@@ -88,11 +102,13 @@ fun TvSeriesDetailScreen(
             topEnd = dimensionResource(id = R.dimen.borderRadiusExtraLarge)
         ),
         sheetContent = {
-//            SeasonsListSheet(
-//                sheetState = sheetState,
-//                title = "The Mandalorian",
-//                seasonsList = viewModel.data.seasonsList
-//            )
+            SeasonsListSheet(
+                sheetState = sheetState,
+                title = "The Mandalorian",
+                seasonsList = tvSeriesDetailState?.seasons ?: emptyList(), onSeasonTap = {
+//                    viewModel.onSeasonChange()
+                }
+            )
             MoreActionsSheet(
                 sheetState = sheetState,
                 title = movie.getMovieTitle(),
@@ -107,7 +123,7 @@ fun TvSeriesDetailScreen(
                 }
             }
         }) {
-            LazyColumn() {
+            LazyColumn {
                 item {
                     MovieDetailHeaderSection(
                         movieCoverUrl = movie.posterPath,
@@ -122,36 +138,37 @@ fun TvSeriesDetailScreen(
                         })
                     Spacer(modifier = Modifier.height(paddingSpacing))
 
-                    if (isMovieDetailLoading) {
+                    if (isTvSeriesDetailLoading) {
                         AnimatedShimmer {
                             TextListShimmer(it, 4, textWidth = 0.15f)
                         }
                     } else {
-                        TextListWithDots(texts = movieDetailState?.metaData ?: emptyList())
+                        TextListWithDots(texts = tvSeriesDetailState?.metaData ?: emptyList())
                     }
 
-                    if (movie.mediaType == ApiConstants.MEDIA_TYPE_TV) {
-                        Spacer(modifier = Modifier.height(paddingSpacing))
-                        SeriesListSection(
-                            onHeaderClick = {
-                                scope.launch {
-                                    if (sheetState.isCollapsed) {
-                                        sheetState.expand()
-                                    }
-                                }
-                            },
-                            episodes = viewModel.data.episodes
-                        )
-                    }
 
                     Spacer(modifier = Modifier.height(paddingSpacing))
-                    if (isMovieDetailLoading) {
+                    EpisodeGridShimmer(4)
+//                    SeriesListSection(
+//                        onHeaderClick = {
+//                            scope.launch {
+//                                if (sheetState.isCollapsed) {
+//                                    sheetState.expand()
+//                                }
+//                            }
+//                        },
+//                        episodes = viewModel.data.episodes
+//                    )
+
+
+                    Spacer(modifier = Modifier.height(paddingSpacing))
+                    if (isTvSeriesDetailLoading) {
                         TrailerAndInfoShimmer()
                     } else {
                         TrailerAndInfoSection(
                             hasMovieDescription = true,
                             movie = movie,
-                            genres = movieDetailState?.genres ?: emptyList(),
+                            genres = tvSeriesDetailState?.genres ?: emptyList(),
                             movieCredits = movieCredits
                         )
                     }
