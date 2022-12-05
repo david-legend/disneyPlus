@@ -14,6 +14,7 @@ import com.davidcobbina.disneyplus.data.model.*
 import com.davidcobbina.disneyplus.model.ActionList
 import com.davidcobbina.disneyplus.model.DisneyMovie
 import com.davidcobbina.disneyplus.model.Episode
+import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.MovieDetailViewModel
 import com.davidcobbina.disneyplus.util.extractDataFromArray
 import com.davidcobbina.disneyplus.util.parseYearFromDate
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -191,9 +192,14 @@ class TvSeriesDetailViewModel @Inject constructor(
         tvSeriesDetailEventChannel.send(TvSeriesDetailEvent.ChangeSeason)
     }
 
+    fun onNavigateToSimilarMovie(movie: Movie) = viewModelScope.launch {
+        tvSeriesDetailEventChannel.send(TvSeriesDetailEvent.NavigateToSimilarMovie(movie))
+    }
     sealed class TvSeriesDetailEvent {
         object NavigateToHomeScreen : TvSeriesDetailEvent()
         object ChangeSeason : TvSeriesDetailEvent()
+
+        data class NavigateToSimilarMovie(val movie: Movie) : TvSeriesDetailEvent()
     }
 
     var data by mutableStateOf(TvSeriesDetailState())

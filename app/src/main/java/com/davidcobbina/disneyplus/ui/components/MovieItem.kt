@@ -50,6 +50,7 @@ fun MovieItem(
     contentScale: ContentScale = ContentScale.Crop,
     useDefaultBaseUrl: Boolean = true
 
+
 ) {
     val imageUrl =
         if (useDefaultBaseUrl) stringResource(id = R.string.image_base_url) + url else url

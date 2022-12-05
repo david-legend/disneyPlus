@@ -29,6 +29,7 @@ import com.davidcobbina.disneyplus.ui.components.TextListWithDots
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.*
 import kotlinx.coroutines.launch
 import com.davidcobbina.disneyplus.data.model.Movie
+import com.davidcobbina.disneyplus.navigation.Screen
 import com.davidcobbina.disneyplus.ui.components.shimmers.AnimatedShimmer
 import com.davidcobbina.disneyplus.ui.components.shimmers.TextListShimmer
 import com.davidcobbina.disneyplus.ui.components.shimmers.TrailerAndInfoShimmer
@@ -69,6 +70,11 @@ fun MovieDetailScreen(
                 is MovieDetailViewModel.MovieDetailEvent.NavigateToHomeScreen -> {
                     navController.popBackStack()
                 }
+                is MovieDetailViewModel.MovieDetailEvent.NavigateToSimilarMovie -> {
+                    navController.navigate(
+                        route = Screen.MovieDetailScreen.parseMovie(event.movie)
+                    )
+                }
             }
         }
     }
@@ -97,7 +103,7 @@ fun MovieDetailScreen(
                 }
             }
         }) {
-            LazyColumn{
+            LazyColumn {
                 item {
                     MovieDetailHeaderSection(
                         movieCoverUrl = movie.posterPath,
@@ -136,7 +142,9 @@ fun MovieDetailScreen(
                 item {
                     SimilarMoviesSection(
                         isLoading = isSimilarMoviesLoading,
-                        suggestedMovieList = similarMoviesState
+                        suggestedMovieList = similarMoviesState, onClick = {
+                            viewModel.onNavigateToSimilarMovie(it)
+                        }
                     )
                 }
             }

@@ -23,13 +23,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.api.ApiConstants
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import com.davidcobbina.disneyplus.ui.components.TextListWithDots
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.*
 import kotlinx.coroutines.launch
 import com.davidcobbina.disneyplus.data.model.Movie
+import com.davidcobbina.disneyplus.navigation.Screen
 import com.davidcobbina.disneyplus.ui.components.shimmers.AnimatedShimmer
 import com.davidcobbina.disneyplus.ui.components.shimmers.EpisodeGridShimmer
 import com.davidcobbina.disneyplus.ui.components.shimmers.TextListShimmer
@@ -39,7 +39,6 @@ import com.davidcobbina.disneyplus.ui.components.shimmers.TrailerAndInfoShimmer
 //TODO:: Fix Long Text titles
 //TODO:: Populate Episode Section Data
 //TODO:: Add Trailer Data
-//TODO:: Add Navigation of Similar Movie Section
 
 //LATER
 //TODO:: Add Animation of Close and Open Episode Accordion
@@ -87,6 +86,11 @@ fun TvSeriesDetailScreen(
                 }
                 is TvSeriesDetailViewModel.TvSeriesDetailEvent.ChangeSeason -> {
 //                    viewModel.getTvSeriesSeasonDetail(movie.id.toString(), seasonNumber)
+                }
+                is TvSeriesDetailViewModel.TvSeriesDetailEvent.NavigateToSimilarMovie -> {
+                    navController.navigate(
+                        route = Screen.TvSeriesDetailScreen.parseMovie(event.movie)
+                    )
                 }
             }
         }
@@ -177,7 +181,9 @@ fun TvSeriesDetailScreen(
                 item {
                     SimilarMoviesSection(
                         isLoading = isSimilarMoviesLoading,
-                        suggestedMovieList = similarMoviesState
+                        suggestedMovieList = similarMoviesState, onClick = {
+                            viewModel.onNavigateToSimilarMovie(it)
+                        }
                     )
                 }
             }

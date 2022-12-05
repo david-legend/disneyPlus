@@ -95,9 +95,7 @@ class MovieDetailViewModel @Inject constructor(
         }
     }
 
-    fun onCloseButtonPressed() = viewModelScope.launch {
-        movieDetailEventChannel.send(MovieDetailEvent.NavigateToHomeScreen)
-    }
+
 
     private fun processMetaData(detail: MovieDetail): List<String> {
         val metaData = mutableListOf<String>()
@@ -131,9 +129,16 @@ class MovieDetailViewModel @Inject constructor(
         return result
     }
 
+    fun onCloseButtonPressed() = viewModelScope.launch {
+        movieDetailEventChannel.send(MovieDetailEvent.NavigateToHomeScreen)
+    }
 
+    fun onNavigateToSimilarMovie(movie: Movie) = viewModelScope.launch {
+        movieDetailEventChannel.send(MovieDetailEvent.NavigateToSimilarMovie(movie))
+    }
     sealed class MovieDetailEvent {
         object NavigateToHomeScreen : MovieDetailEvent()
+        data class NavigateToSimilarMovie(val movie: Movie) : MovieDetailEvent()
     }
 
     var data by mutableStateOf(MovieDetailState())

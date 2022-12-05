@@ -1,5 +1,6 @@
 package com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,7 +22,8 @@ import com.google.accompanist.flowlayout.SizeMode
 @Composable
 fun SimilarMoviesSection(
     suggestedMovieList: List<Movie>,
-    isLoading: Boolean = false
+    isLoading: Boolean = false,
+    onClick: (Movie) -> Unit
 ) {
     val spacing = 10.dp
     val containerPadding = 8
@@ -50,7 +52,11 @@ fun SimilarMoviesSection(
                             url = movieItem.posterPath,
                             width = itemWidth - spacing, height = itemHeight,
                             contentDescription = movieItem.getMovieTitle(),
-                            modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.paddingExtraMedium))
+                            modifier = Modifier
+                                .padding(bottom = dimensionResource(id = R.dimen.paddingExtraMedium))
+                                .clickable {
+                                    onClick(movieItem)
+                                }
                         )
                     }
 
