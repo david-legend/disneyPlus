@@ -10,6 +10,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -41,7 +42,7 @@ fun MovieItem(
 
 @Composable
 fun MovieItem(
-    url: String,
+    url: String?,
     contentDescription: String?,
     modifier: Modifier = Modifier,
     width: Dp = 150.dp,
@@ -58,18 +59,32 @@ fun MovieItem(
         if (contentDescription == null || contentDescription.isEmpty()) stringResource(
             id = R.string.movie_cover_description
         ) else contentDescription
-    AsyncImage(
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(imageUrl)
-            .placeholder(R.drawable.image_placeholder)
-            .error(R.drawable.image_placeholder)
-            .crossfade(true)
-            .build(),
-        contentDescription = description,
-        contentScale = contentScale,
-        modifier = modifier
-            .width(width)
-            .height(height)
-            .clip(RoundedCornerShape(borderRadius))
-    )
+
+    if (url === null) {
+        MovieItem(
+            painterResource(id = R.drawable.image_placeholder),
+            contentDescription = description,
+            contentScale = contentScale,
+            modifier = modifier
+                .width(width)
+                .height(height)
+                .clip(RoundedCornerShape(borderRadius))
+        )
+    } else {
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(imageUrl)
+                .placeholder(R.drawable.image_placeholder)
+                .error(R.drawable.image_placeholder)
+                .crossfade(true)
+                .build(),
+            contentDescription = description,
+            contentScale = contentScale,
+            modifier = modifier
+                .width(width)
+                .height(height)
+                .clip(RoundedCornerShape(borderRadius))
+        )
+    }
+
 }

@@ -16,7 +16,7 @@ fun parseYearFromDate(date: String): String {
     return result
 }
 
-fun covertMinutesToHourMinute(runtime: Int): String {
+fun covertMinutesToHourMinute(runtime: Int ): String {
     val timeInSeconds = runtime * 60
     val hours = timeInSeconds / 3600
     val minutes = (timeInSeconds - hours * 3600) / 60

@@ -36,9 +36,10 @@ import com.davidcobbina.disneyplus.ui.components.shimmers.TextListShimmer
 import com.davidcobbina.disneyplus.ui.components.shimmers.TrailerAndInfoShimmer
 
 
+//TODO:: Fix Series Overall Description Section
 //TODO:: Fix Long Text titles
-//TODO:: Populate Episode Section Data
-//TODO:: Add Trailer Data
+//TODO:: Fix Accordion Arrow Beside Episode Title
+//TODO:: Add Trailer Data - Ideas:: use Movie Preview component
 
 //LATER
 //TODO:: Add Animation of Close and Open Episode Accordion
@@ -59,6 +60,8 @@ fun TvSeriesDetailScreen(
 
     val movieCredits by viewModel.credits.collectAsState()
 
+    val seasonNumber by viewModel.seasonNumber.collectAsState()
+
     val isSeasonDetailLoading by viewModel.seasonDetailLoading.collectAsState()
     val seasonDetailState by viewModel.seasonDetail.collectAsState()
 
@@ -74,7 +77,7 @@ fun TvSeriesDetailScreen(
         viewModel.getMovieCredits(movie.id.toString())
         viewModel.getTvSeriesSeasonDetail(
             movie.id.toString(),
-            viewModel.seasonNumber.value.toString()
+            seasonNumber.toString()
         )
     }
 
@@ -85,7 +88,7 @@ fun TvSeriesDetailScreen(
                     navController.popBackStack()
                 }
                 is TvSeriesDetailViewModel.TvSeriesDetailEvent.ChangeSeason -> {
-//                    viewModel.getTvSeriesSeasonDetail(movie.id.toString(), seasonNumber)
+                    viewModel.getTvSeriesSeasonDetail(movie.id.toString(), event.seasonNumber)
                 }
                 is TvSeriesDetailViewModel.TvSeriesDetailEvent.NavigateToSimilarMovie -> {
                     navController.navigate(
@@ -109,15 +112,12 @@ fun TvSeriesDetailScreen(
             SeasonsListSheet(
                 sheetState = sheetState,
                 title = "The Mandalorian",
-                seasonsList = tvSeriesDetailState?.seasons ?: emptyList(), onSeasonTap = {
-//                    viewModel.onSeasonChange()
+                seasonsList = tvSeriesDetailState?.seasons ?: emptyList(),
+                onSeasonTap = {
+                    viewModel.onSeasonChange(it)
                 }
             )
-            MoreActionsSheet(
-                sheetState = sheetState,
-                title = movie.getMovieTitle(),
-                actionsList = viewModel.data.actionList
-            )
+//            MoreA\
         }
     ) {
         Box(modifier = Modifier.clickable {
@@ -150,22 +150,28 @@ fun TvSeriesDetailScreen(
                         TextListWithDots(texts = tvSeriesDetailState?.metaData ?: emptyList())
                     }
 
+                    Spacer(modifier = Modifier.height(paddingSpacing))
+
+                    if (isSeasonDetailLoading) {
+                        EpisodeGridShimmer(4)
+                    } else {
+                        SeriesListSection(
+                            onHeaderClick = {
+                                scope.launch {
+                                    if (sheetState.isCollapsed) {
+                                        sheetState.expand()
+                                    }
+                                }
+                            },
+                            detail = tvSeriesDetailState,
+                            episodes = seasonDetailState?.episodes ?: emptyList(),
+                            genres = tvSeriesDetailState?.genres ?: emptyList(),
+                            seasonNumber = seasonNumber.toString()
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(paddingSpacing))
-                    EpisodeGridShimmer(4)
-//                    SeriesListSection(
-//                        onHeaderClick = {
-//                            scope.launch {
-//                                if (sheetState.isCollapsed) {
-//                                    sheetState.expand()
-//                                }
-//                            }
-//                        },
-//                        episodes = viewModel.data.episodes
-//                    )
 
-
-                    Spacer(modifier = Modifier.height(paddingSpacing))
                     if (isTvSeriesDetailLoading) {
                         TrailerAndInfoShimmer()
                     } else {

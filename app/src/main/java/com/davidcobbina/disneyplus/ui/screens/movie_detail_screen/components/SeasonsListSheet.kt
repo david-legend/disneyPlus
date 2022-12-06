@@ -33,7 +33,7 @@ fun SeasonsListSheet(
     sheetState: BottomSheetState,
     title: String,
     seasonsList: List<Season>,
-    onSeasonTap: () -> Unit,
+    onSeasonTap: (String) -> Unit,
 ) {
     val windowInfo = rememberWindowInfo()
     val screenHeight = windowInfo.screenHeight
@@ -93,7 +93,7 @@ fun SeasonsListSheet(
                             fontWeight = FontWeight.Bold
                         ),
                         modifier = Modifier.clickable {
-                            onSeasonTap()
+                            onSeasonTap(season.seasonNumber.toString())
                         }
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))

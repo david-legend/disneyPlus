@@ -21,7 +21,7 @@ import com.davidcobbina.disneyplus.R
 
 @Composable
 fun MoviePreview(
-    painter: Painter,
+    imageUrl: String?,
     modifier: Modifier = Modifier,
     imageModifier: Modifier = Modifier,
     contentDescription: String? = null,
@@ -31,8 +31,8 @@ fun MoviePreview(
     val trailerWidth = (screenWidth * 0.5)
     val trailerHeight = (trailerWidth * 0.7)
     Box(modifier = modifier) {
-        Image(
-            painter = painter,
+        MovieItem(
+            url = imageUrl,
             contentDescription = contentDescription,
             contentScale = ContentScale.FillBounds,
             modifier = imageModifier

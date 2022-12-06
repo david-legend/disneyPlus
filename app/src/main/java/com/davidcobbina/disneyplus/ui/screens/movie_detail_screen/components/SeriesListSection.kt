@@ -15,8 +15,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.model.Episode
+import com.davidcobbina.disneyplus.data.model.Episode
+import com.davidcobbina.disneyplus.data.model.Genre
+import com.davidcobbina.disneyplus.data.model.TvSeriesDetail
 import com.davidcobbina.disneyplus.ui.components.*
+import com.davidcobbina.disneyplus.util.covertMinutesToHourMinute
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
@@ -24,13 +27,21 @@ import com.google.accompanist.flowlayout.SizeMode
 @Composable
 fun SeriesListSection(
     onHeaderClick: () -> Unit,
+    detail: TvSeriesDetail?,
     episodes: List<Episode>,
+    genres: List<Genre>,
+    seasonNumber: String,
 ) {
     val paddingSpacing = dimensionResource(id = R.dimen.spacingSm)
+    val genreList = mutableListOf<String>()
+    for (genre in genres) {
+        genreList.add(genre.name)
+    }
+
     DisneyPlusContainer(
         title = {
             TextWithIcon(
-                title = "Season 2",
+                title = "Season $seasonNumber",
                 modifier = Modifier.clickable { onHeaderClick() },
                 textModifier = Modifier.padding(end = dimensionResource(id = R.dimen.paddingSmall)),
                 contentDescription = stringResource(id = R.string.everything_dropdown)
@@ -43,13 +54,7 @@ fun SeriesListSection(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    TextListWithPunctuation(
-                        texts = arrayListOf(
-                            "Space Western",
-                            "Action",
-                            "Adventure"
-                        )
-                    )
+                    TextListWithPunctuation(texts = genreList)
                     Dot(
                         dotColor = MaterialTheme.colorScheme.onPrimary,
                         dotSize = 2.dp,
@@ -64,7 +69,7 @@ fun SeriesListSection(
                     )
                     Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.paddingExtraSmall)))
                     Text(
-                        text = "8.9",
+                        text = detail?.voteAverage.toString(),
                         style = MaterialTheme.typography.bodyMedium.copy(
                             color = Color.White,
                             fontSize = 16.sp
@@ -73,7 +78,7 @@ fun SeriesListSection(
                 }
                 Spacer(modifier = Modifier.height(paddingSpacing))
 
-                Column() {
+                Column {
                     FlowRow(
                         mainAxisSize = SizeMode.Expand,
                         mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween,
@@ -81,11 +86,12 @@ fun SeriesListSection(
                     ) {
                         for (episode in episodes) {
                             EpisodeListItem(
-                                episodeTitle = episode.title,
-                                episodeNumber = episode.episodeNumber,
-                                episodeDuration = episode.duration,
-                                episodeDescription = stringResource(id = episode.description),
-                                isDownloaded = episode.isDownloaded
+                                episodeTitle = episode.name,
+                                imageUrl = episode.stillPath,
+                                episodeNumber = "Episode ${episode.episodeNumber}",
+                                episodeDuration = covertMinutesToHourMinute(episode.runtime),
+                                episodeDescription = episode.overview,
+                                isDownloaded = false //TODO:: check if episode is downloaded or Not
                             )
                             Spacer(modifier = Modifier.height(paddingSpacing))
                         }

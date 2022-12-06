@@ -1,7 +1,6 @@
 package com.davidcobbina.disneyplus.ui.screens.tv_series_detail_screen
 
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,7 +13,6 @@ import com.davidcobbina.disneyplus.data.model.*
 import com.davidcobbina.disneyplus.model.ActionList
 import com.davidcobbina.disneyplus.model.DisneyMovie
 import com.davidcobbina.disneyplus.model.Episode
-import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.MovieDetailViewModel
 import com.davidcobbina.disneyplus.util.extractDataFromArray
 import com.davidcobbina.disneyplus.util.parseYearFromDate
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -55,7 +53,8 @@ data class TvSeriesDetailState(
             "Episode 2",
             duration = "39m",
             description = R.string.lorem_ipsum,
-        ), Episode(
+        ),
+        Episode(
             title = "The Mandalorian",
             "Episode 3",
             duration = "39m",
@@ -86,10 +85,12 @@ class TvSeriesDetailViewModel @Inject constructor(
     private val _seasonDetailLoading = MutableStateFlow(false)
     val seasonDetailLoading: StateFlow<Boolean>
         get() = _seasonDetailLoading
+
     // Fetching TV Series Season Detail
     private val _seasonDetail = MutableStateFlow<SeasonDetail?>(null)
     val seasonDetail: StateFlow<SeasonDetail?>
         get() = _seasonDetail
+
     // Current Season Number on Detail Page
     private val _seasonNumber = MutableStateFlow(1)
     val seasonNumber: StateFlow<Int>
@@ -99,6 +100,7 @@ class TvSeriesDetailViewModel @Inject constructor(
     private val _similarMoviesLoading = MutableStateFlow(false)
     val similarMoviesLoading: StateFlow<Boolean>
         get() = _similarMoviesLoading
+
     // Fetching TV Series Similar Series
     private val _similarMovies = MutableStateFlow(emptyList<Movie>())
     val similarMovies: StateFlow<List<Movie>>
@@ -124,6 +126,7 @@ class TvSeriesDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _seasonDetailLoading.value = true
             val detail = moviesRepository.getTvSeriesSeasonDetail(tvId, seasonNumber)
+            _seasonNumber.value = detail.seasonNumber
             _seasonDetail.value = detail
             _seasonDetailLoading.value = false
 
@@ -187,17 +190,17 @@ class TvSeriesDetailViewModel @Inject constructor(
     }
 
 
-
-    fun onSeasonChange() = viewModelScope.launch {
-        tvSeriesDetailEventChannel.send(TvSeriesDetailEvent.ChangeSeason)
+    fun onSeasonChange(seasonNumber: String) = viewModelScope.launch {
+        tvSeriesDetailEventChannel.send(TvSeriesDetailEvent.ChangeSeason(seasonNumber))
     }
 
     fun onNavigateToSimilarMovie(movie: Movie) = viewModelScope.launch {
         tvSeriesDetailEventChannel.send(TvSeriesDetailEvent.NavigateToSimilarMovie(movie))
     }
+
     sealed class TvSeriesDetailEvent {
         object NavigateToHomeScreen : TvSeriesDetailEvent()
-        object ChangeSeason : TvSeriesDetailEvent()
+        data class ChangeSeason(val seasonNumber: String) : TvSeriesDetailEvent()
 
         data class NavigateToSimilarMovie(val movie: Movie) : TvSeriesDetailEvent()
     }

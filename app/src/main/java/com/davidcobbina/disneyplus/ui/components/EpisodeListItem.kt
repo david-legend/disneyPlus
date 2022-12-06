@@ -22,6 +22,7 @@ import com.davidcobbina.disneyplus.ui.theme.lightGreen
 
 @Composable
 fun EpisodeListItem(
+    imageUrl: String?,
     episodeTitle: String,
     episodeNumber: String,
     episodeDuration: String,
@@ -60,7 +61,8 @@ fun EpisodeListItem(
                 .height(episodePreviewHeight.dp),
         ) {
             MoviePreview(
-                painterResource(id = R.drawable.mandalorian_sunny),
+                imageUrl = imageUrl,
+                contentDescription = episodeTitle,
                 modifier = Modifier
                     .height(episodePreviewHeight.dp)
                     .width(episodePreviewWidth.dp)
