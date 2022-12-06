@@ -10,17 +10,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.model.Genre
-import com.davidcobbina.disneyplus.data.model.Movie
-import com.davidcobbina.disneyplus.data.model.MovieCredits
-import com.davidcobbina.disneyplus.data.model.MovieDetail
+import com.davidcobbina.disneyplus.data.model.*
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
-import com.davidcobbina.disneyplus.model.DisneyMovie
 import com.davidcobbina.disneyplus.ui.components.*
 import com.davidcobbina.disneyplus.ui.theme.grey600
 import com.google.accompanist.flowlayout.FlowRow
@@ -31,6 +26,7 @@ fun TrailerAndInfoSection(
     hasMovieDescription: Boolean = false,
     movie: Movie,
     genres: List<Genre>,
+    trailers: List<Trailer>,
 //    movieDetail: MovieDetail?,
     movieCredits: MovieCredits?,
 ) {
@@ -43,8 +39,7 @@ fun TrailerAndInfoSection(
     DisneyPlusContainer(
         title = {
             RatingTitle(
-                title = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnabcdefghijklmnopqrstuvwxyzabcdefghijklmn",
-//                title = movie.getMovieTitle(),
+                title = movie.getMovieTitle(),
                 painter = painterResource(id = R.drawable.imdb),
                 rating = movie.voteAverage.toString()
             )
@@ -60,17 +55,18 @@ fun TrailerAndInfoSection(
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                 }
-//                LazyRow(
-//                    contentPadding = PaddingValues(horizontal = paddingSpacing),
-//                    content = {
-//                        itemsIndexed(trailers) { _, item ->
-//                            Trailer(
-//                                painter = painterResource(id = item.movieCover)
-//                            )
-//                            Spacer(modifier = Modifier.width(16.dp))
-//                        }
-//                    },
-//                )
+                LazyRow(
+                    contentPadding = PaddingValues(horizontal = paddingSpacing),
+                    content = {
+                        itemsIndexed(trailers) { _, item ->
+                            item.imageUrl = movie.backdropPath
+                            TrailerPreview(
+                                data = item
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
+                        }
+                    },
+                )
                 Spacer(modifier = Modifier.height(30.dp))
                 Row(
                     modifier = Modifier.padding(start = paddingSpacing)

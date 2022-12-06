@@ -65,6 +65,10 @@ fun TvSeriesDetailScreen(
     val isSeasonDetailLoading by viewModel.seasonDetailLoading.collectAsState()
     val seasonDetailState by viewModel.seasonDetail.collectAsState()
 
+
+    val isTrailersLoading by viewModel.trailersLoading.collectAsState()
+    val trailersState by viewModel.trailers.collectAsState()
+
     val paddingSpacing = dimensionResource(id = R.dimen.spacingSm)
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
@@ -79,6 +83,7 @@ fun TvSeriesDetailScreen(
             movie.id.toString(),
             seasonNumber.toString()
         )
+        viewModel.getTvSeriesTrailers(movie.id.toString())
     }
 
     lifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -175,7 +180,8 @@ fun TvSeriesDetailScreen(
                             hasMovieDescription = true,
                             movie = movie,
                             genres = tvSeriesDetailState?.genres ?: emptyList(),
-                            movieCredits = movieCredits
+                            movieCredits = movieCredits,
+                            trailers = trailersState
                         )
                     }
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingXXs)))

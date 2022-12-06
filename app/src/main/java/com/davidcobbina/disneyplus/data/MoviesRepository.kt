@@ -16,6 +16,9 @@ class MoviesRepository @Inject constructor(
         return moviesAPi.getMovieDetail(movieId)
     }
 
+    suspend fun getMovieTrailers(movieId: String): List<Trailer> {
+        return moviesAPi.getMovieTrailers(movieId).results
+    }
     suspend fun getSimilarMovies(movieId: String): List<Movie> {
         return moviesAPi.getSimilarMovies(movieId).results
     }
@@ -38,5 +41,9 @@ class MoviesRepository @Inject constructor(
 
     suspend fun getTvSeriesSeasonDetail(tvId: String, seasonNumber: String): SeasonDetail {
         return moviesAPi.getTvSeriesSeasonDetail(tvId, seasonNumber)
+    }
+
+    suspend fun getTvSeriesTrailers(tvId: String): List<Trailer> {
+        return moviesAPi.getTvSeriesTrailers(tvId).results
     }
 }

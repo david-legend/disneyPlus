@@ -111,6 +111,15 @@ class TvSeriesDetailViewModel @Inject constructor(
     val credits: StateFlow<MovieCredits?>
         get() = _credits
 
+    private val _trailersLoading = MutableStateFlow(false)
+    val trailersLoading: StateFlow<Boolean>
+        get() = _trailersLoading
+
+    private val _trailers = MutableStateFlow(emptyList<Trailer>())
+    val trailers: StateFlow<List<Trailer>>
+        get() = _trailers
+
+
     fun getTvSeriesDetail(tvId: String) {
         viewModelScope.launch {
             _tvSeriesDetailLoading.value = true
@@ -143,6 +152,15 @@ class TvSeriesDetailViewModel @Inject constructor(
         }
     }
 
+    fun getTvSeriesTrailers(tvId: String) {
+        viewModelScope.launch {
+            _trailersLoading.value = true
+            val movieTrailers =  moviesRepository.getTvSeriesTrailers(tvId)
+            _trailers.value = movieTrailers
+            _trailersLoading.value = false
+
+        }
+    }
 
     fun getMovieCredits(movieId: String) {
         viewModelScope.launch {

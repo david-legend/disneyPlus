@@ -52,6 +52,9 @@ fun MovieDetailScreen(
 //    val movieCreditsLoading by viewModel.movieCreditsLoading.collectAsState()
     val movieCredits by viewModel.movieCredits.collectAsState()
 
+    val isTrailersLoading by viewModel.trailersLoading.collectAsState()
+    val trailersState by viewModel.movieTrailers.collectAsState()
+
     val paddingSpacing = dimensionResource(id = R.dimen.spacingSm)
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
@@ -62,6 +65,7 @@ fun MovieDetailScreen(
         viewModel.getMovieDetail(movie.id.toString())
         viewModel.getRecommendations(movie.id.toString())
         viewModel.getMovieCredits(movie.id.toString())
+        viewModel.getMovieTrailers(movie.id.toString())
     }
 
     lifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -134,7 +138,8 @@ fun MovieDetailScreen(
                             hasMovieDescription = true,
                             movie = movie,
                             genres = movieDetailState?.genres ?: emptyList(),
-                            movieCredits = movieCredits
+                            movieCredits = movieCredits,
+                            trailers = trailersState,
                         )
                     }
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingXXs)))

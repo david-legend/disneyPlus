@@ -7,12 +7,14 @@ object ApiConstants {
     const val MOVIE_DETAIL_ENDPOINT = "movie/{movieId}?api_key=8b29c6e37e426fa616c3805ea363200a&language=en-US"
     const val SIMILAR_MOVIES_ENDPOINT = "movie/{movieId}/recommendations?api_key=8b29c6e37e426fa616c3805ea363200a&language=en-US&page=1"
     const val MOVIE_CREDITS_ENDPOINT = "movie/{movieId}/credits?api_key=8b29c6e37e426fa616c3805ea363200a&language=en-US"
+    const val MOVIE_TRAILERS_ENDPOINT = "movie/{movieId}/videos?api_key=8b29c6e37e426fa616c3805ea363200a&language=en-US"
 
 
     const val TV_SERIES_DETAIL_ENDPOINT = "tv/{tvId}?api_key=8b29c6e37e426fa616c3805ea363200a&language=en-US"
     const val SIMILAR_TV_SERIES_ENDPOINT = "tv/{tvId}/recommendations?api_key=8b29c6e37e426fa616c3805ea363200a&language=en-US&page=1"
     const val TV_SERIES_CREDITS_ENDPOINT = "tv/{tvId}/credits?api_key=8b29c6e37e426fa616c3805ea363200a&language=en-US"
     const val TV_SERIES_SEASON_DETAIL_ENDPOINT = "tv/{tvId}/season/{seasonNumber}?api_key=8b29c6e37e426fa616c3805ea363200a&language=en-US"
+    const val TV_SERIES_TRAILERS_ENDPOINT = "tv/{tvId}/videos?api_key=8b29c6e37e426fa616c3805ea363200a&language=en-US"
 
     const val DIRECTING = "Directing"
     const val ACTING = "Acting"

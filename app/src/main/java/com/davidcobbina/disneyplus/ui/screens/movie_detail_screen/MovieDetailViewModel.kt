@@ -95,6 +95,23 @@ class MovieDetailViewModel @Inject constructor(
         }
     }
 
+    private val _trailersLoading = MutableStateFlow(false)
+    val trailersLoading: StateFlow<Boolean>
+        get() = _trailersLoading
+
+    private val _movieTrailers = MutableStateFlow(emptyList<Trailer>())
+    val movieTrailers: StateFlow<List<Trailer>>
+        get() = _movieTrailers
+
+    fun getMovieTrailers(movieId: String) {
+        viewModelScope.launch {
+            _trailersLoading.value = true
+            val movieTrailers =  moviesRepository.getMovieTrailers(movieId)
+            _movieTrailers.value = movieTrailers
+            _trailersLoading.value = false
+
+        }
+    }
 
 
     private fun processMetaData(detail: MovieDetail): List<String> {

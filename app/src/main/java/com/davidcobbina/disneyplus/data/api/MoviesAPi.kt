@@ -18,6 +18,12 @@ interface MoviesAPi {
     @GET(ApiConstants.MOVIE_CREDITS_ENDPOINT)
     suspend fun getMovieCredits(@Path("movieId") movieId: String): MovieCredits
 
+    @GET(ApiConstants.MOVIE_TRAILERS_ENDPOINT)
+    suspend fun getMovieTrailers(
+        @Path("movieId") movieId: String
+    ): TrailersResult
+
+
     @GET(ApiConstants.TV_SERIES_DETAIL_ENDPOINT)
     suspend fun getTvSeriesDetail(@Path("tvId") tvId: String): TvSeriesDetail
 
@@ -32,4 +38,9 @@ interface MoviesAPi {
         @Path("tvId") tvId: String,
         @Path("seasonNumber") seasonNumber: String
     ): SeasonDetail
+
+    @GET(ApiConstants.TV_SERIES_TRAILERS_ENDPOINT)
+    suspend fun getTvSeriesTrailers(
+        @Path("tvId") tvId: String
+    ): TrailersResult
 }
