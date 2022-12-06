@@ -11,6 +11,7 @@ const val MENU_ROUTE = "menu"
 const val DOWNLOADS_ROUTE = "downloads"
 const val MOVIE_DETAIL_ROUTE = "movieDetail"
 const val TV_SERIES_DETAIL_ROUTE = "tvSeriesDetail"
+const val LIST_MOVIES_ROUTE = "listMovies"
 
 
 const val MOVIE_DETAIL_ARGUMENT = "movie"
@@ -26,6 +27,7 @@ sealed class Screen(val route: String) {
     object HomeScreen : Screen(route = HOME_ROUTE)
     object MenuScreen : Screen(route = MENU_ROUTE)
     object DownloadsScreen : Screen(route = DOWNLOADS_ROUTE)
+    object ListMoviesScreen : Screen(route = LIST_MOVIES_ROUTE)
     object MovieDetailScreen : Screen(route = "$MOVIE_DETAIL_ROUTE/{$MOVIE_DETAIL_ARGUMENT}") {
         fun parseMovie(movie: Movie) : String {
             val data = movie.toString()

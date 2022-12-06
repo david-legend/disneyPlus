@@ -1,5 +1,6 @@
 package com.davidcobbina.disneyplus.navigation
 
+import ListMoviesScreen
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -18,7 +19,7 @@ import com.google.gson.Gson
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.HomeScreen.route,
+        startDestination = Screen.ListMoviesScreen.route,
         builder = {
             composable(route = Screen.SplashScreen.route) {
                 SplashScreen(navController = navController)
@@ -40,6 +41,9 @@ fun SetupNavGraph(navController: NavHostController) {
             }
             composable(route = Screen.DownloadsScreen.route) {
                 DownloadScreen(navController)
+            }
+            composable(route = Screen.ListMoviesScreen.route) {
+                ListMoviesScreen(navController)
             }
             composable(
                 route = Screen.MovieDetailScreen.route,

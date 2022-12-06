@@ -32,6 +32,7 @@
     <string name="movies">Movies</string>
     <string name="marvel">Marvel</string>
     <string name="star_wars">Star Wars</string>
+    <string name="icon_button">Icon Button</string>
 
     //Navigator Drawer
     <string name="shows">Shows</string>
@@ -45,6 +46,7 @@
     <string name="close_drawer_icon">Close icon to close navigation drawer</string>
 
     //Choose Avatar BottomSheet
+    <string name="close_button">Close and Navigate to Previous Screen Button</string>
     <string name="choose_mascot">Who\'s your mascot?</string>
     <string name="close_mascot_button_description">Close Choose Mascot BottomSheet</string>
     <string name="princess">Princess</string>

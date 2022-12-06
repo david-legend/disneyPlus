@@ -20,16 +20,16 @@ import com.davidcobbina.disneyplus.R
 @Composable
 fun TextWithIcon(
     title: String,
-    contentDescription: String,
     modifier: Modifier = Modifier,
+    contentDescription: String = stringResource(id = R.string.icon_button),
     textModifier: Modifier = Modifier,
     iconModifier: Modifier = Modifier,
     imageVector: ImageVector = Icons.Filled.KeyboardArrowDown,
     textStyle: TextStyle = MaterialTheme.typography.headlineMedium,
-    iconColor: Color = MaterialTheme.colorScheme.onPrimary
+    iconColor: Color = MaterialTheme.colorScheme.onPrimary,
+    hasIcon: Boolean = true,
 
-
-) {
+    ) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
@@ -39,11 +39,14 @@ fun TextWithIcon(
             style = textStyle,
             modifier = textModifier,
         )
-        Icon(
-            imageVector,
-            contentDescription,
-            modifier = iconModifier.size(dimensionResource(id = R.dimen.iconSizeLarge)),
-            tint = iconColor
-        )
+        if (hasIcon) {
+            Icon(
+                imageVector,
+                contentDescription,
+                modifier = iconModifier.size(dimensionResource(id = R.dimen.iconSizeLarge)),
+                tint = iconColor
+            )
+        }
+
     }
 }

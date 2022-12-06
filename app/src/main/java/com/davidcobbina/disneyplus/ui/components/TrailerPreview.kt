@@ -46,18 +46,6 @@ fun TrailerPreview(
                     shape = RoundedCornerShape(8.dp)
                 )
         )
-//        Image(
-//            painter = painter,
-//            contentDescription = contentDescription,
-//            contentScale = ContentScale.FillBounds,
-//            modifier = imageModifier
-//                .width(trailerWidth.dp)
-//                .height(trailerHeight.dp)
-//                .shadow(
-//                    elevation = dimensionResource(id = R.dimen.elevationSmall),
-//                    shape = RoundedCornerShape(8.dp)
-//                )
-//        )
         Sticker(
             modifier = Modifier
                 .align(alignment = Alignment.BottomStart)
