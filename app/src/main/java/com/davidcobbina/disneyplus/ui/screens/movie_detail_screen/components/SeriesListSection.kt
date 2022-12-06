@@ -20,6 +20,7 @@ import com.davidcobbina.disneyplus.data.model.Genre
 import com.davidcobbina.disneyplus.data.model.TvSeriesDetail
 import com.davidcobbina.disneyplus.ui.components.*
 import com.davidcobbina.disneyplus.util.covertMinutesToHourMinute
+import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
@@ -49,10 +50,13 @@ fun SeriesListSection(
         },
         content = {
             Column() {
-                Row(
+                FlowRow(
                     modifier = Modifier.fillMaxWidth(1f),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
+                    mainAxisAlignment = FlowMainAxisAlignment.Center,
+                    crossAxisAlignment = FlowCrossAxisAlignment.Center
+
+//                    verticalAlignment = Alignment.CenterVertically,
+//                    horizontalArrangement = Arrangement.Center
                 ) {
                     TextListWithPunctuation(texts = genreList)
                     Dot(
@@ -69,7 +73,7 @@ fun SeriesListSection(
                     )
                     Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.paddingExtraSmall)))
                     Text(
-                        text = detail?.voteAverage.toString(),
+                        text = String.format("%.1f", detail?.voteAverage),
                         style = MaterialTheme.typography.bodyMedium.copy(
                             color = Color.White,
                             fontSize = 16.sp

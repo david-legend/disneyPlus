@@ -111,13 +111,12 @@ fun TvSeriesDetailScreen(
         sheetContent = {
             SeasonsListSheet(
                 sheetState = sheetState,
-                title = "The Mandalorian",
+                title = movie.getMovieTitle(),
                 seasonsList = tvSeriesDetailState?.seasons ?: emptyList(),
                 onSeasonTap = {
                     viewModel.onSeasonChange(it)
                 }
             )
-//            MoreA\
         }
     ) {
         Box(modifier = Modifier.clickable {
