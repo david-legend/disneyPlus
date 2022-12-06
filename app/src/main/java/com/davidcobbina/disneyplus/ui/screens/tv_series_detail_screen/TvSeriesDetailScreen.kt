@@ -34,9 +34,9 @@ import com.davidcobbina.disneyplus.ui.components.shimmers.AnimatedShimmer
 import com.davidcobbina.disneyplus.ui.components.shimmers.EpisodeGridShimmer
 import com.davidcobbina.disneyplus.ui.components.shimmers.TextListShimmer
 import com.davidcobbina.disneyplus.ui.components.shimmers.TrailerAndInfoShimmer
+import com.davidcobbina.disneyplus.util.collapseSheet
 
 
-//TODO:: Fix Series Overall Description Section
 //TODO:: Fix Long Text titles
 //TODO:: Fix Accordion Arrow Beside Episode Title
 //TODO:: Add Trailer Data - Ideas:: use Movie Preview component
@@ -115,16 +115,13 @@ fun TvSeriesDetailScreen(
                 seasonsList = tvSeriesDetailState?.seasons ?: emptyList(),
                 onSeasonTap = {
                     viewModel.onSeasonChange(it)
+                    collapseSheet(scope, sheetState)
                 }
             )
         }
     ) {
         Box(modifier = Modifier.clickable {
-            scope.launch {
-                if (sheetState.isExpanded) {
-                    sheetState.collapse()
-                }
-            }
+            collapseSheet(scope, sheetState)
         }) {
             LazyColumn {
                 item {

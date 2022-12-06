@@ -51,7 +51,7 @@ fun SeasonsListSheet(
     ) {
         item {
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Spacer(modifier = Modifier.weight(1.0f))
                 Text(
@@ -92,9 +92,12 @@ fun SeasonsListSheet(
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold
                         ),
-                        modifier = Modifier.clickable {
-                            onSeasonTap(season.seasonNumber.toString())
-                        }
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = dimensionResource(id = R.dimen.spacingXXs))
+                            .clickable {
+                                onSeasonTap(season.seasonNumber.toString())
+                            }
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                 }

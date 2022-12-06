@@ -1,7 +1,11 @@
 package com.davidcobbina.disneyplus.util
 
 import android.os.Build
+import androidx.compose.material.BottomSheetState
+import androidx.compose.material.ExperimentalMaterialApi
 import com.davidcobbina.disneyplus.data.model.Cast
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import java.time.Duration
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -39,4 +43,22 @@ fun extractDataFromArray(key: String, cast: List<Cast>, maxNumberToExtract: Int)
         if (itemCount == maxNumberToExtract) break
     }
     return result
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+fun collapseSheet(scope: CoroutineScope, sheetState: BottomSheetState) {
+    scope.launch {
+        if (sheetState.isExpanded) {
+            sheetState.collapse()
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+fun expandSheet(scope: CoroutineScope, sheetState: BottomSheetState) {
+    scope.launch {
+        if (sheetState.isCollapsed) {
+            sheetState.expand()
+        }
+    }
 }

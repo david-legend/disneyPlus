@@ -43,7 +43,8 @@ fun TrailerAndInfoSection(
     DisneyPlusContainer(
         title = {
             RatingTitle(
-                title = movie.getMovieTitle(),
+                title = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnabcdefghijklmnopqrstuvwxyzabcdefghijklmn",
+//                title = movie.getMovieTitle(),
                 painter = painterResource(id = R.drawable.imdb),
                 rating = movie.voteAverage.toString()
             )
