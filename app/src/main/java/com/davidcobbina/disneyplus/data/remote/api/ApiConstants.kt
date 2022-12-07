@@ -1,4 +1,4 @@
-package com.davidcobbina.disneyplus.data.api
+package com.davidcobbina.disneyplus.data.remote.api
 
 object ApiConstants {
     private const val API_V3 = "3"

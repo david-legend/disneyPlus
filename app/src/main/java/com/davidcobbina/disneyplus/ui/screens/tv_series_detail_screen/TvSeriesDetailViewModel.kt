@@ -7,8 +7,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.MoviesRepository
-import com.davidcobbina.disneyplus.data.api.ApiConstants
+import com.davidcobbina.disneyplus.data.repositories.MoviesRepository
+import com.davidcobbina.disneyplus.data.remote.api.ApiConstants
 import com.davidcobbina.disneyplus.data.model.*
 import com.davidcobbina.disneyplus.model.ActionList
 import com.davidcobbina.disneyplus.model.DisneyMovie

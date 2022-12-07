@@ -1,6 +1,6 @@
-package com.davidcobbina.disneyplus.data
+package com.davidcobbina.disneyplus.data.repositories
 
-import com.davidcobbina.disneyplus.data.api.MoviesAPi
+import com.davidcobbina.disneyplus.data.remote.api.MoviesAPi
 import com.davidcobbina.disneyplus.data.model.*
 import javax.inject.Inject
 

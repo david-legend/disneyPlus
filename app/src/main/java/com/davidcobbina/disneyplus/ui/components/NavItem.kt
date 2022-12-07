@@ -21,12 +21,13 @@ fun NavItem(
     title: String,
     textStyle: TextStyle,
     contentDescription: String,
+    modifier: Modifier = Modifier,
     iconColor: Color = grey100,
     isSelected: Boolean = false,
     selectedColor: Color = Color.White,
     dotSize: Dp = 4.dp,
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Row(verticalAlignment = Alignment.CenterVertically, modifier = modifier) {
         Icon(
             painter,
             contentDescription = contentDescription,

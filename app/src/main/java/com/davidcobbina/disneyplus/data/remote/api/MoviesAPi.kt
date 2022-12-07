@@ -1,4 +1,4 @@
-package com.davidcobbina.disneyplus.data.api
+package com.davidcobbina.disneyplus.data.remote.api
 
 import com.davidcobbina.disneyplus.data.model.*
 import retrofit2.http.GET

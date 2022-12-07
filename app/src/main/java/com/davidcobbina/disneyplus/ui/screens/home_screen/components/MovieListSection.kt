@@ -9,13 +9,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.api.ApiConstants
+import com.davidcobbina.disneyplus.data.remote.api.ApiConstants
 import com.davidcobbina.disneyplus.data.model.Movie
 import com.davidcobbina.disneyplus.navigation.Screen
 import com.davidcobbina.disneyplus.ui.components.MovieItem

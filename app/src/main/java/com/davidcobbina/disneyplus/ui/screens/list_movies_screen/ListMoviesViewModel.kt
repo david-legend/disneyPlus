@@ -2,7 +2,7 @@ package com.davidcobbina.disneyplus.ui.screens.list_movies_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.davidcobbina.disneyplus.data.MoviesRepository
+import com.davidcobbina.disneyplus.data.repositories.MoviesRepository
 import com.davidcobbina.disneyplus.data.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,32 +1,59 @@
 package com.davidcobbina.disneyplus.ui.screens.menu_screen
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
-import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.model.FranchiseStudio
-import com.davidcobbina.disneyplus.model.NavItem
+import androidx.lifecycle.viewModelScope
+import com.davidcobbina.disneyplus.data.repositories.MenuRepository
+import com.davidcobbina.disneyplus.model.Studio
+import com.davidcobbina.disneyplus.model.MenuItem
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-data class HomeViewState(
-    val navItems: List<NavItem> =  arrayListOf(
-        NavItem(R.string.everything, R.drawable.ic_layers, true),
-        NavItem(R.string.movies, R.drawable.ic_film),
-        NavItem(R.string.shows, R.drawable.ic_monitor),
-        NavItem(R.string.watchlist, R.drawable.ic_check),
-        NavItem(R.string.downloads, R.drawable.ic_arrow_downward),
-    ),
-    val franchiseStudioList: List<FranchiseStudio>  = arrayListOf(
-        FranchiseStudio(R.string.star_wars, R.drawable.star_wars, color = Color.White),
-        FranchiseStudio(R.string.marvel, R.drawable.marvel_logo),
-        FranchiseStudio(R.string.disney, R.drawable.walt_disney),
-        FranchiseStudio(R.string.pixar, R.drawable.pixar, color = Color.White),
-        FranchiseStudio(R.string.national_geographic, R.drawable.national_geograhic),
-    )
-)
 
-class MenuViewModel() : ViewModel() {
+@HiltViewModel
+class MenuViewModel @Inject constructor(
+    private val menuRepository: MenuRepository
+) : ViewModel() {
 
-    var data by mutableStateOf(HomeViewState())
+    private val menuEventChannel = Channel<MenuEvent>()
+    val menuEvent = menuEventChannel.receiveAsFlow()
+
+    private val _menuItems = MutableStateFlow(emptyList<MenuItem>())
+    val menuItems: StateFlow<List<MenuItem>> get() = _menuItems
+
+    private val _studios = MutableStateFlow(emptyList<Studio>())
+    val studios: StateFlow<List<Studio>> get() = _studios
+
+    init {
+        viewModelScope.launch {
+            _menuItems.value = menuRepository.getMenuItems()
+            _studios.value = menuRepository.getStudios()
+        }
+    }
+
+
+    fun updateMenuList(id: String) {
+        viewModelScope.launch {
+            val updatedMenu = arrayListOf<MenuItem>()
+            for (menu in _menuItems.value) {
+                val item = menu.copy(isSelected = menu.title.lowercase() == id.lowercase())
+                updatedMenu.add(item)
+            }
+            _menuItems.value = updatedMenu
+        }
+    }
+
+    fun onMenuItemSelected(id: String) = viewModelScope.launch {
+        menuEventChannel.send(
+            MenuEvent.NavigateToScreenSelected(id)
+        )
+    }
+
+    sealed class MenuEvent {
+        data class NavigateToScreenSelected(val id: String) : MenuEvent()
+    }
 }

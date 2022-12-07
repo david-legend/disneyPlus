@@ -73,6 +73,7 @@ fun MovieDetailScreen(
             when (event) {
                 is MovieDetailViewModel.MovieDetailEvent.NavigateToHomeScreen -> {
                     navController.popBackStack()
+
                 }
                 is MovieDetailViewModel.MovieDetailEvent.NavigateToSimilarMovie -> {
                     navController.navigate(

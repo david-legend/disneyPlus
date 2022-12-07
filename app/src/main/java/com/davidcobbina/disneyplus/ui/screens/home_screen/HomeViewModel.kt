@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.MoviesRepository
+import com.davidcobbina.disneyplus.data.repositories.MoviesRepository
 import com.davidcobbina.disneyplus.data.model.Movie
 import com.davidcobbina.disneyplus.model.AvatarCategory
 import com.davidcobbina.disneyplus.model.AvatarProfile

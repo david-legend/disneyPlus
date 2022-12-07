@@ -1,8 +1,8 @@
 package com.davidcobbina.disneyplus.di
 
-import com.davidcobbina.disneyplus.data.MoviesRepository
-import com.davidcobbina.disneyplus.data.api.ApiConstants
-import com.davidcobbina.disneyplus.data.api.MoviesAPi
+import com.davidcobbina.disneyplus.data.repositories.MoviesRepository
+import com.davidcobbina.disneyplus.data.remote.api.ApiConstants
+import com.davidcobbina.disneyplus.data.remote.api.MoviesAPi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

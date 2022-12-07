@@ -22,7 +22,7 @@ import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.components.*
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
-import com.davidcobbina.disneyplus.data.api.ApiConstants
+import com.davidcobbina.disneyplus.data.remote.api.ApiConstants
 import com.davidcobbina.disneyplus.navigation.Screen
 import com.davidcobbina.disneyplus.ui.components.shimmers.GridShimmerItem
 import com.davidcobbina.disneyplus.ui.screens.list_movies_screen.ListMoviesViewModel
