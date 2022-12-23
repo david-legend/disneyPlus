@@ -2,6 +2,7 @@ package com.davidcobbina.disneyplus.ui.screens.add_edit_user_screen
 
 import android.util.Log
 import androidx.compose.runtime.*
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -43,8 +44,6 @@ data class AddEditUserState(
     )
 )
 
-
-//TODO:: Change Avatar Profile to Profile -->
 @HiltViewModel
 class AddEditUserViewModel @Inject constructor(
     private val authRepository: AuthRepository,
@@ -59,22 +58,22 @@ class AddEditUserViewModel @Inject constructor(
     private val addEditUserEventChannel = Channel<AddEditUserEvent>()
     val addEditUserEvent = addEditUserEventChannel.receiveAsFlow()
 
-    private val _userName = mutableStateOf("")
-    val userName: State<String> get() = _userName
+    private val _userName = mutableStateOf(TextFieldValue("here"))
+    val userName: State<TextFieldValue> get() = _userName
 
     private val _userProfile =
         MutableStateFlow(UserProfile(avatar = R.drawable.moana))
     val userProfile: StateFlow<UserProfile> get() = _userProfile
 
 
-
-    fun getProfile() {
+    init {
         viewModelScope.launch {
             _userProfile.value = authRepository.getUserProfile(profileId)
-            _userName.value = _userProfile.value.username
-            Log.i("ADD", "${ _userName.value}")
+            _userName.value = TextFieldValue(_userProfile.value.username)
+            Log.i("ADD", _userName.value.text)
         }
     }
+
     fun updateSelectedAvatar(avatar: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             _userProfile.update { it.copy(avatar = avatar) }
@@ -98,13 +97,12 @@ class AddEditUserViewModel @Inject constructor(
         }
     }
 
-    fun updateUserName(username: String) {
+    fun updateUserName(username: TextFieldValue) {
         viewModelScope.launch(Dispatchers.IO) {
-            _userProfile.update { it.copy(username = username) }
+            _userProfile.update { it.copy(username = username.text) }
+            _userName.value = username
         }
     }
-
-
 
 
     fun onNavigateToSelectAvatarScreen() = viewModelScope.launch {
@@ -123,7 +121,7 @@ class AddEditUserViewModel @Inject constructor(
         addEditUserEventChannel.send(AddEditUserEvent.SaveUserProfile)
     }
 
-    fun onUserNameChange(name: String) = viewModelScope.launch {
+    fun onUserNameChange(name: TextFieldValue) = viewModelScope.launch {
         addEditUserEventChannel.send(AddEditUserEvent.UserNameChanged(name))
     }
 
@@ -143,9 +141,7 @@ class AddEditUserViewModel @Inject constructor(
         data class UpdateSelectedAvatar(val avatar: Int) : AddEditUserEvent()
         object SaveUserProfile : AddEditUserEvent()
         object SavedProfileSuccess : AddEditUserEvent()
-        data class UserNameChanged(val name: String) : AddEditUserEvent()
-
-        //        object ValidateForm : AddEditUserEvent()
+        data class UserNameChanged(val name: TextFieldValue) : AddEditUserEvent()
         object InValidForm : AddEditUserEvent()
     }
 }

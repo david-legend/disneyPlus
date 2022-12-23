@@ -1,16 +1,14 @@
 package com.davidcobbina.disneyplus.ui.screens.select_account_sreen
 
-import androidx.compose.runtime.collectAsState
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.data.local.model.DisneyUser
 import com.davidcobbina.disneyplus.data.local.model.UserProfile
 import com.davidcobbina.disneyplus.data.local.stores.Profile
-import com.davidcobbina.disneyplus.data.remote.model.Movie
 import com.davidcobbina.disneyplus.data.repositories.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -48,8 +46,8 @@ class SelectAccountViewModel @Inject constructor(private val authRepository: Aut
             _profileLoading.value = true
             authRepository.getAllProfiles().collect { response ->
                 _profiles.value = response
+                _profileLoading.value = false
             }
-            _profileLoading.value = false
         }
     }
 

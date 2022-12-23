@@ -25,6 +25,7 @@ import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.navigation.Screen
 import com.davidcobbina.disneyplus.ui.components.*
 
+
 @Composable
 fun LoginCreateAccountScreen(
     navController: NavHostController,
@@ -100,7 +101,7 @@ fun LoginCreateAccountScreen(
                     value = email,
                     singleLine = true,
                     onValueChange = {
-                        viewModel.onEmailChanged(it.text)
+                        viewModel.onEmailChanged(it)
                     },
                     label = {
                         Text(

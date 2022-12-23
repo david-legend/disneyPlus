@@ -1,21 +1,16 @@
 package com.davidcobbina.disneyplus.ui.screens.login_screen
 
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.davidcobbina.disneyplus.data.repositories.UserPreferencesRepository
-import com.davidcobbina.disneyplus.ui.screens.add_edit_user_screen.AddEditUserViewModel
-import com.davidcobbina.disneyplus.ui.screens.select_avatar_screen.SelectAvatarViewModel
 import com.davidcobbina.disneyplus.util.validateEmail
-import com.davidcobbina.disneyplus.util.validateUserName
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,17 +22,17 @@ class LoginViewModel @Inject constructor(
     private val _logUserInEventChannel = Channel<LogUserInEvent>()
     val logUserInEvent = _logUserInEventChannel.receiveAsFlow()
 
-    private val _email = mutableStateOf("")
-    val email : State<String> get() = _email
+    private val _email = mutableStateOf(TextFieldValue(""))
+    val email : State<TextFieldValue> get() = _email
 
-    fun updateEmail(email: String) {
+    fun updateEmail(email: TextFieldValue) {
         viewModelScope.launch(Dispatchers.IO) {
             _email.value = email
         }
     }
-    fun saveEmail(email: String) {
-        if (validateEmail(email)) {
-            saveEmailToDataStore(email)
+    fun saveEmail(email: TextFieldValue) {
+        if (validateEmail(email.text)) {
+            saveEmailToDataStore(email.text)
             onSaveEmailSuccess(true)
             onNavigateToSelectAccountScreen()
             return
@@ -51,7 +46,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun onEmailChanged(email: String) = viewModelScope.launch {
+    fun onEmailChanged(email: TextFieldValue) = viewModelScope.launch {
         _logUserInEventChannel.send(LogUserInEvent.EmailChanged(email))
     }
 
@@ -59,7 +54,7 @@ class LoginViewModel @Inject constructor(
         _logUserInEventChannel.send(LogUserInEvent.SavedEmailSuccess(status))
     }
 
-    fun onSaveEmail(email: String) = viewModelScope.launch {
+    fun onSaveEmail(email: TextFieldValue) = viewModelScope.launch {
         _logUserInEventChannel.send(LogUserInEvent.SaveUserEmail(email))
     }
 
@@ -68,8 +63,8 @@ class LoginViewModel @Inject constructor(
     }
 
     sealed class LogUserInEvent {
-        data class EmailChanged(val email: String) : LogUserInEvent()
-        data class SaveUserEmail(val email: String) : LogUserInEvent()
+        data class EmailChanged(val email: TextFieldValue) : LogUserInEvent()
+        data class SaveUserEmail(val email: TextFieldValue) : LogUserInEvent()
         data class SavedEmailSuccess(val status: Boolean) : LogUserInEvent()
         object NavigateToSelectAccountScreen : LogUserInEvent()
     }

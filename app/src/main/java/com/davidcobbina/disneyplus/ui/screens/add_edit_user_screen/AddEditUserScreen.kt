@@ -20,6 +20,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -42,14 +43,13 @@ fun AddEditUserScreen(
     val autoPlayPreviewsState = remember { mutableStateOf(true) }
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
+    val userName = viewModel.userName.value
     val profile by viewModel.userProfile.collectAsState()
     val addProfileSuccessMessage = stringResource(id = R.string.add_profile_success)
     val editProfileSuccessMessage = stringResource(id = R.string.edit_profile_success)
     val userNameInvalidMessage = stringResource(id = R.string.username_invalid)
 
-    LaunchedEffect(Unit) {
-        viewModel.getProfile()
-    }
+
     // get selected Icon from Select Avatar Screen
     navController.currentBackStackEntry?.savedStateHandle?.getLiveData<Int>(SELECT_AVATAR_ARGUMENT)
         ?.observe(
@@ -117,7 +117,7 @@ fun AddEditUserScreen(
                 Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                 AddEditUserName(focusRequester,
                     isAdd = isAdd,
-                    username = viewModel.userName.value,
+                    username = userName,
                     onUserNameChanged = {
                         viewModel.onUserNameChange(it)
                     }
@@ -233,15 +233,16 @@ fun EditProfilePhoto(onEditAvatar: () -> Unit, profilePhoto: UserProfile) {
 fun AddEditUserName(
     focusRequester: FocusRequester,
     isAdd: Boolean,
-    username: String = "",
-    onUserNameChanged: (String) -> Unit
+    username: TextFieldValue ,
+    onUserNameChanged: (TextFieldValue) -> Unit
 ) {
+
     DisneyOutlineTextField(
         modifier = Modifier.focusRequester(focusRequester),
         value = username,
         singleLine = true,
         onValueChange = {
-            onUserNameChanged(it.text)
+            onUserNameChanged(it)
         },
         label = {
             Text(

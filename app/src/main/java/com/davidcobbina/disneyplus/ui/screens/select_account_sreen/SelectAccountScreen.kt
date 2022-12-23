@@ -3,6 +3,7 @@ package com.davidcobbina.disneyplus.ui.screens.select_account_sreen
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.MaterialTheme
@@ -30,12 +31,14 @@ import com.davidcobbina.disneyplus.navigation.Screen
 import com.davidcobbina.disneyplus.ui.theme.blue
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.SizeMode
-import com.davidcobbina.disneyplus.data.local.stores.Profile
 import com.davidcobbina.disneyplus.ui.components.*
 
 const val EDIT = 0
 const val ADD = 1
+const val MAX_PROFILE_COUNT = 4
 
+
+//TODO:: Add loader when loading profiles
 @Composable
 fun SelectAccountScreen(
     navController: NavHostController,
@@ -47,6 +50,7 @@ fun SelectAccountScreen(
     var editProfile by rememberSaveable { mutableStateOf(false) }
 
     val profiles by viewModel.profiles.collectAsState()
+    val profileLoading by viewModel.profileLoading.collectAsState()
 
     LaunchedEffect(Unit) {
         viewModel.loadProfiles()
@@ -58,63 +62,81 @@ fun SelectAccountScreen(
             vertical = screenVerticalSpacing
         )
     ) {
-
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxHeight(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            item {
-                Text(
-                    text = if (profiles.isEmpty()) stringResource(R.string.add_user_profile) else stringResource(
-                        R.string.who_is_watching
-                    ),
-                    style = MaterialTheme.typography.headlineMedium
+        if (profileLoading) {
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight().fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                CircularProgressIndicator(
+                    color = Color.White
                 )
-                Spacer(modifier = Modifier.height(screenVerticalSpacing))
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxHeight(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                item {
+                    Text(
+                        text = if (profiles.isEmpty()) stringResource(R.string.add_user_profile) else stringResource(
+                            R.string.who_is_watching
+                        ),
+                        style = MaterialTheme.typography.headlineMedium
+                    )
+                    Spacer(modifier = Modifier.height(screenVerticalSpacing))
 
 
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    if (profiles.isEmpty()) {
-                        Spacer(modifier = Modifier.height((windowInfo.screenHeight * 0.30).dp))
-                        Text(
-                            text = stringResource(id = R.string.no_profile_accounts_message),
-                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
-                            textAlign = TextAlign.Center,
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        if (profiles.isEmpty()) {
+                            Spacer(modifier = Modifier.height((windowInfo.screenHeight * 0.30).dp))
+                            Text(
+                                text = stringResource(id = R.string.no_profile_accounts_message),
+                                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
+                                textAlign = TextAlign.Center,
 
+                                )
+                        } else {
+                            UserProfileList(
+                                windowInfo, editProfile,
+                                onTapWithEdit = { profileId ->
+                                    navController.navigate(
+                                        Screen.AddEditUserScreen.passAction(
+                                            EDIT, profileId
+                                        )
+                                    )
+                                },
+                                onTapWithoutEdit = { navController.navigate(Screen.HomeScreen.route) },
+                                userProfiles = profiles
                             )
-                    } else {
-                        UserProfileList(
-                            windowInfo, editProfile,
-                            onTapWithEdit = { profileId ->
-                                navController.navigate(Screen.AddEditUserScreen.passAction(
-                                EDIT, profileId)) },
-                            onTapWithoutEdit = { navController.navigate(Screen.HomeScreen.route) },
-                            userProfiles = profiles
-                        )
+                        }
                     }
+                }
+            }
+
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.BottomCenter
+            ) {
+                if (profiles.isEmpty()) {
+                    AddUserProfile(navController = navController)
+                } else {
+                    AddEditButtons(
+                        navController = navController,
+                        isEdit = editProfile,
+                        onEditChange = { editProfile = !it },
+                        profilesCount = profiles.size
+                    )
                 }
             }
         }
 
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            if (profiles.isEmpty()) {
-                AddUserProfile(navController = navController)
-            } else {
-                AddEditButtons(
-                    navController = navController,
-                    isEdit = editProfile,
-                    onEditChange = { editProfile = !it },
-                )
-            }
-        }
 
     }
 }
@@ -190,28 +212,14 @@ fun UserProfileList(
             }
         }
     }
-
 }
 
-
-@Composable
-fun NoProfileAccounts() {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = stringResource(id = R.string.no_profile_accounts_message),
-            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
-            textAlign = TextAlign.Center
-        )
-    }
-}
 
 @Composable
 fun AddEditButtons(
     navController: NavHostController,
     isEdit: Boolean,
+    profilesCount: Int,
     onEditChange: (Boolean) -> Unit,
 ) {
     Row(
@@ -220,16 +228,18 @@ fun AddEditButtons(
 
     ) {
         if (!isEdit) {
-            CircularIconButton(
-                child = {
-                    CustomIcon(
-                        contentDescription = stringResource(R.string.add_button_content_description),
-                        iconColor = Color.White,
-                        icon = Icons.Filled.Add
-                    )
-                },
-                onClick = { navController.navigate(Screen.AddEditUserScreen.passAction(ADD)) },
-            )
+            if (profilesCount < MAX_PROFILE_COUNT) {
+                CircularIconButton(
+                    child = {
+                        CustomIcon(
+                            contentDescription = stringResource(R.string.add_button_content_description),
+                            iconColor = Color.White,
+                            icon = Icons.Filled.Add
+                        )
+                    },
+                    onClick = { navController.navigate(Screen.AddEditUserScreen.passAction(ADD)) },
+                )
+            }
         }
 
         Spacer(modifier = Modifier.weight(1.0f))
