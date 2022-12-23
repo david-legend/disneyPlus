@@ -1,11 +1,12 @@
 package com.davidcobbina.disneyplus.ui.components
 
+import android.util.Log
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -14,8 +15,8 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun DisneyOutlineTextField(
-    value: TextFieldValue,
     modifier: Modifier = Modifier,
+    value: String = "",
     textStyle: TextStyle = MaterialTheme.typography.titleMedium.copy(
         color = Color.White,
         fontSize = 18.sp
@@ -36,11 +37,16 @@ fun DisneyOutlineTextField(
     ),
 ) {
 
+    var textState by remember { mutableStateOf(TextFieldValue(value)) }
+
     OutlinedTextField(
         modifier = modifier,
         textStyle = textStyle,
-        value = value,
-        onValueChange = onValueChange,
+        value = textState,
+        onValueChange = {
+            textState = it
+            onValueChange(it)
+        },
         singleLine = singleLine,
         label = label,
         colors = textFieldColors,

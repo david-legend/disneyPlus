@@ -28,7 +28,7 @@ import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import com.davidcobbina.disneyplus.ui.components.TextListWithDots
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.*
 import kotlinx.coroutines.launch
-import com.davidcobbina.disneyplus.data.model.Movie
+import com.davidcobbina.disneyplus.data.remote.model.Movie
 import com.davidcobbina.disneyplus.navigation.Screen
 import com.davidcobbina.disneyplus.ui.components.shimmers.AnimatedShimmer
 import com.davidcobbina.disneyplus.ui.components.shimmers.EpisodeGridShimmer
@@ -97,7 +97,7 @@ fun TvSeriesDetailScreen(
                 }
                 is TvSeriesDetailViewModel.TvSeriesDetailEvent.NavigateToSimilarMovie -> {
                     navController.navigate(
-                        route = Screen.TvSeriesDetailScreen.parseMovie(event.movie)
+                        route = Screen.TvSeriesDetailScreen.passTvSeries(event.movie)
                     )
                 }
             }

@@ -7,16 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.davidcobbina.disneyplus.navigation.SetupNavGraph
-import com.davidcobbina.disneyplus.ui.screens.DownloadScreen
-import com.davidcobbina.disneyplus.ui.screens.SelectAccountScreen
-import com.davidcobbina.disneyplus.ui.screens.home_screen.HomeScreen
-import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.MovieDetailScreen
 import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 import dagger.hilt.android.AndroidEntryPoint
 

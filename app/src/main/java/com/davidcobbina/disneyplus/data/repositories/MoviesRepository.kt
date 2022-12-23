@@ -1,7 +1,7 @@
 package com.davidcobbina.disneyplus.data.repositories
 
 import com.davidcobbina.disneyplus.data.remote.api.MoviesAPi
-import com.davidcobbina.disneyplus.data.model.*
+import com.davidcobbina.disneyplus.data.remote.model.*
 import javax.inject.Inject
 
 class MoviesRepository @Inject constructor(
@@ -10,6 +10,10 @@ class MoviesRepository @Inject constructor(
 
     suspend fun getMovieFeed(): List<Movie> {
         return moviesAPi.getMovieFeed().items
+    }
+
+    suspend fun getMovieFeed(apiId: String): List<Movie> {
+        return moviesAPi.getMovieFeed(apiId).items
     }
 
     suspend fun getMovieDetail(movieId: String): MovieDetail {

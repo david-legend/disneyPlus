@@ -3,6 +3,7 @@ buildscript {
         compose_version = '1.2.0'
         nav_version = "2.5.1"
         dagger_version = "2.44.2"
+        room_version = "2.4.0-alpha04"
     }
     repositories {
         mavenCentral()

@@ -7,10 +7,13 @@
     <string name="login_heading_subtitle">Enter your email to create or sign in to your account.</string>
     <string name="email_label">Email</string>
     <string name="get_started">GET STARTED</string>
+    <string name="save_email_success">Login Success</string>
+    <string name="email_invalid">Email is invalid</string>
 
 
     //Choose Profile Screen
     <string name="who_is_watching">Who\'s watching ?</string>
+    <string name="add_user_profile">Add User Profile</string>
     <string name="megan">Megan</string>
     <string name="anthony">Anthony</string>
     <string name="marc">Marc</string>
@@ -53,6 +56,7 @@
     <string name="hero">Hero</string>
     <string name="villain">Villain</string>
     <string name="buddy">Buddy</string>
+    <string name="no_profile_accounts_message">There are no profile Accounts. Add one by Clicking the Add Button Below</string>
 
     //Downloads Screen
     <string name="downloads_dropdown">Dropdown Icon that takes user to menu list</string>
@@ -72,8 +76,10 @@
 
     //Add Edit User Screen
     <string name="cancel">Cancel</string>
+    <string name="add_profile">Add Profile</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="profile_name_label">Edit Profile</string>
+    <string name="profile_name_label_add">Enter Profile Name</string>
 
     <string name="maturity_rating_title">Maturity Rating</string>
     <string name="maturity_rating_subtitle">No Restrictions</string>
@@ -86,8 +92,16 @@
 
     <string name="autoplay_next_episode_title">Autoplay next episode</string>
     <string name="autoplay_next_episode_subtitle">Play next episode</string>
-
     <string name="autoplay_previews_title">Autoplay Previews</string>
     <string name="autoplay_previews_subtitle">Play previews</string>
     <string name="changes">Changes made here apply to all devices</string>
+    <string name="add_profile_success">Profile Added</string>
+    <string name="edit_profile_success">Profile Updated</string>
+    <string name="username_invalid">Username must be 3 characters or more</string>
+
+    //Select Avatar Screen
+    <string name="choose_icon">Choose Icon</string>
+    <string name="classic_icons">The Classics</string>
+
+
 </resources>

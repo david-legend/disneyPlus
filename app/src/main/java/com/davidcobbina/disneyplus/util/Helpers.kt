@@ -3,10 +3,9 @@ package com.davidcobbina.disneyplus.util
 import android.os.Build
 import androidx.compose.material.BottomSheetState
 import androidx.compose.material.ExperimentalMaterialApi
-import com.davidcobbina.disneyplus.data.model.Cast
+import com.davidcobbina.disneyplus.data.remote.model.Cast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.time.Duration
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -20,7 +19,7 @@ fun parseYearFromDate(date: String): String {
     return result
 }
 
-fun covertMinutesToHourMinute(runtime: Int ): String {
+fun covertMinutesToHourMinute(runtime: Int): String {
     val timeInSeconds = runtime * 60
     val hours = timeInSeconds / 3600
     val minutes = (timeInSeconds - hours * 3600) / 60
@@ -43,6 +42,14 @@ fun extractDataFromArray(key: String, cast: List<Cast>, maxNumberToExtract: Int)
         if (itemCount == maxNumberToExtract) break
     }
     return result
+}
+
+fun validateUserName(name: String): Boolean {
+    return name.length >= 3
+}
+
+fun validateEmail(email: String): Boolean {
+    return email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
 }
 
 @OptIn(ExperimentalMaterialApi::class)

@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.remote.api.ApiConstants
-import com.davidcobbina.disneyplus.data.model.Movie
+import com.davidcobbina.disneyplus.data.remote.model.Movie
 import com.davidcobbina.disneyplus.navigation.Screen
 import com.davidcobbina.disneyplus.ui.components.MovieItem
 import com.davidcobbina.disneyplus.ui.components.shimmers.AnimatedShimmer
@@ -63,11 +63,11 @@ fun MovieListSection(
                             .clickable {
                                 if (movieItem.mediaType == ApiConstants.MEDIA_TYPE_TV) {
                                     navController.navigate(
-                                        route = Screen.TvSeriesDetailScreen.parseMovie(movieItem)
+                                        route = Screen.TvSeriesDetailScreen.passTvSeries(movieItem)
                                     )
                                 } else {
                                     navController.navigate(
-                                        route = Screen.MovieDetailScreen.parseMovie(movieItem)
+                                        route = Screen.MovieDetailScreen.passMovie(movieItem)
                                     )
                                 }
 
@@ -108,11 +108,11 @@ fun MovieListSection(
                                 .clickable {
                                     if (movieItem.mediaType == ApiConstants.MEDIA_TYPE_TV) {
                                         navController.navigate(
-                                            route = Screen.TvSeriesDetailScreen.parseMovie(movieItem)
+                                            route = Screen.TvSeriesDetailScreen.passTvSeries(movieItem)
                                         )
                                     } else {
                                         navController.navigate(
-                                            route = Screen.MovieDetailScreen.parseMovie(movieItem)
+                                            route = Screen.MovieDetailScreen.passMovie(movieItem)
                                         )
                                     }
                                 }

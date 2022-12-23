@@ -1,4 +1,4 @@
-
+package com.davidcobbina.disneyplus.ui.screens.menu_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -25,15 +25,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.model.Studio
-import com.davidcobbina.disneyplus.model.MenuItem
+import com.davidcobbina.disneyplus.data.local.DOWNLOADS
+import com.davidcobbina.disneyplus.data.local.EVERYTHING
+import com.davidcobbina.disneyplus.data.local.WATCHLIST
+import com.davidcobbina.disneyplus.data.local.model.Menu
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.navigation.Screen
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import com.davidcobbina.disneyplus.ui.components.NavItem
-import com.davidcobbina.disneyplus.ui.screens.menu_screen.MenuViewModel
 
 
 val topSpacing: Dp = 250.dp
@@ -53,8 +54,21 @@ fun MenuScreen(navController: NavHostController, viewModel: MenuViewModel = hilt
         viewModel.menuEvent.collect { event ->
             when (event) {
                 is MenuViewModel.MenuEvent.NavigateToScreenSelected -> {
-                    viewModel.updateMenuList(event.id)
-                    navController.navigate(route = Screen.ListMoviesScreen.route)
+                    viewModel.updateMenuList(event.menu.title)
+                    when (event.menu.title) {
+                        DOWNLOADS -> {
+                            navController.navigate(route = Screen.DownloadsScreen.route)
+                        }
+                        EVERYTHING -> {
+                            navController.navigate(route = Screen.HomeScreen.route)
+                        }
+                        WATCHLIST -> {}
+                        else -> {
+                            navController.navigate(
+                                route = Screen.ListMoviesScreen.passMenu(event.menu)
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -83,11 +97,13 @@ fun MenuScreen(navController: NavHostController, viewModel: MenuViewModel = hilt
             } else {
                 Box(modifier = Modifier.height(mediumSpacing))
             }
-            NavigationList(navItems) {
-                viewModel.onMenuItemSelected(it)
+            NavigationList(navItems) { menu ->
+                viewModel.onMenuItemSelected(menu)
             }
             Box(modifier = Modifier.height(mediumSpacing))
-            FranchiseStudioList(studios)
+            StudioList(studios) { menu ->
+                viewModel.onMenuItemSelected(menu)
+            }
             Box(modifier = Modifier.height(mediumSpacing))
             Text(
                 text = stringResource(id = R.string.categories),
@@ -107,7 +123,7 @@ fun MenuScreen(navController: NavHostController, viewModel: MenuViewModel = hilt
 
 
 @Composable
-fun NavigationList(menuItems: List<MenuItem>, onNavItemClicked: (String) -> Unit) {
+fun NavigationList(menuItems: List<Menu>, onMenuItemClicked: (Menu) -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth(fraction = 1f)
@@ -120,7 +136,7 @@ fun NavigationList(menuItems: List<MenuItem>, onNavItemClicked: (String) -> Unit
                 contentDescription = menu.title,
                 isSelected = menu.isSelected,
                 modifier = Modifier.clickable {
-                    onNavItemClicked(menu.title)
+                    onMenuItemClicked(menu)
                 }
             )
             Box(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
@@ -129,7 +145,7 @@ fun NavigationList(menuItems: List<MenuItem>, onNavItemClicked: (String) -> Unit
 }
 
 @Composable
-fun FranchiseStudioList(franchiseStudioData: List<Studio>) {
+fun StudioList(franchiseStudioData: List<Menu>, onStudioItemClicked: (Menu) -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth(fraction = 1f)
@@ -138,9 +154,12 @@ fun FranchiseStudioList(franchiseStudioData: List<Studio>) {
             val colorFilter =
                 if (item.color != null) ColorFilter.tint(color = item.color) else null
             Image(
-                painter = painterResource(id = item.logo),
+                painter = painterResource(id = item.icon),
                 colorFilter = colorFilter,
                 contentDescription = item.title,
+                modifier = Modifier.clickable {
+                    onStudioItemClicked(item)
+                }
             )
             Box(modifier = Modifier.height(mediumSpacing))
         }

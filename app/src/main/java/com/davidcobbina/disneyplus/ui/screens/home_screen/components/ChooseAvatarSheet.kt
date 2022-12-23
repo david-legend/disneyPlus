@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
-import com.davidcobbina.disneyplus.model.AvatarCategory
-import com.davidcobbina.disneyplus.model.AvatarProfile
+import com.davidcobbina.disneyplus.data.local.model.AvatarCategory
+import com.davidcobbina.disneyplus.data.local.model.AvatarProfile
 import com.davidcobbina.disneyplus.ui.components.AvatarCategoryItem
 import com.davidcobbina.disneyplus.ui.components.MovieItem
 

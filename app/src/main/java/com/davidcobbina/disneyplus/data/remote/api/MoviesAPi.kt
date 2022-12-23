@@ -1,6 +1,6 @@
 package com.davidcobbina.disneyplus.data.remote.api
 
-import com.davidcobbina.disneyplus.data.model.*
+import com.davidcobbina.disneyplus.data.remote.model.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -8,6 +8,9 @@ interface MoviesAPi {
 
     @GET(ApiConstants.LIST_ENDPOINT)
     suspend fun getMovieFeed(): MovieResult
+
+    @GET(ApiConstants.LIST_ID_ENDPOINT)
+    suspend fun getMovieFeed(@Path("apiId") apiId: String): MovieResult
 
     @GET(ApiConstants.MOVIE_DETAIL_ENDPOINT)
     suspend fun getMovieDetail(@Path("movieId") movieId: String): MovieDetail

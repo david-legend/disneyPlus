@@ -4,6 +4,7 @@ object ApiConstants {
     private const val API_V3 = "3"
     const val BASE_URL = "https://api.themoviedb.org/$API_V3/"
     const val LIST_ENDPOINT = "list/8229678?page=1&api_key=8b29c6e37e426fa616c3805ea363200a"
+    const val LIST_ID_ENDPOINT = "list/{apiId}?page=1&api_key=8b29c6e37e426fa616c3805ea363200a"
     const val MOVIE_DETAIL_ENDPOINT = "movie/{movieId}?api_key=8b29c6e37e426fa616c3805ea363200a&language=en-US"
     const val SIMILAR_MOVIES_ENDPOINT = "movie/{movieId}/recommendations?api_key=8b29c6e37e426fa616c3805ea363200a&language=en-US&page=1"
     const val MOVIE_CREDITS_ENDPOINT = "movie/{movieId}/credits?api_key=8b29c6e37e426fa616c3805ea363200a&language=en-US"

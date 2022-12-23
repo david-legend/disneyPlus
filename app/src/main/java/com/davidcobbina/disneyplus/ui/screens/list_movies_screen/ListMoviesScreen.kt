@@ -1,3 +1,5 @@
+import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,13 +12,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
+import com.davidcobbina.disneyplus.data.local.model.Menu
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.ui.components.*
@@ -35,6 +40,7 @@ import com.davidcobbina.disneyplus.ui.screens.list_movies_screen.ListMoviesViewM
 @Composable
 fun ListMoviesScreen(
     navController: NavHostController,
+    menu: Menu,
     viewModel: ListMoviesViewModel = hiltViewModel()
 ) {
     val movies by viewModel.moviesFeed.collectAsState()
@@ -49,9 +55,6 @@ fun ListMoviesScreen(
         (screenWidth / 3).dp else (screenWidth / (6)).dp
     val itemHeight: Dp = itemWidth + (itemWidth / 2)
 
-//    LaunchedEffect(key1 = "title") {
-//        viewModel.getMoviesFeed()
-//    }
     Box(
         modifier = Modifier
             .padding(
@@ -67,10 +70,20 @@ fun ListMoviesScreen(
                     Spacer(modifier = Modifier.height(paddingSpacing))
                 }
 
-                TextWithIcon(
-                    title = stringResource(id = R.string.downloads),
-                    hasIcon = false,
-                )
+                if (menu.isBrand) {
+                    Image(
+                        painter = painterResource(id = menu.icon),
+                        colorFilter = menu.color?.let { ColorFilter.tint(color = it) },
+                        contentDescription = menu.title,
+                    )
+                } else {
+                    TextWithIcon(
+                        title = menu.title,
+                        hasIcon = false,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
+                }
+
                 Spacer(modifier = Modifier.height(paddingSpacing))
                 if (isMoviesLoading) {
                     GridShimmerItem(rowItemCount = 3, gridItems = 12)
@@ -92,11 +105,13 @@ fun ListMoviesScreen(
                                     .clickable {
                                         if (movie.mediaType == ApiConstants.MEDIA_TYPE_TV) {
                                             navController.navigate(
-                                                route = Screen.TvSeriesDetailScreen.parseMovie(movie)
+                                                route = Screen.TvSeriesDetailScreen.passTvSeries(
+                                                    movie
+                                                )
                                             )
                                         } else {
                                             navController.navigate(
-                                                route = Screen.MovieDetailScreen.parseMovie(movie)
+                                                route = Screen.MovieDetailScreen.passMovie(movie)
                                             )
                                         }
 

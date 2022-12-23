@@ -28,7 +28,7 @@ import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import com.davidcobbina.disneyplus.ui.components.TextListWithDots
 import com.davidcobbina.disneyplus.ui.screens.movie_detail_screen.components.*
 import kotlinx.coroutines.launch
-import com.davidcobbina.disneyplus.data.model.Movie
+import com.davidcobbina.disneyplus.data.remote.model.Movie
 import com.davidcobbina.disneyplus.navigation.Screen
 import com.davidcobbina.disneyplus.ui.components.shimmers.AnimatedShimmer
 import com.davidcobbina.disneyplus.ui.components.shimmers.TextListShimmer
@@ -77,7 +77,7 @@ fun MovieDetailScreen(
                 }
                 is MovieDetailViewModel.MovieDetailEvent.NavigateToSimilarMovie -> {
                     navController.navigate(
-                        route = Screen.MovieDetailScreen.parseMovie(event.movie)
+                        route = Screen.MovieDetailScreen.passMovie(event.movie)
                     )
                 }
             }

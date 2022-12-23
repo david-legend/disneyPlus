@@ -1,6 +1,5 @@
 package com.davidcobbina.disneyplus.ui.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,9 +14,9 @@ import com.davidcobbina.disneyplus.R
 val iconSize: Dp = 36.dp
 
 @Composable
-fun DefaultEditableIcon() {
+fun DefaultSelectableIcon(icon: Int  = R.drawable.ic_outline_edit) {
     CustomIcon(
-        icon = painterResource(id = R.drawable.ic_outline_edit),
+        icon = painterResource(id = icon),
         iconPadding = 0.dp,
         iconColor = Color.White,
         iconSize = iconSize
@@ -25,21 +24,21 @@ fun DefaultEditableIcon() {
 }
 
 @Composable
-fun EditableItem(
+fun SelectableItem(
     child: @Composable () -> Unit,
-    isEditable: Boolean = false,
+    isSelected: Boolean = false,
     childHeight: Dp = 100.dp, //used for computing and centering the editable Icon
     editableIconHeight: Dp = iconSize, //used for computing and centering the editable Icon
-    editableIcon: @Composable () -> Unit = { DefaultEditableIcon() },
+    selectedIcon: @Composable () -> Unit = { DefaultSelectableIcon() },
 ) {
     val padding = (childHeight - editableIconHeight) / 2
     Box(
         contentAlignment = Alignment.TopCenter,
     ) {
         child()
-        if (isEditable) {
+        if (isSelected) {
             Box(modifier = Modifier.padding(top = padding)) {
-                editableIcon()
+                selectedIcon()
             }
         }
     }

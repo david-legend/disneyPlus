@@ -35,9 +35,7 @@ fun CircularImage(
     )
 ) {
 
-    Box(
-
-    ) {
+    Box{
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = modifier

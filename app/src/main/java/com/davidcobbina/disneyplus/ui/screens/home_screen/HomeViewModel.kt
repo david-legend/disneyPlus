@@ -7,24 +7,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.repositories.MoviesRepository
-import com.davidcobbina.disneyplus.data.model.Movie
-import com.davidcobbina.disneyplus.model.AvatarCategory
-import com.davidcobbina.disneyplus.model.AvatarProfile
+import com.davidcobbina.disneyplus.data.remote.model.Movie
+import com.davidcobbina.disneyplus.data.local.model.AvatarCategory
+import com.davidcobbina.disneyplus.data.local.model.AvatarProfile
+import com.davidcobbina.disneyplus.data.repositories.LocalResourcesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+const val TRENDING = "8230787"
+const val STAR_WARS = "8230783"
+const val MARVEL = "8230785"
+const val DISNEY = "8230785"
+
 data class HomeViewState(
-    val avatarProfiles: List<AvatarProfile> = arrayListOf(
-        AvatarProfile(R.drawable.merida),
-        AvatarProfile(R.drawable.moana),
-        AvatarProfile(R.drawable.olaf),
-        AvatarProfile(R.drawable.mr_incredible),
-        AvatarProfile(R.drawable.mushu),
-        AvatarProfile(R.drawable.simba),
-    ),
+
     val avatarCategories: List<AvatarCategory> = arrayListOf(
         AvatarCategory(R.string.princess, isSelected = true),
         AvatarCategory(R.string.hero),
@@ -35,7 +34,9 @@ data class HomeViewState(
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-      moviesRepository: MoviesRepository
+
+    private val localResourcesRepository: LocalResourcesRepository,
+    moviesRepository: MoviesRepository
 ) : ViewModel() {
 
     private val _moviesFeedLoading = MutableStateFlow(false)
@@ -55,6 +56,14 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private val _avatars = MutableStateFlow(emptyList<AvatarProfile>())
+    val avatars: StateFlow<List<AvatarProfile>> get() = _avatars
+
+    init {
+        viewModelScope.launch {
+            _avatars.value = localResourcesRepository.getDisneyProfiles()
+        }
+    }
     var data by mutableStateOf(HomeViewState())
 
 }

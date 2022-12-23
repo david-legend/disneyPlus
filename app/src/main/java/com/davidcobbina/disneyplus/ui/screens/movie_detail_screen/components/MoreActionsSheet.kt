@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
-import com.davidcobbina.disneyplus.model.ActionList
+import com.davidcobbina.disneyplus.data.local.model.ActionList
 import com.davidcobbina.disneyplus.ui.components.ActionListTile
 import com.davidcobbina.disneyplus.ui.components.CircularIconButton
 import com.davidcobbina.disneyplus.ui.components.CustomIcon
@@ -88,7 +88,7 @@ fun MoreActionsSheet(sheetState: BottomSheetState, title: String, actionsList: L
                         )
                     }
                 }
-//            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.topSpacing)))
+//            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.com.davidcobbina.disneyplus.ui.screens.menu_screen.getTopSpacing)))
 //            Row(
 //                modifier = Modifier
 //                    .fillMaxWidth()

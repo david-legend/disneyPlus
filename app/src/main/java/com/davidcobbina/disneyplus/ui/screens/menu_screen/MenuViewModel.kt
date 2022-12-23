@@ -2,9 +2,8 @@ package com.davidcobbina.disneyplus.ui.screens.menu_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.davidcobbina.disneyplus.data.repositories.MenuRepository
-import com.davidcobbina.disneyplus.model.Studio
-import com.davidcobbina.disneyplus.model.MenuItem
+import com.davidcobbina.disneyplus.data.repositories.LocalResourcesRepository
+import com.davidcobbina.disneyplus.data.local.model.Menu
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,17 +15,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MenuViewModel @Inject constructor(
-    private val menuRepository: MenuRepository
+    private val menuRepository: LocalResourcesRepository
 ) : ViewModel() {
 
     private val menuEventChannel = Channel<MenuEvent>()
     val menuEvent = menuEventChannel.receiveAsFlow()
 
-    private val _menuItems = MutableStateFlow(emptyList<MenuItem>())
-    val menuItems: StateFlow<List<MenuItem>> get() = _menuItems
+    private val _menuItems = MutableStateFlow(emptyList<Menu>())
+    val menuItems: StateFlow<List<Menu>> get() = _menuItems
 
-    private val _studios = MutableStateFlow(emptyList<Studio>())
-    val studios: StateFlow<List<Studio>> get() = _studios
+    private val _studios = MutableStateFlow(emptyList<Menu>())
+    val studios: StateFlow<List<Menu>> get() = _studios
 
     init {
         viewModelScope.launch {
@@ -38,7 +37,7 @@ class MenuViewModel @Inject constructor(
 
     fun updateMenuList(id: String) {
         viewModelScope.launch {
-            val updatedMenu = arrayListOf<MenuItem>()
+            val updatedMenu = arrayListOf<Menu>()
             for (menu in _menuItems.value) {
                 val item = menu.copy(isSelected = menu.title.lowercase() == id.lowercase())
                 updatedMenu.add(item)
@@ -47,13 +46,13 @@ class MenuViewModel @Inject constructor(
         }
     }
 
-    fun onMenuItemSelected(id: String) = viewModelScope.launch {
+    fun onMenuItemSelected( menu: Menu) = viewModelScope.launch {
         menuEventChannel.send(
-            MenuEvent.NavigateToScreenSelected(id)
+            MenuEvent.NavigateToScreenSelected(menu)
         )
     }
 
     sealed class MenuEvent {
-        data class NavigateToScreenSelected(val id: String) : MenuEvent()
+        data class NavigateToScreenSelected(val menu: Menu) : MenuEvent()
     }
 }

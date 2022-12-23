@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.davidcobbina.disneyplus.R
-import com.davidcobbina.disneyplus.model.DownloadedMovie
+import com.davidcobbina.disneyplus.data.local.model.DownloadedMovie
 
 
 

@@ -9,9 +9,9 @@ import androidx.lifecycle.viewModelScope
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.repositories.MoviesRepository
 import com.davidcobbina.disneyplus.data.remote.api.ApiConstants
-import com.davidcobbina.disneyplus.data.model.*
-import com.davidcobbina.disneyplus.model.ActionList
-import com.davidcobbina.disneyplus.model.DisneyMovie
+import com.davidcobbina.disneyplus.data.remote.model.*
+import com.davidcobbina.disneyplus.data.local.model.ActionList
+import com.davidcobbina.disneyplus.data.local.model.DisneyMovie
 import com.davidcobbina.disneyplus.util.covertMinutesToHourMinute
 import com.davidcobbina.disneyplus.util.extractDataFromArray
 import com.davidcobbina.disneyplus.util.parseYearFromDate
