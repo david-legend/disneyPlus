@@ -15,14 +15,22 @@ import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 
-//TODO:: Passing Data Around
+//TODO:: Pass Profile Around
+//TODO:: Change profile inside app
+//TODO:: Add proper profile avatars
+//TODO:: Link proper api's for sections
+//TODO:: Hide api key
+
+//Future Impl
+//TODO:: Implement watch lists functionality (Add, view and delete watchlist)
+//TODO:: Implement downloads functionality (Add, view and delete downloads)
+//TODO:: Implement view video functionality
+//TODO:: Implement search movies
+//TODO:: Implement like a movie
+//TODO:: Add tests -> Unit test and UI Tests
 
 
-
-
-
-
-// After completing all screens
+// UI Remaining
 //TODO: Revisits
 //    1. Implement Stacked Downloaded Images (Download Screen)
 //    2. Add Gradient Cover to footer of nav drawer
@@ -47,8 +55,6 @@ class MainActivity : ComponentActivity() {
 
                     navController = rememberNavController()
                     SetupNavGraph(navController = navController)
-//                    HomeScreen(navController = navController)
-//                    MovieDetailScreen(navController = navController)
                 }
             }
         }

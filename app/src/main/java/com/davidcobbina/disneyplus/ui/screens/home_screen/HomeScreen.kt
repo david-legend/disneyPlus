@@ -33,6 +33,7 @@ import kotlinx.coroutines.launch
 fun HomeScreen(navController: NavHostController, homeViewModel: HomeViewModel = hiltViewModel()) {
 
     val avatars by homeViewModel.avatars.collectAsState()
+    val userProfile by homeViewModel.userProfile.collectAsState()
     val recommendedMovies = homeViewModel.moviesFeed.collectAsState()
     val isRecommendedMoviesLoading = homeViewModel.moviesFeedLoading.collectAsState()
 
@@ -130,7 +131,7 @@ fun HomeScreen(navController: NavHostController, homeViewModel: HomeViewModel = 
                 }
             }
             CircularImage(
-                painter = painterResource(R.drawable.merida),
+                painter = painterResource(userProfile.avatar),
                 imageSize = 50.dp,
                 hasTitle = false,
                 contentDescription = stringResource(R.string.profile_content_description),

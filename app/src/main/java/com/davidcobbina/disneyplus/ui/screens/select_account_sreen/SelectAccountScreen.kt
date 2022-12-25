@@ -112,7 +112,8 @@ fun SelectAccountScreen(
                                         )
                                     )
                                 },
-                                onTapWithoutEdit = { navController.navigate(Screen.HomeScreen.route) },
+                                onTapWithoutEdit = { id ->
+                                    navController.navigate(route = Screen.HomeScreen.passId(id)) },
                                 userProfiles = profiles
                             )
                         }
@@ -145,7 +146,7 @@ fun SelectAccountScreen(
 fun UserProfileList(
     windowInfo: WindowInfo,
     isEdit: Boolean,
-    onTapWithoutEdit: () -> Unit,
+    onTapWithoutEdit: (Int) -> Unit,
     onTapWithEdit: (Int) -> Unit,
     userProfiles: List<UserProfile>
 ) {
@@ -170,7 +171,7 @@ fun UserProfileList(
                                     if (isEdit) {
                                         onTapWithEdit(profile.id)
                                     } else {
-                                        onTapWithoutEdit()
+                                        onTapWithoutEdit(profile.id)
                                     }
                                 },
                             painter = painterResource(profile.avatar),
@@ -200,7 +201,7 @@ fun UserProfileList(
                                     if (isEdit) {
                                         onTapWithEdit(profile.id)
                                     } else {
-                                        onTapWithoutEdit()
+                                        onTapWithoutEdit(profile.id)
                                     }
                                 },
                             painter = painterResource(profile.avatar),

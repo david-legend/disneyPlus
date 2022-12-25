@@ -27,7 +27,7 @@ import com.google.gson.Gson
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SplashScreen.route,
+        startDestination = Screen.SelectAccountScreen.route,
         builder = {
             composable(route = Screen.SplashScreen.route) {
                 SplashScreen(navController = navController)
@@ -59,11 +59,13 @@ fun SetupNavGraph(navController: NavHostController) {
                     }
                 )
             ) {
-//                    navBackStackEntry ->
-//                val profileId = navBackStackEntry.arguments?.getInt(USER_PROFILE_ID_ARGUMENT)
                 AddEditUserScreen(navController)
             }
-            composable(route = Screen.HomeScreen.route) {
+            composable(route = Screen.HomeScreen.route, arguments = listOf(
+                navArgument(USER_PROFILE_ID_ARGUMENT) {
+                    type = NavType.IntType
+                }
+            )) {
                 HomeScreen(navController)
             }
             composable(route = Screen.MenuScreen.route) {

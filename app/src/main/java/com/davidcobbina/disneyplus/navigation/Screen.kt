@@ -17,12 +17,13 @@ const val TV_SERIES_DETAIL_ROUTE = "tvSeriesDetail"
 const val LIST_MOVIES_ROUTE = "listMovies"
 
 
+//const val PROFILE_ID_ARGUMENT = "profileId"
 const val MOVIE_DETAIL_ARGUMENT = "movie"
 const val TV_SERIES_DETAIL_ARGUMENT = "tv"
 const val LIST_MOVIES_ARGUMENT = "listMoviesTitle"
 const val ADD_EDIT_ARGUMENT = "addEdit"
 const val SELECT_AVATAR_ARGUMENT = "selected_avatar"
-const val USER_PROFILE_ID_ARGUMENT = "userProfileId"
+const val USER_PROFILE_ID_ARGUMENT = "profileId"
 
 
 sealed class Screen(val route: String) {
@@ -43,7 +44,12 @@ sealed class Screen(val route: String) {
         }
     }
 
-    object HomeScreen : Screen(route = HOME_ROUTE)
+    object HomeScreen : Screen(route = "$HOME_ROUTE/{$USER_PROFILE_ID_ARGUMENT}") {
+        fun passId(id: Int): String {
+            return "$HOME_ROUTE/$id"
+        }
+    }
+
     object MenuScreen : Screen(route = MENU_ROUTE)
     object DownloadsScreen : Screen(route = DOWNLOADS_ROUTE)
     object ListMoviesScreen :

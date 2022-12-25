@@ -58,11 +58,11 @@ class AddEditUserViewModel @Inject constructor(
     private val addEditUserEventChannel = Channel<AddEditUserEvent>()
     val addEditUserEvent = addEditUserEventChannel.receiveAsFlow()
 
-    private val _userName = mutableStateOf(TextFieldValue("here"))
+    private val _userName = mutableStateOf(TextFieldValue())
     val userName: State<TextFieldValue> get() = _userName
 
     private val _userProfile =
-        MutableStateFlow(UserProfile(avatar = R.drawable.moana))
+        MutableStateFlow(UserProfile(avatar = R.drawable.image_placeholder))
     val userProfile: StateFlow<UserProfile> get() = _userProfile
 
 
@@ -70,7 +70,6 @@ class AddEditUserViewModel @Inject constructor(
         viewModelScope.launch {
             _userProfile.value = authRepository.getUserProfile(profileId)
             _userName.value = TextFieldValue(_userProfile.value.username)
-            Log.i("ADD", _userName.value.text)
         }
     }
 
