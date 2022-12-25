@@ -66,7 +66,7 @@ val classicAvatars = arrayListOf(
     AvatarProfile(3, R.drawable.olaf),
     AvatarProfile(4, R.drawable.mr_incredible),
     AvatarProfile(5, R.drawable.mushu),
-    AvatarProfile(6,  R.drawable.simba),
+    AvatarProfile(6, R.drawable.simba),
 )
 val disneyAvatars = arrayListOf(
     AvatarProfile(7, R.drawable.merida),
@@ -77,17 +77,19 @@ val disneyAvatars = arrayListOf(
     AvatarProfile(12, R.drawable.simba),
 )
 
-val avatarCategories = arrayListOf(
-    AvatarCategory(R.string.princess, isSelected = true),
-    AvatarCategory(R.string.hero),
-    AvatarCategory(R.string.villain),
-    AvatarCategory(R.string.buddy),
-)
+//val avatarCategories = arrayListOf(
+//    AvatarCategory(R.string.princess, isSelected = true),
+//    AvatarCategory(R.string.hero),
+//    AvatarCategory(R.string.villain),
+//    AvatarCategory(R.string.buddy),
+//)
 
+const val DISNEY_AVATAR_CATEGORY = "Disney"
+const val CLASSICS_AVATAR_CATEGORY = "The Classics"
 fun getProfilesData(): Map<String, List<AvatarProfile>> {
     return mapOf<String, List<AvatarProfile>>(
-        "The Classics" to classicAvatars,
-        "Disney" to disneyAvatars
+        CLASSICS_AVATAR_CATEGORY to classicAvatars,
+        DISNEY_AVATAR_CATEGORY to disneyAvatars
     )
 
 }
@@ -99,6 +101,7 @@ fun getDisneyProfilesData(): List<AvatarProfile> {
 fun getDefaultUserProfileData(): UserProfile {
     return UserProfile(avatar = R.drawable.mr_incredible, username = "")
 }
-fun getAvatarCategoriesData(): List<AvatarCategory> {
-    return avatarCategories
-}
+
+//fun getAvatarCategoriesData(): List<AvatarCategory> {
+//    return avatarCategories
+//}

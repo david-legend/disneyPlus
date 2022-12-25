@@ -6,12 +6,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -25,17 +23,19 @@ import com.davidcobbina.disneyplus.ui.components.CircularImage
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.ChooseAvatarSheetContent
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.HeaderSection
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.MovieListSection
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
 @Composable
 @ExperimentalMaterialApi
-fun HomeScreen(navController: NavHostController, homeViewModel: HomeViewModel = hiltViewModel()) {
+fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hiltViewModel()) {
 
-    val avatars by homeViewModel.avatars.collectAsState()
-    val userProfile by homeViewModel.userProfile.collectAsState()
-    val recommendedMovies = homeViewModel.moviesFeed.collectAsState()
-    val isRecommendedMoviesLoading = homeViewModel.moviesFeedLoading.collectAsState()
+    val avatars by viewModel.avatars.collectAsState()
+    val avatarCategories by viewModel.avatarCategories.collectAsState()
+    val userProfile by viewModel.userProfile.collectAsState()
+    val recommendedMovies = viewModel.moviesFeed.collectAsState()
+    val isRecommendedMoviesLoading = viewModel.moviesFeedLoading.collectAsState()
 
     val windowInfo = rememberWindowInfo()
     val screenPadding =
@@ -44,7 +44,17 @@ fun HomeScreen(navController: NavHostController, homeViewModel: HomeViewModel = 
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
+    LaunchedEffect(key1 = context) {
+        viewModel.homeScreenEvents.collect { event ->
+            when (event) {
+                is HomeViewModel.HomeScreenEvent.ChangeAvatarCategory -> {
+                    viewModel.updateCategory(event.category)
+                }
+            }
+        }
+    }
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
         backgroundColor = MaterialTheme.colorScheme.background,
@@ -58,7 +68,8 @@ fun HomeScreen(navController: NavHostController, homeViewModel: HomeViewModel = 
             ChooseAvatarSheetContent(
                 sheetState,
                 avatars,
-                homeViewModel.data.avatarCategories
+                avatarCategories,
+                onCategorySelected = { category -> viewModel.onCategoryChanged(category) }
             )
         },
     ) {

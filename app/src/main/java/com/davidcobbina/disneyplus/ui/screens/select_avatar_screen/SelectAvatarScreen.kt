@@ -10,11 +10,13 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -42,9 +44,8 @@ fun SelectAvatarScreen(
     val selectedIcon by viewModel.selectedIcon.collectAsState()
     val avatars by viewModel.avatars.collectAsState()
     val verticalSpacing = dimensionResource(id = R.dimen.paddingMedium)
-
-    val lifecycleOwner = LocalLifecycleOwner.current
-    lifecycleOwner.lifecycleScope.launchWhenStarted {
+    val context = LocalContext.current
+    LaunchedEffect(key1 = context ) {
         viewModel.selectAvatarEvent.collect { event ->
             when (event) {
                 is SelectAvatarViewModel.SelectAvatarEvent.NavigateToAddEditProfile -> {

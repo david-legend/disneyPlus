@@ -1,6 +1,7 @@
 package com.davidcobbina.disneyplus.ui.screens.home_screen.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -39,7 +40,12 @@ import kotlinx.coroutines.launch
 
 @ExperimentalMaterialApi
 @Composable
-fun ChooseAvatarSheetContent(sheetState: BottomSheetState, avatarProfiles: List<AvatarProfile>, avatarCategories: List<AvatarCategory>) {
+fun ChooseAvatarSheetContent(
+    sheetState: BottomSheetState,
+    avatarProfiles: List<AvatarProfile>,
+    avatarCategories: List<AvatarCategory>,
+    onCategorySelected: (String) -> Unit,
+) {
     val windowInfo = rememberWindowInfo()
     val screenWidth = windowInfo.screenWidth
     val screenHeight = windowInfo.screenHeight
@@ -128,9 +134,11 @@ fun ChooseAvatarSheetContent(sheetState: BottomSheetState, avatarProfiles: List<
                 val itemWidth = avatarCategoryItemWidth / avatarCategories.size
                 avatarCategories.forEach { category ->
                     AvatarCategoryItem(
-                        title = stringResource(id = category.title),
+                        title = category.title,
                         isSelected = category.isSelected,
-                        modifier = Modifier.width(itemWidth.dp),
+                        modifier = Modifier
+                            .width(itemWidth.dp)
+                            .clickable { onCategorySelected(category.title) },
                         activeBorderRadius = selectorBorderRadius,
                         inactiveBackgroundColor = Color.Transparent,
                     )
