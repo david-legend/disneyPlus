@@ -23,7 +23,6 @@ import com.davidcobbina.disneyplus.ui.components.CircularImage
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.ChooseAvatarSheetContent
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.HeaderSection
 import com.davidcobbina.disneyplus.ui.screens.home_screen.components.MovieListSection
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -34,8 +33,15 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hilt
     val avatars by viewModel.avatars.collectAsState()
     val avatarCategories by viewModel.avatarCategories.collectAsState()
     val userProfile by viewModel.userProfile.collectAsState()
-    val recommendedMovies = viewModel.moviesFeed.collectAsState()
-    val isRecommendedMoviesLoading = viewModel.moviesFeedLoading.collectAsState()
+    val isRecommendedMoviesLoading by viewModel.recommendedMoviesLoading.collectAsState()
+    val isMarvelMoviesLoading by viewModel.marvelMoviesLoading.collectAsState()
+    val isStarWarsMoviesLoading by viewModel.starWarsMoviesLoading.collectAsState()
+    val isTrendingMoviesLoading by viewModel.trendingMoviesLoading.collectAsState()
+
+    val recommendedMovies by viewModel.recommendedMovies.collectAsState()
+    val marvelMovies by viewModel.marvelMovies.collectAsState()
+    val starWarsMovies by viewModel.starWarsMovies.collectAsState()
+    val trendingMovies by viewModel.trendingMovies.collectAsState()
 
     val windowInfo = rememberWindowInfo()
     val screenPadding =
@@ -51,6 +57,9 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hilt
             when (event) {
                 is HomeViewModel.HomeScreenEvent.ChangeAvatarCategory -> {
                     viewModel.updateCategory(event.category)
+                }
+                is HomeViewModel.HomeScreenEvent.UpdateAvatar -> {
+                    viewModel.updateProfile(event.avatar)
                 }
             }
         }
@@ -69,7 +78,9 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hilt
                 sheetState,
                 avatars,
                 avatarCategories,
-                onCategorySelected = { category -> viewModel.onCategoryChanged(category) }
+                userProfile = userProfile,
+                onCategorySelected = { category -> viewModel.onCategoryChanged(category) },
+                onAvatarUpdate = { avatar -> viewModel.onAvatarUpdate(avatar) }
             )
         },
     ) {
@@ -93,74 +104,63 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hilt
                     MovieListSection(
                         navController,
                         stringResource(id = R.string.movie_suggestion_title),
-                        recommendedMovies.value,
+                        recommendedMovies,
                         isVertical = false,
-                        isLoading = isRecommendedMoviesLoading.value
+                        isLoading = isRecommendedMoviesLoading
                     )
 
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         navController,
-                        stringResource(id = R.string.keep_watching),
-                        recommendedMovies.value,
+                        stringResource(id = R.string.trending_movies),
+                        trendingMovies,
                         isVertical = false,
-                        isLoading = isRecommendedMoviesLoading.value
-                    )
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
-                    MovieListSection(
-                        navController,
-                        stringResource(id = R.string.your_watchlist),
-                        recommendedMovies.value,
-                        isVertical = false,
-                        isLoading = isRecommendedMoviesLoading.value
-                    )
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
-                    MovieListSection(
-                        navController,
-                        stringResource(id = R.string.movies),
-                        recommendedMovies.value,
-                        isVertical = false,
-                        isLoading = isRecommendedMoviesLoading.value
+                        isLoading = isTrendingMoviesLoading
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         navController,
                         stringResource(id = R.string.marvel),
-                        recommendedMovies.value,
+                        marvelMovies,
                         isVertical = false,
-                        isLoading = isRecommendedMoviesLoading.value
+                        isLoading = isMarvelMoviesLoading
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         navController,
                         stringResource(id = R.string.star_wars),
-                        recommendedMovies.value,
+                        starWarsMovies,
                         isVertical = false,
-                        isLoading = isRecommendedMoviesLoading.value
+                        isLoading = isStarWarsMoviesLoading
                     )
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                 }
             }
-            CircularImage(
-                painter = painterResource(userProfile.avatar),
-                imageSize = 50.dp,
-                hasTitle = false,
-                contentDescription = stringResource(R.string.profile_content_description),
-                imageTitle = stringResource(R.string.megan),
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(
-                        horizontal = dimensionResource(id = R.dimen.paddingLarge),
-                        vertical = dimensionResource(id = R.dimen.paddingLarge)
-                    )
-                    .clickable {
-                        scope.launch {
-                            if (sheetState.isCollapsed) {
-                                sheetState.expand()
+
+            Box(modifier =  Modifier
+                .align(Alignment.TopEnd)) {
+                CircularImage(
+                    painter = painterResource(userProfile.avatar),
+                    imageSize = 50.dp,
+                    hasTitle = false,
+                    contentDescription = stringResource(R.string.profile_content_description),
+                    imageTitle = stringResource(R.string.megan),
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(
+                            horizontal = dimensionResource(id = R.dimen.paddingLarge),
+                            vertical = dimensionResource(id = R.dimen.paddingLarge)
+                        )
+                        .clickable {
+                            scope.launch {
+                                if (sheetState.isCollapsed) {
+                                    sheetState.expand()
+                                }
                             }
                         }
-                    }
-            )
+                )
+            }
+
         }
     }
 }

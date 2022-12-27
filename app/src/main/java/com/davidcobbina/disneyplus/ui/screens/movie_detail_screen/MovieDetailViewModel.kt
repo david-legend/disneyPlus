@@ -26,7 +26,7 @@ import javax.inject.Inject
 data class MovieDetailState(
 
     val trailers: List<DisneyMovie> = List(5) {
-        DisneyMovie(R.drawable.mandalorian_sunny)
+        DisneyMovie(R.drawable.mandalorian_cover)
     },
     val actionList: List<ActionList> = arrayListOf(
         ActionList("Download", R.drawable.ic_arrow_down),

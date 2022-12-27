@@ -27,7 +27,7 @@ import com.google.gson.Gson
 fun SetupNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.SelectAccountScreen.route,
+        startDestination = Screen.SplashScreen.route,
         builder = {
             composable(route = Screen.SplashScreen.route) {
                 SplashScreen(navController = navController)

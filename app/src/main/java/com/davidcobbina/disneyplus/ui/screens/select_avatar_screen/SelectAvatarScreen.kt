@@ -17,14 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import com.davidcobbina.disneyplus.R
 import com.davidcobbina.disneyplus.data.local.model.AvatarProfile
@@ -56,7 +54,7 @@ fun SelectAvatarScreen(
                     navController.popBackStack()
                 }
                 is SelectAvatarViewModel.SelectAvatarEvent.SelectAvatar -> {
-                    viewModel.updateAvatarMap(event.id)
+                    viewModel.updateAvatarMap(event.avatar)
                 }
             }
         }
@@ -149,7 +147,7 @@ fun AvatarList(
                                 .width(itemWidth)
                                 .clickable {
                                     Log.i("ADD", "ON TAP OF AVATAR ${avatar.avatar}")
-                                    onAvatarSelect(avatar.id) },
+                                    onAvatarSelect(avatar.avatar) },
                             painter = painterResource(avatar.avatar),
                             contentDescription = stringResource(R.string.profile_content_description),
                             hasTitle = false,
@@ -173,7 +171,7 @@ fun AvatarList(
                         CircularImage(
                             modifier = Modifier
                                 .width(itemWidth)
-                                .clickable { onAvatarSelect(avatar.id) },
+                                .clickable { onAvatarSelect(avatar.avatar) },
                             painter = painterResource(avatar.avatar),
                             contentDescription = stringResource(R.string.profile_content_description),
                             hasTitle = false,

@@ -6,8 +6,8 @@ import retrofit2.http.Path
 
 interface MoviesAPi {
 
-    @GET(ApiConstants.LIST_ENDPOINT)
-    suspend fun getMovieFeed(): MovieResult
+//    @GET(ApiConstants.LIST_ENDPOINT)
+//    suspend fun getMovieFeed(): MovieResult
 
     @GET(ApiConstants.LIST_ID_ENDPOINT)
     suspend fun getMovieFeed(@Path("apiId") apiId: String): MovieResult

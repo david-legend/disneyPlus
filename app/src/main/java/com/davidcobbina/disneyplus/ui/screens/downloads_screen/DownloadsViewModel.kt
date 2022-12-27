@@ -13,7 +13,7 @@ import com.davidcobbina.disneyplus.data.local.model.DownloadedMovie
 data class DownloadsViewState(
     val downloadedMovies: List<DownloadedMovie> = List(15) {
         DownloadedMovie(
-            movieCover = R.drawable.mandalorian,
+            movieCover = R.drawable.mandalorian_cover,
             title = "The Mandalorian",
             yearReleased = "2019",
             downloadedSize = "2.7Gb"

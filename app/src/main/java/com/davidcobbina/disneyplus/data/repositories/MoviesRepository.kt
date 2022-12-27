@@ -8,9 +8,9 @@ class MoviesRepository @Inject constructor(
     private val moviesAPi: MoviesAPi
 ) {
 
-    suspend fun getMovieFeed(): List<Movie> {
-        return moviesAPi.getMovieFeed().items
-    }
+//    suspend fun getMovieFeed(): List<Movie> {
+//        return moviesAPi.getMovieFeed().items
+//    }
 
     suspend fun getMovieFeed(apiId: String): List<Movie> {
         return moviesAPi.getMovieFeed(apiId).items

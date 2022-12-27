@@ -27,16 +27,13 @@ import com.davidcobbina.disneyplus.layout.WindowInfo
 import com.davidcobbina.disneyplus.layout.rememberWindowInfo
 import com.davidcobbina.disneyplus.data.local.model.AvatarCategory
 import com.davidcobbina.disneyplus.data.local.model.AvatarProfile
-import com.davidcobbina.disneyplus.ui.components.AvatarCategoryItem
-import com.davidcobbina.disneyplus.ui.components.MovieItem
+import com.davidcobbina.disneyplus.data.local.model.UserProfile
+import com.davidcobbina.disneyplus.ui.components.*
 
-import com.davidcobbina.disneyplus.ui.components.CircularIconButton
-import com.davidcobbina.disneyplus.ui.components.CustomIcon
 import kotlinx.coroutines.launch
 
 
-//TODO:: Add selector UI for mascot category
-
+//TODO:: Make avatars not clickable when updating an avatar
 
 @ExperimentalMaterialApi
 @Composable
@@ -44,7 +41,9 @@ fun ChooseAvatarSheetContent(
     sheetState: BottomSheetState,
     avatarProfiles: List<AvatarProfile>,
     avatarCategories: List<AvatarCategory>,
+    userProfile: UserProfile,
     onCategorySelected: (String) -> Unit,
+    onAvatarUpdate: (Int) -> Unit,
 ) {
     val windowInfo = rememberWindowInfo()
     val screenWidth = windowInfo.screenWidth
@@ -62,9 +61,7 @@ fun ChooseAvatarSheetContent(
     Column(
         modifier = Modifier
             .height(bottomSheetHeight)
-            .padding(
-                top = dimensionResource(id = R.dimen.paddingExtraLarge),
-            )
+            .padding(top = dimensionResource(id = R.dimen.paddingExtraLarge))
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -106,13 +103,22 @@ fun ChooseAvatarSheetContent(
         ) {
 
             itemsIndexed(avatarProfiles) { _, data ->
-                MovieItem(
-                    painter = painterResource(id = data.avatar),
-                    contentDescription = stringResource(id = R.string.movie_cover_description),
-                    width = avatarImageSize,
-                    height = avatarImageSize,
-                    borderRadius = 150.dp,
-                    modifier = Modifier.padding(end = dimensionResource(id = R.dimen.paddingMedium))
+                SelectableItem(
+                    isSelected = userProfile.avatar == data.avatar,
+                    selectedIcon = { DefaultSelectableIcon(icon = R.drawable.ic_check) },
+                    childHeight = avatarImageSize,
+                    child = {
+                        MovieItem(
+                            painter = painterResource(id = data.avatar),
+                            contentDescription = stringResource(id = R.string.movie_cover_description),
+                            width = avatarImageSize,
+                            height = avatarImageSize,
+                            borderRadius = 150.dp,
+                            modifier = Modifier
+                                .padding(end = dimensionResource(id = R.dimen.paddingMedium))
+                                .clickable { onAvatarUpdate(data.avatar) }
+                        )
+                    }
                 )
             }
         }

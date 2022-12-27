@@ -40,14 +40,14 @@ class SelectAvatarViewModel @Inject constructor(
         }
     }
 
-    fun updateAvatarMap(id: Int) {
+    fun updateAvatarMap(avatar: Int) {
         viewModelScope.launch {
             val updatedAvatarList = mutableMapOf<String, List<AvatarProfile>>()
             for (data in _avatars.value) {
                 val key = data.key
                 val avatarList = arrayListOf<AvatarProfile>()
                 for (avatarProfile in data.value) {
-                    val item = avatarProfile.copy(isSelected = avatarProfile.id == id)
+                    val item = avatarProfile.copy(isSelected = avatarProfile.avatar == avatar)
                     avatarList.add(item)
                     _selectedIcon.value = if (item.isSelected) item.avatar else _selectedIcon.value
                 }
@@ -63,14 +63,14 @@ class SelectAvatarViewModel @Inject constructor(
         )
     }
 
-    fun onAvatarSelected(id: Int) = viewModelScope.launch {
+    fun onAvatarSelected(avatar: Int) = viewModelScope.launch {
         selectAvatarEventChannel.send(
-            SelectAvatarEvent.SelectAvatar(id)
+            SelectAvatarEvent.SelectAvatar(avatar)
         )
     }
 
     sealed class SelectAvatarEvent {
         data class NavigateToAddEditProfile(val selectedIcon: Int?) : SelectAvatarEvent()
-        data class SelectAvatar(val id: Int) : SelectAvatarEvent()
+        data class SelectAvatar(val avatar: Int) : SelectAvatarEvent()
     }
 }
