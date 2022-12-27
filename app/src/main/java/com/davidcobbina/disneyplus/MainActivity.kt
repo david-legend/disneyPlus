@@ -14,12 +14,9 @@ import com.davidcobbina.disneyplus.navigation.SetupNavGraph
 import com.davidcobbina.disneyplus.ui.theme.DisneyPlusTheme
 import dagger.hilt.android.AndroidEntryPoint
 
-
-//TODO:: Pass Profile Around
-//TODO:: Change profile inside app
-//TODO:: Add proper profile avatars
-//TODO:: Link proper api's for sections
-//TODO:: Hide api key
+// Next Issues
+//TODO:: Handle exceptions & errors -> network, room and dataStore
+//TODO:: Write tests for entire app
 
 //Future Impl
 //TODO:: Implement watch lists functionality (Add, view and delete watchlist)
@@ -27,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 //TODO:: Implement view video functionality
 //TODO:: Implement search movies
 //TODO:: Implement like a movie
-//TODO:: Add tests -> Unit test and UI Tests
 
 
 // UI Remaining

@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.davidcobbina.disneyplus.R
@@ -29,6 +31,8 @@ fun MovieListSection(
     movieItems: List<Movie>,
     isLoading: Boolean = false,
     isVertical: Boolean = true,
+    width: Dp = 150.dp,
+    height: Dp = 200.dp,
 ) {
 
     if (isVertical) {
@@ -60,6 +64,8 @@ fun MovieListSection(
                         contentDescription = movieItem.getMovieTitle(),
                         modifier = Modifier
                             .padding(bottom = dimensionResource(id = R.dimen.paddingExtraMedium))
+                            .width(width)
+                            .height(height)
                             .clickable {
                                 if (movieItem.mediaType == ApiConstants.MEDIA_TYPE_TV) {
                                     navController.navigate(
@@ -70,7 +76,6 @@ fun MovieListSection(
                                         route = Screen.MovieDetailScreen.passMovie(movieItem)
                                     )
                                 }
-
                             }
                     )
                 }
@@ -105,10 +110,14 @@ fun MovieListSection(
                             contentDescription = movieItem.getMovieTitle(),
                             modifier = Modifier
                                 .padding(end = dimensionResource(id = R.dimen.paddingExtraMedium))
+                                .width(width)
+                                .height(height)
                                 .clickable {
                                     if (movieItem.mediaType == ApiConstants.MEDIA_TYPE_TV) {
                                         navController.navigate(
-                                            route = Screen.TvSeriesDetailScreen.passTvSeries(movieItem)
+                                            route = Screen.TvSeriesDetailScreen.passTvSeries(
+                                                movieItem
+                                            )
                                         )
                                     } else {
                                         navController.navigate(

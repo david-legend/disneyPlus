@@ -22,10 +22,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-const val TRENDING = "8230787"
+const val RECOMMENDED = "8229678"
+const val TRENDING = "8230788"
 const val STAR_WARS = "8230783"
 const val MARVEL = "8230785"
-const val DISNEY = "8229678"
 const val DEFAULT_SELECTED_CATEGORY = PRINCESS_AVATAR_CATEGORY
 
 @HiltViewModel
@@ -112,9 +112,11 @@ class HomeViewModel @Inject constructor(
 
             _userProfile.value = authRepository.getUserProfile(profileId)
 
-            val rMovies = moviesRepository.getMovieFeed(DISNEY)
+            val rMovies = moviesRepository.getMovieFeed(RECOMMENDED)
             _recommendedMovies.value = rMovies
             _recommendedMoviesLoading.value = false
+
+
 
             _marvelMovies.value = moviesRepository.getMovieFeed(MARVEL)
             _marvelMoviesLoading.value = false

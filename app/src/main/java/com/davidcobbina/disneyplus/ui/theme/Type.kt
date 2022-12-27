@@ -10,9 +10,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.davidcobbina.disneyplus.R
 
-val SFPro = FontFamily(
-    Font(R.font.sfpro_regular),
-    Font(R.font.sfpro_bold, FontWeight.Bold)
+val hankenGrotesk = FontFamily(
+    Font(R.font.hanken_grotesk_black, FontWeight.Black),
+    Font(R.font.hanken_grotesk_thin, FontWeight.Thin),
+    Font(R.font.hanken_grotesk_extra_light, FontWeight.ExtraLight),
+    Font(R.font.hanken_grotesk_light, FontWeight.Light),
+    Font(R.font.hanken_grotesk_regular, FontWeight.Normal),
+    Font(R.font.hanken_grotesk_medium, FontWeight.Medium),
+    Font(R.font.hanken_grotesk_bold, FontWeight.Bold),
+    Font(R.font.hanken_grotesk_semi_bold, FontWeight.SemiBold),
+    Font(R.font.hanken_grotesk_extra_bold, FontWeight.ExtraBold),
+
 )
 
 // Set of Material typography styles to start with
@@ -23,44 +31,44 @@ fun DisneyPlusTypography() {
 }
 
 val Typography = Typography(
-    displayLarge = TextStyle(fontFamily = SFPro, color = Color.White, fontSize = 57.sp),
-    displayMedium = TextStyle(fontFamily = SFPro, color = Color.White, fontSize = 45.sp),
-    displaySmall = TextStyle(fontFamily = SFPro, color = Color.White, fontSize = 36.sp),
-    headlineLarge = TextStyle(fontFamily = SFPro, color = Color.White, fontSize = 32.sp),
+    displayLarge = TextStyle(fontFamily = hankenGrotesk, color = Color.White, fontSize = 57.sp),
+    displayMedium = TextStyle(fontFamily = hankenGrotesk, color = Color.White, fontSize = 45.sp),
+    displaySmall = TextStyle(fontFamily = hankenGrotesk, color = Color.White, fontSize = 36.sp),
+    headlineLarge = TextStyle(fontFamily = hankenGrotesk, color = Color.White, fontSize = 32.sp),
     headlineMedium = TextStyle(
-        fontFamily = SFPro,
+        fontFamily = hankenGrotesk,
         color = Color.White,
         fontSize = 28.sp,
         fontWeight = FontWeight.Bold
     ),
-    headlineSmall = TextStyle(fontFamily = SFPro, color = Color.White, fontSize = 24.sp),
+    headlineSmall = TextStyle(fontFamily = hankenGrotesk, color = Color.White, fontSize = 24.sp),
     titleLarge = TextStyle(
-        fontFamily = SFPro,
+        fontFamily = hankenGrotesk,
         fontSize = 22.sp,
         color = grey100,
         fontWeight = FontWeight.W600
     ),
     titleMedium = TextStyle(
-        fontFamily = SFPro,
+        fontFamily = hankenGrotesk,
         fontSize = 20.sp,
         color = grey100,
         fontWeight = FontWeight.W400
     ),
     titleSmall = TextStyle(
-        fontFamily = SFPro,
+        fontFamily = hankenGrotesk,
         fontSize = 14.sp,
         color = grey100,
         fontWeight = FontWeight.Bold
     ),
     bodyLarge = TextStyle(
-        fontFamily = SFPro,
+        fontFamily = hankenGrotesk,
         fontWeight = FontWeight.Normal,
         color = grey100,
         fontSize = 16.sp
     ),
-    bodyMedium = TextStyle(fontFamily = SFPro, color = grey300, fontSize = 14.sp),
-    bodySmall = TextStyle(fontFamily = SFPro, color = grey300, fontSize = 12.sp),
-    labelLarge = TextStyle(fontFamily = SFPro, fontSize = 14.sp),
-    labelMedium = TextStyle(fontFamily = SFPro, fontSize = 12.sp),
-    labelSmall = TextStyle(fontFamily = SFPro, fontSize = 11.sp),
+    bodyMedium = TextStyle(fontFamily = hankenGrotesk, color = grey300, fontSize = 14.sp),
+    bodySmall = TextStyle(fontFamily = hankenGrotesk, color = grey300, fontSize = 12.sp),
+    labelLarge = TextStyle(fontFamily = hankenGrotesk, fontSize = 14.sp),
+    labelMedium = TextStyle(fontFamily = hankenGrotesk, fontSize = 12.sp),
+    labelSmall = TextStyle(fontFamily = hankenGrotesk, fontSize = 11.sp),
 )

@@ -1,6 +1,5 @@
 package com.davidcobbina.disneyplus.ui.screens.add_edit_user_screen
 
-import android.util.Log
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.SavedStateHandle
@@ -20,7 +19,6 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-// TODO:: I loose profile state when I type username and navigate to select avatar screen
 data class AddEditUserState(
     val settingsList: List<SettingsListItem> = arrayListOf(
         SettingsListItem(

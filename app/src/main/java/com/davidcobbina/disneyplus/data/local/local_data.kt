@@ -142,9 +142,5 @@ fun getDisneyProfilesData(): List<AvatarProfile> {
 }
 
 fun getDefaultUserProfileData(): UserProfile {
-    return UserProfile(avatar = R.drawable.mr_incredible, username = "")
+    return UserProfile(avatar = R.drawable.mulan, username = "")
 }
-
-//fun getAvatarCategoriesData(): List<AvatarCategory> {
-//    return avatarCategories
-//}

@@ -108,23 +108,16 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hilt
                         isVertical = false,
                         isLoading = isRecommendedMoviesLoading
                     )
-
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         navController,
                         stringResource(id = R.string.trending_movies),
                         trendingMovies,
                         isVertical = false,
-                        isLoading = isTrendingMoviesLoading
+                        isLoading = isTrendingMoviesLoading, width = 180.dp, height = 250.dp
                     )
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
-                    MovieListSection(
-                        navController,
-                        stringResource(id = R.string.marvel),
-                        marvelMovies,
-                        isVertical = false,
-                        isLoading = isMarvelMoviesLoading
-                    )
+
+
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                     MovieListSection(
                         navController,
@@ -133,12 +126,24 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hilt
                         isVertical = false,
                         isLoading = isStarWarsMoviesLoading
                     )
+
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
+                    MovieListSection(
+                        navController,
+                        stringResource(id = R.string.marvel),
+                        marvelMovies,
+                        isVertical = false,
+                        isLoading = isMarvelMoviesLoading
+                    )
+
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacingMd)))
                 }
             }
 
-            Box(modifier =  Modifier
-                .align(Alignment.TopEnd)) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+            ) {
                 CircularImage(
                     painter = painterResource(userProfile.avatar),
                     imageSize = 50.dp,

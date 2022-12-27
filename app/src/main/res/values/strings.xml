@@ -23,14 +23,14 @@
     <string name="add_button_content_description">Button For Adding More Profile</string>
 
     //Home Screen
-    <string name="everything">EveryThing</string>
+    <string name="everything">Everything</string>
     <string name="everything_dropdown">Dropdown Icon that takes user to menu list</string>
     <string name="categorise_movie_dropdown">Drop down Icon that allows user to categorise Movies</string>
     <string name="search_movie_icon">Search Icon for searching through movies</string>
     <string name="download_icon">Download icon that navigates to all downloads</string>
     <string name="movie_cover_description">Cover Image for Movie</string>
     <string name="movie_suggestion_title">You might like this</string>
-    <string name="trending_movies">Trending</string>
+    <string name="trending_movies">Trending Now</string>
     <string name="your_watchlist">Your WatchList</string>
     <string name="movies">Movies</string>
     <string name="marvel">Marvel</string>
