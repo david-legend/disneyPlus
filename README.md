@@ -54,7 +54,7 @@ Use your API key as the value for API_KEY in the file local.properties file in t
 ## Screenshots
 <h4 align="center">
 <img src="https://media.giphy.com/media/Jf70lautLDV5WmuguB/giphy-downsized-large.gif" width=280" />
-<img src="https://media.giphy.com/media/q0qGox8PrSaRh0B3wC/giphy-downsized-large.gif" width="280">
+<img src="https://media.giphy.com/media/q0qGox8PrSaRh0B3wC/giphy-downsized-large.gif" width="200">
 
 [comment]: <> (<img src="screenshots/main.jpg" width=280>)
 
