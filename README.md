@@ -3,7 +3,7 @@
 </h1>
 
 <h1 align="center">
- Disney+, But Better. Built by David Cobbina
+ Disney+, But Better
 </h1>
 
 ## Project Overview
@@ -18,6 +18,10 @@ it will cover the following:
 * Writing Unit Tests
 * Handling exceptions etc.
 
+# Designs
+* Designed by <a href="https://www.behance.net/andrecarioca" target="_blank"> Andre Carioca</a>
+* Find <a href="https://www.behance.net/gallery/141700011/Disney-But-Better?tracking_source=search_projects%7Cui%20app%20design" target="_blank"> Behance Showcase Here</a>
+* Find <a href="https://www.figma.com/proto/xt7i2dLqTEcwLmQjMknDud/Disney%2B%2C-But-Better?node-id=1170%3A87578&starting-point-node-id=1170%3A87578" target="_blank"> Figma Preview Here</a>
 
 ## Features
 *   Creating Multiple Profiles
@@ -49,14 +53,6 @@ Use your API key as the value for API_KEY in the file local.properties file in t
 
 ## Screenshots
 ![Disney Plus Part 1 GIF](screenshots/header.png)
-
-
-# Designs
-* Designed by <a href="https://www.behance.net/andrecarioca" target="_blank"> Andre Carioca</a>
-* Find <a href="https://www.behance.net/gallery/141700011/Disney-But-Better?tracking_source=search_projects%7Cui%20app%20design" target="_blank"> Behance Showcase Here</a>
-* Find <a href="https://www.figma.com/proto/xt7i2dLqTEcwLmQjMknDud/Disney%2B%2C-But-Better?node-id=1170%3A87578&starting-point-node-id=1170%3A87578" target="_blank"> Figma Preview Here</a>
-
-
 ![Disney Plus Header](screenshots/header.png)
 ![Mulan](screenshots/mulan.png)
 ![Description](screenshots/description.png)
