@@ -73,8 +73,6 @@ Use your API key as the value for API_KEY in the file local.properties file in t
 
 
 
-
-![Disney Plus Part 1 GIF](screenshots/header.png)
 ![Disney Plus Header](screenshots/header.png)
 ![Mulan](screenshots/mulan.png)
 ![Description](screenshots/description.png)
