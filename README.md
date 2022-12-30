@@ -6,6 +6,38 @@
  Disney+, But Better
 </h1>
 
+## Project Overview
+Users can create an account, view the disney movie catalog and also view movie trailers (to be added soon).
+User profile accounts are stored in a local database 
+All movie data is fetched from themoviedb.org API.
+
+
+## Features
+*   Creating Multiple Profiles
+*   Discover Disney Movies
+*   Add Favorite Movies To WatchList (To be Added)
+*   Download Movies Feature (To be Added)
+*   MVVM with Android Architecture
+*   Dagger Hilt
+*   Kotlin Coroutines
+*   Material design.
+
+## Libraries
+* Jetpack Compose
+* Navigation Compose
+* Material 3
+* Lottie Compose
+* Kotlin Coroutines
+* ViewModel
+* Room
+* Coil
+* Retrofit
+* DataStore Preferences
+* ExoPlayer
+
+## Screenshots
+![Disney Plus Part 1 GIF](screenshots/header.png)
+
 ![Disney Plus Header](screenshots/header.png)
 ![Mulan](screenshots/mulan.png)
 ![Description](screenshots/description.png)
