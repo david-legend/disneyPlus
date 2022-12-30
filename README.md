@@ -54,9 +54,22 @@ Use your API key as the value for API_KEY in the file local.properties file in t
 ## Screenshots
 <h4 align="center">
 <img src="https://media.giphy.com/media/Jf70lautLDV5WmuguB/giphy-downsized-large.gif" width=280" />
-<img src="https://media.giphy.com/media/q0qGox8PrSaRh0B3wC/giphy-downsized-large.gif" width="200">
+<img src="https://media.giphy.com/media/q0qGox8PrSaRh0B3wC/giphy-downsized-large.gif" width="240">
 
-[comment]: <> (<img src="screenshots/main.jpg" width=280>)
+<img src="screenshots/splash_screenshot.png" width=280>
+<img src="screenshots/create_account_screenshot.png" width=280>
+<img src="screenshots/add_profile_screenshot.png" width=280>
+<img src="screenshots/select_account_screenshot.png" width=280>
+<img src="screenshots/home_screen_screenshot.png" width=280>
+<img src="screenshots/change_avatar_screenshot.png" width=280>
+<img src="screenshots/series_detail_1_screenshot.png" width=280>
+<img src="screenshots/series_detail_2_screenshot.png" width=280>
+<img src="screenshots/series_description_screenshot.png" width=280>
+<img src="screenshots/movie_detail_screenshot.png" width=280>
+<img src="screenshots/movie_detail_description.png" width=280>
+<img src="screenshots/similar_movies_screenshot.png" width=280>
+<img src="screenshots/menu_screenshot.png" width=280>
+<img src="screenshots/downloads_screenshot.png" width=280>
 
 [comment]: <> (<img src="screenshots/detail.jpg" width=280>)
 

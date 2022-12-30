@@ -46,7 +46,7 @@ fun HomeScreen(navController: NavHostController, viewModel: HomeViewModel = hilt
     val windowInfo = rememberWindowInfo()
     val screenPadding =
         if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact)
-            dimensionResource(id = R.dimen.paddingSmall) else dimensionResource(id = R.dimen.paddingSmall)
+            dimensionResource(id = R.dimen.paddingNone) else dimensionResource(id = R.dimen.paddingSmall)
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
     val scope = rememberCoroutineScope()
