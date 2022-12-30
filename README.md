@@ -52,11 +52,19 @@ request an API Key.
 Use your API key as the value for API_KEY in the file local.properties file in the root folder
 
 ## Screenshots
-<p> <div align="center">
-      <h2>Harley</h2>
-      <img src="https://media.giphy.com/media/Jf70lautLDV5WmuguB/giphy-downsized-large.gif" width=50%">
-    <img src="https://media.giphy.com/media/fHmiIpV9ZNlEH9por0/giphy-downsized-large.gif" width="50%">
-    </div></p>
+<p> 
+<div align="center">
+      <img src="https://media.giphy.com/media/Jf70lautLDV5WmuguB/giphy-downsized-large.gif" width=50%" />
+</div>
+</p>
+
+<p> 
+<div align="center">
+      <img src="https://media.giphy.com/media/fHmiIpV9ZNlEH9por0/giphy-downsized-large.gif" width="50%">
+</div>
+</p>
+
+
 
 ![Disney Plus Part 1 GIF](screenshots/header.png)
 ![Disney Plus Header](screenshots/header.png)
