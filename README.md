@@ -52,17 +52,14 @@ request an API Key.
 Use your API key as the value for API_KEY in the file local.properties file in the root folder
 
 ## Screenshots
-<p> 
-<div align="center">
-      <img src="https://media.giphy.com/media/Jf70lautLDV5WmuguB/giphy-downsized-large.gif" width=280" />
-</div>
-</p>
+<h4 align="center">
+<img src="https://media.giphy.com/media/Jf70lautLDV5WmuguB/giphy-downsized-large.gif" width=280" />
+<img src="https://media.giphy.com/media/q0qGox8PrSaRh0B3wC/giphy-downsized-large.gif" width="280">
 
-<p> 
-<div align="center">
-      <img src="https://media.giphy.com/media/q0qGox8PrSaRh0B3wC/giphy-downsized-large.gif" width="280">
-</div>
-</p>
+[comment]: <> (<img src="screenshots/main.jpg" width=280>)
+
+[comment]: <> (<img src="screenshots/detail.jpg" width=280>)
+
 
 
 
