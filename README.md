@@ -8,7 +8,7 @@
 
 ## Project Overview
 Disney Plus is a movie streaming app designed by <a href="https://www.behance.net/andrecarioca" target="_blank"> Andre Carioca</a>. He describes the project as his attempt of making the current disney plus app better. 
-For me, this project is my attempt of learning and getting my hands dirty with Jetpack Compose. My goal for this project is to learning how to do things in compose way. 
+For me, this project is my attempt of learning and getting my hands dirty with Jetpack Compose. My goal for this project is to learn how to do things in compose way. 
 it will cover the following:
 * building UI with compose 
 * managing state in compose
